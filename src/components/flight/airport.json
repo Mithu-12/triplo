@@ -1,0 +1,381 @@
+[
+  {
+    "country": "Bangladesh",
+    "airports": [
+      {
+        "city": "Dhaka",
+        "name": "Hazrat Shahjalal International Airport",
+        "code": "DAC",
+        "country": "Bangladesh"
+      },
+      {
+        "city": "Chittagong",
+        "name": "Shah Amanat International Airport",
+        "code": "CGP",
+        "country": "Bangladesh"
+      },
+      {
+        "city": "Sylhet",
+        "name": "Osmani International Airport",
+        "code": "ZYL",
+        "country": "Bangladesh"
+      },
+      {
+        "city": "Cox's Bazar",
+        "name": "Cox's Bazar Airport",
+        "code": "CXB",
+        "country": "Bangladesh"
+      },
+      {
+        "city": "Jessore",
+        "name": "Jessore Airport",
+        "code": "JSR",
+        "country": "Bangladesh"
+      }
+    ]
+  },
+  {
+    "country": "Pakistan",
+    "airports": [
+      {
+        "city": "Islamabad",
+        "name": "Islamabad International Airport",
+        "code": "ISB",
+        "country": "Pakistan"
+      },
+      {
+        "city": "Karachi",
+        "name": "Jinnah International Airport",
+        "code": "KHI",
+        "country": "Pakistan"
+      },
+      {
+        "city": "Lahore",
+        "name": "Allama Iqbal International Airport",
+        "code": "LHE",
+        "country": "Pakistan"
+      },
+      {
+        "city": "Peshawar",
+        "name": "Peshawar International Airport",
+        "code": "PEW",
+        "country": "Pakistan"
+      },
+      {
+        "city": "Quetta",
+        "name": "Quetta International Airport",
+        "code": "UET",
+        "country": "Pakistan"
+      }
+    ]
+  },
+  {
+    "country": "India",
+    "airports": [
+      {
+        "city": "Delhi",
+        "name": "Indira Gandhi International Airport",
+        "code": "DEL",
+        "country": "India"
+      },
+      {
+        "city": "Mumbai",
+        "name": "Chhatrapati Shivaji Maharaj International Airport",
+        "code": "BOM",
+        "country": "India"
+      },
+      {
+        "city": "Kolkata",
+        "name": "Netaji Subhas Chandra Bose International Airport",
+        "code": "CCU",
+        "country": "India"
+      },
+      {
+        "city": "Chennai",
+        "name": "Chennai International Airport",
+        "code": "MAA",
+        "country": "India"
+      },
+      {
+        "city": "Bengaluru",
+        "name": "Kempegowda International Airport",
+        "code": "BLR",
+        "country": "India"
+      }
+    ]
+  },
+  {
+    "country": "Nepal",
+    "airports": [
+      {
+        "city": "Kathmandu",
+        "name": "Tribhuvan International Airport",
+        "code": "KTM",
+        "country": "Nepal"
+      },
+      {
+        "city": "Pokhara",
+        "name": "Pokhara Airport",
+        "code": "PKR",
+        "country": "Nepal"
+      },
+      {
+        "city": "Bharatpur",
+        "name": "Bharatpur Airport",
+        "code": "BHR",
+        "country": "Nepal"
+      },
+      {
+        "city": "Biratnagar",
+        "name": "Biratnagar Airport",
+        "code": "BIR",
+        "country": "Nepal"
+      },
+      {
+        "city": "Lukla",
+        "name": "Tenzing–Hillary Airport",
+        "code": "LUA",
+        "country": "Nepal"
+      }
+    ]
+  },
+  {
+    "country": "Bhutan",
+    "airports": [
+      {
+        "city": "Paro",
+        "name": "Paro International Airport",
+        "code": "PBH",
+        "country": "Bhutan"
+      },
+      {
+        "city": "Jakar",
+        "name": "Bumthang Airport",
+        "code": "BHU",
+        "country": "Bhutan"
+      },
+      {
+        "city": "Gelephu",
+        "name": "Gelephu Airport",
+        "code": "GLU",
+        "country": "Bhutan"
+      },
+      {
+        "city": "Trashigang",
+        "name": "Trashigang Airport",
+        "code": "YON",
+        "country": "Bhutan"
+      },
+      {
+        "city": "Yongphulla",
+        "name": "Yongphulla Airport",
+        "code": "YON",
+        "country": "Bhutan"
+      }
+    ]
+  },
+  {
+    "country": "Malaysia",
+    "airports": [
+      {
+        "city": "Kuala Lumpur",
+        "name": "Kuala Lumpur International Airport",
+        "code": "KUL",
+        "country": "Malaysia"
+      },
+      {
+        "city": "Penang",
+        "name": "Penang International Airport",
+        "code": "PEN",
+        "country": "Malaysia"
+      },
+      {
+        "city": "Johor Bahru",
+        "name": "Senai International Airport",
+        "code": "JHB",
+        "country": "Malaysia"
+      },
+      {
+        "city": "Kuching",
+        "name": "Kuching International Airport",
+        "code": "KCH",
+        "country": "Malaysia"
+      }
+    ]
+  },
+    {
+      "country": "China",
+      "airports": [
+      {
+      "city": "Beijing",
+      "name": "Beijing Capital International Airport",
+      "code": "PEK",
+      "country": "China"
+      },
+      {
+      "city": "Shanghai",
+      "name": "Shanghai Pudong International Airport",
+      "code": "PVG",
+      "country": "China"
+      },
+      {
+      "city": "Guangzhou",
+      "name": "Guangzhou Baiyun International Airport",
+      "code": "CAN",
+      "country": "China"
+      },
+      {
+      "city": "Chengdu",
+      "name": "Chengdu Shuangliu International Airport",
+      "code": "CTU",
+      "country": "China"
+      },
+      {
+      "city": "Xi'an",
+      "name": "Xi'an Xianyang International Airport",
+      "code": "XIY",
+      "country": "China"
+      }
+      ]
+      },
+      {
+      "country": "Thailand",
+      "airports": [
+      {
+      "city": "Bangkok",
+      "name": "Suvarnabhumi Airport",
+      "code": "BKK",
+      "country": "Thailand"
+      },
+      {
+      "city": "Bangkok",
+      "name": "Don Mueang International Airport",
+      "code": "DMK",
+      "country": "Thailand"
+      },
+      {
+      "city": "Phuket",
+      "name": "Phuket International Airport",
+      "code": "HKT",
+      "country": "Thailand"
+      },
+      {
+      "city": "Chiang Mai",
+      "name": "Chiang Mai International Airport",
+      "code": "CNX",
+      "country": "Thailand"
+      },
+      {
+      "city": "Hat Yai",
+      "name": "Hat Yai International Airport",
+      "code": "HDY",
+      "country": "Thailand"
+      }
+      ]
+      },
+      {
+      "country": "USA",
+      "airports": [
+      {
+      "city": "New York",
+      "name": "John F. Kennedy International Airport",
+      "code": "JFK",
+      "country": "USA"
+      },
+      {
+      "city": "Los Angeles",
+      "name": "Los Angeles International Airport",
+      "code": "LAX",
+      "country": "USA"
+      },
+      {
+      "city": "Chicago",
+      "name": "O'Hare International Airport",
+      "code": "ORD",
+      "country": "USA"
+      },
+      {
+      "city": "Atlanta",
+      "name": "Hartsfield-Jackson Atlanta International Airport",
+      "code": "ATL",
+      "country": "USA"
+      },
+      {
+      "city": "Dallas",
+      "name": "Dallas/Fort Worth International Airport",
+      "code": "DFW",
+      "country": "USA"
+      }
+      ]
+      },
+      {
+      "country": "Australia",
+      "airports": [
+      {
+      "city": "Sydney",
+      "name": "Sydney Airport",
+      "code": "SYD",
+      "country": "Australia"
+      },
+      {
+      "city": "Melbourne",
+      "name": "Melbourne Airport",
+      "code": "MEL",
+      "country": "Australia"
+      },
+      {
+      "city": "Brisbane",
+      "name": "Brisbane Airport",
+      "code": "BNE",
+      "country": "Australia"
+      },
+      {
+      "city": "Perth",
+      "name": "Perth Airport",
+      "code": "PER",
+      "country": "Australia"
+      },
+      {
+      "city": "Adelaide",
+      "name": "Adelaide Airport",
+      "code": "ADL",
+      "country": "Australia"
+      }
+      ]
+      },
+      {
+      "country": "Japan",
+      "airports": [
+      {
+      "city": "Tokyo",
+      "name": "Tokyo Haneda Airport",
+      "code": "HND",
+      "country": "Japan"
+      },
+      {
+      "city": "Tokyo",
+      "name": "Narita International Airport",
+      "code": "NRT",
+      "country": "Japan"
+      },
+      {
+      "city": "Osaka",
+      "name": "Osaka International Airport",
+      "code": "ITM",
+      "country": "Japan"
+      },
+      {
+      "city": "Osaka",
+      "name": "Kansai International Airport",
+      "code": "KIX",
+      "country": "Japan"
+      },
+      {
+      "city": "Nagoya",
+      "name": "Chubu Centrair International Airport",
+      "code": "NGO",
+      "country": "Japan"
+      }
+      ]
+      }
+      ]

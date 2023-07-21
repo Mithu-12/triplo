@@ -1,0 +1,16 @@
+.image-container{
+    margin: auto;
+    padding-top: 80px ;
+    /* width: 1200px; */
+    height: 500px !important;
+    display: block;
+}
+
+.container-shadow{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    margin: 22px 0;
+}
+.collapse{
+    border-radius: 5px !important;
+}
