@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSearchFlightsQuery } from '../../api/airportApi';
+
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
 import './FlightSearchList.css';
 import Button from '../../components/button/Button';
@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 // import { setFlights } from '../../slices/airportSlice';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import FlightAccordion from './AccordianFlight';
+import FlightCarousel from './FlightCarosel';
+import FlightInfo from './flightCard';
 
 const FlightList = () => {
   const selectedFromAirport = useSelector((state) => state.toFrom.fromAirport);
@@ -28,7 +31,7 @@ const FlightList = () => {
   const getCarrierName = (carrierCode) => {
     return flights.dictionaries.carriers[carrierCode] || '';
   };
-
+  const carriers = flights.dictionaries.carriers;
   const formatDateTime = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -84,65 +87,30 @@ const FlightList = () => {
       discountPrice: discountPrice.toFixed(0),
     };
   };
+  const [isOpenArray, setIsOpenArray] = useState(
+    new Array(flights.length).fill(false)
+  );
+
+  const toggleAccordion = (index) => {
+    setIsOpenArray((prevIsOpenArray) => {
+      const updatedIsOpenArray = [...prevIsOpenArray];
+      updatedIsOpenArray[index] = !updatedIsOpenArray[index];
+      return updatedIsOpenArray;
+    });
+  };
+
   return (
     <div>
       {flights && (
         <div>
-          {flights.data?.map((flight) => {
-            const airlineCode = flight.validatingAirlineCodes[0];
-            const airlineName = getCarrierName(
-              flight.itineraries[0].segments[0].carrierCode
-            );
-            const departureAirportCode =
-              flight.itineraries[0].segments[0].departure.iataCode;
-            const arrivalAirportCode =
-              flight.itineraries[0].segments[0].arrival.iataCode;
-
-            const departureDateTime =
-              flight.itineraries[0].segments[0].departure.at;
-            const arrivalDateTime =
-              flight.itineraries[0].segments[0].arrival.at;
-
-            const departure = formatDateTime(departureDateTime);
-            const arrival = formatDateTime(arrivalDateTime);
-
-            const imageUrl = airlineImages[airlineCode];
-
-            const duration = flight.itineraries[0].segments[0].duration;
-            const numberOfStops =
-              flight.itineraries[0].segments[0].numberOfStops;
-            const durationRegex = /PT(\d+H)?(\d+M)/;
-            const match = duration.match(durationRegex);
-            let hours = 0;
-            let minutes = 0;
-
-            if (match) {
-              if (match[1]) {
-                hours = parseInt(match[1]); 
-              }
-
-              if (match[2]) {
-                minutes = parseInt(match[2]); 
-              }
-            }
-
-            // Calculate hours and minutes
-            {
-              /* const hours = Math.floor(minutes / 60);
-            minutes = minutes % 60; */
-            }
-            const durationText = `${hours}h ${minutes}min`;
-            // Check if it's a non-stop flight
-            const stopType =
-              numberOfStops === 0 ? 'Nonstop' : `${numberOfStops} stop(s)`;
-
+          {flights.data?.map((flight, index) => {
             const price = getTotalPrice(flight.travelerPricings);
             const weight =
               flight.travelerPricings[0].fareDetailsBySegment[0]
                 .includedCheckedBags.weight;
 
             return (
-              <div>
+              <div key={flight.id}>
                 <ContentWrapper>
                   <div className="flex">
                     <div className="basis-3/12">
@@ -150,44 +118,33 @@ const FlightList = () => {
                       <h2>hello</h2>
                     </div>
                     <div className="basis-9/12 my-4">
-                      <div className="flex">
+                      <div
+                        className="flex"
+                        onClick={() => toggleAccordion(index)}
+                      >
                         <div
                           key={flight.id}
-                          className="basis-10/12 bg-white shadow-lg flex px-6 py-10 ml-6  justify-between align-middle items-center"
+                          className="basis-10/12 bg-white shadow-lg  px-6 py-10 ml-6  "
                         >
-                          <div className="">
-                            {imageUrl && (
-                              <img
-                                className="w-14 h-13 m-auto"
-                                src={imageUrl}
-                                alt={airlineCode}
-                              />
-                            )}
-                            <p className="text-xs font-semibold">
-                              {airlineName}
-                            </p>
-                          </div>
-                          <div>
-                            <div className="flex">
-                              <p>{departureAirportCode}</p>
-                              {'  '}
-                              <p className="pl-2">{departure.time}</p>
-                            </div>
-                            <p>{selectedFromAirport.name.slice(0, 20)}...</p>
-                            <p>{departure.newDate}</p>
-                          </div>
-                          <div className="text-center">
-                            <p className="arrowText">{durationText}</p>
-                            <img className="arrow w-20" src={arrow} />
-                            <p className="arrowText">{stopType}</p>
-                          </div>
-                          <div>
-                            <div className="flex">
-                              <p>{arrivalAirportCode}</p>
-                              <p className="pl-2">{arrival.time}</p>
-                            </div>
-                            <p>{selectedToAirport.name.slice(0, 20)}...</p>
-                            <p>{arrival.newDate}</p>
+                          <FlightInfo
+                            flight={flight}
+                            itineraryIndex={0}
+                            selectedFromAirport={selectedFromAirport}
+                            selectedToAirport={selectedToAirport}
+                            airlineImages={airlineImages}
+                            carriers={flights.dictionaries.carriers}
+                          />
+                          <div className='pt-8'>
+                          {flight?.itineraries?.length > 1 && (
+                            <FlightInfo
+                              flight={flight}
+                              itineraryIndex={1}
+                              selectedFromAirport={selectedToAirport}
+                              selectedToAirport={selectedFromAirport}
+                              airlineImages={airlineImages}
+                              carriers={flights.dictionaries.carriers}
+                            />
+                          )}
                           </div>
                         </div>
                         <div className="basis-2/12 personalContainer shadow-md ">
@@ -230,6 +187,12 @@ const FlightList = () => {
                           </div>
                         </div>
                       </div>
+                      <FlightAccordion
+                        key={flight.id}
+                        flight={flight}
+                        isOpen={isOpenArray[index]}
+                        toggleAccordion={() => toggleAccordion(index)}
+                      />
                     </div>
                   </div>
                 </ContentWrapper>

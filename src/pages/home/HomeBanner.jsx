@@ -36,7 +36,7 @@ const HomeBanner = () => {
         <div className="opacity-layer"></div>
         <ContentWrapper>
           <div className="heroBannerContent">
-            <ul className="menuItems">
+            <ul className="menuItems custom-carousel">
               <li
                 className={`menuItem ${
                   activeOption === 'flight' ? 'active' : ''
@@ -71,12 +71,16 @@ const HomeBanner = () => {
               </li>
             </ul>
 
-            <div className="carouselWrapper">
-              {activeContent && (
-                
-                  <div className="carouselItem">{activeContent.component}</div>
-                
-              )}
+            <div className="carousel-container">
+      <div className="carousel-content" style={{
+                transform: `translateX(calc(-${content.findIndex(item => item.option === activeOption) * 100}%))`,
+              }}>
+              {content.map((item, index) => (
+            <div key={index} className={`slide slide-${item.option}`}>
+              {item.component}
+            </div>
+          ))}
+            </div>
             </div>
           </div>
         </ContentWrapper>

@@ -9,14 +9,12 @@ const FlightSearch = () => {
           params: searchCriteria,
         });
         const flights = response.data.flights;
-        // Process the flight search results
         console.log(flights);
       } catch (error) {
         console.error('Error searching flight offers:', error);
       }
     };
 
-    // Example usage
     const searchCriteria = {
       fromCity: 'New York',
       toCity: 'London',

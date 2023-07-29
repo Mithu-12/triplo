@@ -96,9 +96,7 @@ const PackageDetails = () => {
     }
   );
 
-  const handleButton=()=>{
-
-  }
+  const handleButton = () => {};
 
   return (
     <ContentWrapper>
@@ -296,39 +294,43 @@ const PackageDetails = () => {
         </div>
         <div className="basis-2/6">
           <div className="container-shadow ml-5 ">
-          <div className='px-3 py-5'>
-            <h2>Deluxe</h2>
-            <div className="flex justify-between font-medium">
-              <div>
-                <p className="text-sm font-thin">Valid From</p>
-                <p>2023-01-01</p>
+            <div className="px-3 py-5">
+              <h2>Deluxe</h2>
+              <div className="flex justify-between font-medium">
+                <div>
+                  <p className="text-sm font-thin">Valid From</p>
+                  <p>2023-01-01</p>
+                </div>
+                <div>
+                  <p className="text-sm font-thin">Valid To</p>
+                  <p>2023-01-01</p>
+                </div>
+                <div>
+                  <p className="text-sm font-thin">Departs</p>
+                  <p>Specific Day</p>
+                </div>
+              </div>
+              <div className="py-5">
+                <h2 className="text-medium font-bold">Hotels: </h2>
+                <p className="text-sm font-medium">{packageDetails.hotels}</p>
               </div>
               <div>
-                <p className="text-sm font-thin">Valid To</p>
-                <p>2023-01-01</p>
+                <p>Price Per Person</p>
+                <p>Double</p>
+                <h1 className="font-bold text-xl">
+                  <b className="">
+                    <FontAwesomeIcon icon={faBangladeshiTakaSign} />
+                  </b>{' '}
+                  {packageDetails.price}
+                </h1>
               </div>
-              <div>
-                <p className="text-sm font-thin">Departs</p>
-                <p>Specific Day</p>
-              </div>
             </div>
-            <div className="py-5">
-              <h2 className="text-medium font-bold">Hotels: </h2>
-              <p className="text-sm font-medium">{packageDetails.hotels}</p>
-            </div>
-            <div>
-              <p>Price Per Person</p>
-              <p>Double</p>
-              <h1 className="font-bold text-xl">
-                <b className="">
-                  <FontAwesomeIcon icon={faBangladeshiTakaSign} />
-                </b>{' '}
-                {packageDetails.price}
-              </h1>
-            </div>
+            <Button
+              title="SELECT OFFER"
+              onClick={handleButton}
+              className="text-lg w-full py-4"
+            />
           </div>
-            <Button title='SELECT OFFER' onClick={handleButton} className='text-lg w-full py-4'/>
-        </div>
         </div>
       </div>
     </ContentWrapper>

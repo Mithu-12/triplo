@@ -81,4 +81,34 @@
     position: relative;
     /* top: -80px; */
   }
-  
+ /* CustomCarousel.css */
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-content {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide {
+  flex: 0 0 100%; /* Each slide takes full width */
+}
+
+.slide.slide-flight {
+  transform: translateX(0);
+}
+
+.slide.slide-holiday {
+  transform: translateX(00%);
+}
+
+.slide.slide-visa {
+  transform: translateX(00%);
+}
+
+.slide.slide-hotels {
+  transform: translateX(00%);
+}

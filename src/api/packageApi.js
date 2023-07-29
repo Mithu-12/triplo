@@ -5,7 +5,7 @@ export const packageApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8800/api/' }),
   endpoints: (builder) => ({
     getPackages: builder.query({
-      query: () => ({ url: '/package' }),  
+      query: () => ({ url: '/package' }),
     }),
     createPackage: builder.mutation({
       query: (pkg) => ({

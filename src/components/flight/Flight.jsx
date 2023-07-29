@@ -14,8 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import PassangerModal from './PassangerModal';
 // import { useSearchFlightsQuery } from '../../api/airportApi';
 import axios from 'axios'; 
-import { fetchFlights } from '../../slices/airportSlice';
-// import { setFlights, setLoading, setError, fetchFlights } from '../../slices/airportSlice';
+// import { fetchFlights } from '../../slices/airportSlice';
+import { setFlights } from '../../slices/airportSlice';
 
 const Flight = () => {
  
@@ -35,7 +35,7 @@ const Flight = () => {
   const selectReturnDate = useSelector((state) => state.toFrom.returnDate);
   // const searchFlightsQuery = useSearchFlightsQuery()
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   console.log('departureDate', selectDepartureDate);
   console.log('passanger', adultCount);
 
@@ -109,7 +109,7 @@ const Flight = () => {
         params: params,
       });
       console.log('Flight data last:', response.data);
-
+          dispatch(setFlights(response.data))
         const searchParams = new URLSearchParams({
           flights: JSON.stringify(response.data),
           origin: params.originLocationCode,

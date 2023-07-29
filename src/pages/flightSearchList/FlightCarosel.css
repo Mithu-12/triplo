@@ -1,0 +1,55 @@
+.carousel-container {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  /* background-color: #fff; */
+  
+}
+
+.carousel-content {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  
+}
+.carousel-buttons {
+  display: flex;
+  background-color: #00276C;
+  color: #FFC610;
+  font-weight: 500;
+
+}
+
+.carousel-buttons button {
+  /* Style the buttons */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+.carousel-buttons button.active {
+  /* Style the active button */
+  background-color: #FFC610; /* Adjust the active color as needed */
+  color: #00276C; /* Adjust the text color for the active button */
+}
+
+.slide {
+  flex: 0 0 100%; /* Each slide takes full width */
+}
+
+.slide.slide-1 {
+  transform: translateX(0);
+}
+
+.slide.slide-2 {
+  transform: translateX(-0%);
+}
+
+.slide.slide-3 {
+  transform: translateX(-00%);
+}
+
+.slide.slide-4 {
+  transform: translateX(-00%);
+}

@@ -1,0 +1,48 @@
+.imgContent{
+    width: 200px; 
+    height: 150px; 
+    overflow: hidden;
+    object-fit: cover;
+}
+.imgContent img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: inherit;
+  }
+  .slider-container {
+    margin-bottom: 20px;
+  }
+  
+  .slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #888;
+    margin-top: 8px;
+  }
+  .slideContent{
+    flex-shrink: 0;
+    /* background-color: #fff; */
+    
+  }
+
+  .rc-slider-track {
+    background-color: #00346d; /* Replace with your desired color */
+  }
+  
+  /* Change the color of the slider handles */
+  .rc-slider-handle {
+    border-color: #00346d;
+    background-color: #00346d;
+  }
+  
+  /* Change the color of the slider handles on hover */
+  .rc-slider-handle:hover {
+    border-color: #0056b3; /* Replace with your desired color */
+  }
+  
+  /* Change the color of the slider handles when active (being dragged) */
+  .rc-slider-handle:active {
+    border-color: #00346d; /* Replace with your desired color */
+  }
+  

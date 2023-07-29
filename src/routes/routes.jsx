@@ -5,6 +5,7 @@ import Home from '../pages/home/Home';
 import Login from '../pages/login/Login';
 import PackageDetails from '../components/package/PackageDetails';
 import FlightList from '../pages/flightSearchList/FlightSearchList';
+import PackageMenu from '../components/package/PackageMenu';
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/flightList',
         element: <FlightList />,
+      },
+      {
+        path: '/packageMenu',
+        element: <PackageMenu />,
       },
     ],
   },

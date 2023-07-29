@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useGetPackagesQuery } from '../../api/packageApi';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,7 +8,9 @@ import './style.css';
 import { Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 
+
 const Package = () => {
+
   const { data: packages, isLoading, isError } = useGetPackagesQuery();
 
   if (isLoading) {
@@ -21,7 +23,7 @@ const Package = () => {
       </div>
     );
   }
-
+console.log(' package', packages)
   return (
     <div className="flex">
       {packages.map((pack) => (
@@ -39,7 +41,7 @@ const Package = () => {
               <img src={pack.image[0].img1} alt="Package" />
               <div className="card-body">
                 <h2>{pack.name}</h2>
-                <p>{pack.description}</p>
+                <p>{pack.description.slice(0, 100)}...</p>
                 <Link to={`/packages/${pack._id}`}>button</Link>
               </div>
             </div>
