@@ -1,6 +1,6 @@
 import React from 'react';
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
-import Flight from '../../components/Flight/Flight';
+import Flight from '../../components/flight/Flight';
 import Holidays from '../../components/holidays/Holidays';
 import Visa from '../../components/visa/Visa';
 import Hotels from '../../components/hotels/Hotels';
@@ -25,8 +25,6 @@ const HomeBanner = () => {
     { option: 'hotels', component: <Hotels /> },
   ];
 
-  const activeContent = content.find((item) => item.option === activeOption);
-
   return (
     <div>
       <div className="heroBanner">
@@ -36,9 +34,9 @@ const HomeBanner = () => {
         <div className="opacity-layer"></div>
         <ContentWrapper>
           <div className="heroBannerContent">
-            <ul className="menuItems custom-carousel">
+            <ul className="menuItems custom-carousel ">
               <li
-                className={`menuItem ${
+                className={`menuItem shadow-lg ${
                   activeOption === 'flight' ? 'active' : ''
                 }`}
                 onClick={() => handleOptionClick('flight')}

@@ -62,9 +62,10 @@
     font-weight: 500;
     position: relative;
   }
-  
- 
-  .header .menuItems .menuItem.active {
-    color: black;
-    background-color: yellow;
+  .header .menuItems .menuItem:hover {
+    color: #FFC610;
   }
+  .homeNavbar-color{
+    color: #ffffff
+  }
+ 

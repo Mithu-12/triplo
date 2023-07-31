@@ -4,36 +4,43 @@ import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
 import { useGetPackagesQuery } from '../../api/packageApi';
 import { useNavigate } from 'react-router-dom';
+import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './Holidays.css'
+import ContentWrapper from '../wrapperComponent/ContentWrapper';
 
 
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
-    borderRadius: 8,
-    borderColor: state.isFocused ? 'blue' : 'gray',
-    boxShadow: state.isFocused ? '0 0 0 2px lightblue' : 'none',
+    borderRadius: 5,
+    height: '60px',
+    cursor: 'pointer',
+    borderColor: state.isFocused ? '#00276C' : 'gray',
+    boxShadow: state.isFocused ? '0 2px 4px rgba(0, 39, 108, 0.5)' : 'none',
     '&:hover': {
-      borderColor: 'blue',
+      borderColor: '#00276C',
     },
   }),
 
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isFocused ? 'lightblue' : 'white',
+    width: '380px',
+    backgroundColor: state.isFocused ? '#00276C' : 'white',
     color: state.isFocused ? 'blue' : 'black',
     '&:hover': {
-      backgroundColor: 'lightblue',
-      color: 'blue',
-      
+      backgroundColor: '#00276C',
+      color: '#ffffff',
     },
   }),
 
   // Styles for the selected option(s)
   multiValue: (provided) => ({
     ...provided,
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#FFC610',
     // width: '500px',
-    color: 'white',
+    color: '#00276C',
+    borderRadius: 5,
   }),
 
   // Styles for the input field inside the control container
@@ -48,18 +55,22 @@ const customStyles = {
     ...provided,
     backgroundColor: 'white',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    width: '400px',
+    // marginLeft: '20px'
   }),
 
   // Styles for the single value (displayed when only one option is selected)
   singleValue: (provided) => ({
     ...provided,
-    color: 'black',
+    color: '#00276C',
+    fontWeight: 'bold'
   }),
 };
 
 export default function AnimatedMulti() {
   const { data: packages, isLoading, isError } = useGetPackagesQuery();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true);
   const navigate = useNavigate();
 
   if (isLoading) {
@@ -72,6 +83,10 @@ export default function AnimatedMulti() {
       </div>
     );
   }
+  const handleToChange = (selectValue)=>{
+    setSelectedOptions(selectValue)
+    setIsSearchButtonDisabled(false)
+  }
   const handleSearch = () => {
     // Filter the data based on the selected options
     const searchData = packages.filter((item) =>
@@ -81,18 +96,27 @@ export default function AnimatedMulti() {
   };
 
   return (
-    <div className='h-60 bg-white'>
-    <Select
-    className='pt-12'
+    <div className='h-60 bg-white holidays-container'>
+    
+   <div className='holidays-content'>
+   <Select
+    className='pt-12 holidaysSelect-content'
       closeMenuOnSelect={false}
       components={makeAnimated()}
       isMulti
       options={packages.map((item) => ({ value: item.package, label: item.package }))}
       value={selectedOptions}
-      onChange={setSelectedOptions}
+      onChange={handleToChange}
       styles={customStyles}
+      placeholder='Select Holidays Destination...'
     />
-    <button className='bg-yellow-400 py-5 px-10' onClick={handleSearch}>Search</button>
+    <div>
+        <button className='holidaysSearch-button' type='button' onClick={handleSearch} disabled={isSearchButtonDisabled} style={{ backgroundColor: isSearchButtonDisabled ? '#E0E0E0' : '#FFC610', color: '#00276C' }}>
+        <FontAwesomeIcon icon={faMagnifyingGlass} />{' '}
+        SEARCH VISA</button>
+      </div>
+   </div>
+    
   </div>
   );
 }

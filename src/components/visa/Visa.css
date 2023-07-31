@@ -1,0 +1,53 @@
+/* .css-snvcjw-control{
+    width: 350px;
+} */
+
+
+.visa-container{
+    background-color: #fff;
+    color: '#00276C';
+    width: 100%;
+    width: 1300px;
+    height: 230px;
+    position: fixed;
+    box-sizing: border-box;
+}
+.visa-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 40px;
+}
+
+.select-container{
+    cursor: pointer;
+}
+.travelPerson-container{
+    width: 360px;
+    height: 60px;
+    border: 1px solid #00276C;
+    border-radius: 7px;
+    margin-right: 40px;
+
+
+}
+.travelPerson-content{
+    
+    padding: 17px 5px;
+}
+
+.visaSearch-button{
+    margin-top: 30px;
+    padding: 12px 35px;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+    color: #00276C;
+}
+.visaPerson-count{
+    border: 1px solid #00276C;
+    padding: 0px 8px;
+    border-radius: 50%;
+    font-weight: 700;
+    text-align: center;
+}

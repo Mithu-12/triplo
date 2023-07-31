@@ -6,6 +6,7 @@ import Login from '../pages/login/Login';
 import PackageDetails from '../components/package/PackageDetails';
 import FlightList from '../pages/flightSearchList/FlightSearchList';
 import PackageMenu from '../components/package/PackageMenu';
+import VisaDetails from '../pages/visaDetails/VisaDetails';
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
         path: '/packageMenu',
         element: <PackageMenu />,
       },
+      {
+        path: '/visaDetails',
+        element: <VisaDetails/>
+      }
     ],
   },
 ]);

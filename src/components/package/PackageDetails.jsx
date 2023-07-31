@@ -108,7 +108,7 @@ const PackageDetails = () => {
             clickable: true,
           }}
           autoplay={{
-            delay: 3000,
+            delay: 1000,
             disableOnInteraction: false,
           }}
           modules={[Pagination]}

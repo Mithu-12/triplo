@@ -5,9 +5,9 @@ const VisaSlice = createSlice({
   name: 'visa',
   initialState: {
     visa: [],      
-    travelers: 0,  
+    travelers: 1,  
     country: '', 
-    nationality: ''
+    nationality: 'Bangladesh'
   },
   reducers: {
     setVisa: (state, action) => {

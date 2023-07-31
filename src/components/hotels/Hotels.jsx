@@ -1,8 +1,13 @@
 import React from 'react'
-
+import './Hotels.css'
 const Hotels = () => {
   return (
-    <div>Hotels</div>
+    <div className='hotels-container flex items-center'>
+    <div>
+
+    Hotels
+    </div>
+    </div>
   )
 }
 

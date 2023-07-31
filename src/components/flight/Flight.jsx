@@ -11,17 +11,21 @@ import {
 } from '../../slices/toFromSlice';
 import { useNavigate } from 'react-router-dom';
 
-import PassangerModal from './PassangerModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarCheck, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+
 // import { useSearchFlightsQuery } from '../../api/airportApi';
 import axios from 'axios'; 
 // import { fetchFlights } from '../../slices/airportSlice';
 import { setFlights } from '../../slices/airportSlice';
+import Modal from './Model';
 
 const Flight = () => {
  
   const [selectedOption, setSelectedOption] = useState('oneWay');
   const [departureDate, setDepartureDate] = useState(new Date());
   const [returnDate, setReturnDate] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
   const selectedCabin = useSelector((state) => state.passenger.selectedCabin);
   const adultCount = useSelector((state) => state.passenger.adultsCount);
   const childCount = useSelector((state) => state.passenger.childrenCount);
@@ -39,6 +43,7 @@ const Flight = () => {
   console.log('departureDate', selectDepartureDate);
   console.log('passanger', adultCount);
 
+  const totalPassenger = adultCount + childCount + infantCount
   const handleFromChange = (value) => {
     console.log('From:', value);
   };
@@ -131,7 +136,7 @@ const Flight = () => {
   };
   
   return (
-    <div className="flight-component">
+    <div className="flight-component bg-white">
       <div className="p-3 rounded-md">
         <button
           className={`optionButton rounded-s-md ${
@@ -161,20 +166,13 @@ const Flight = () => {
 
       <div className="flight-content">
         <div className="flight-wrapper">
-          {/* <div className="from">
-            <p>From</p>
-            <input />
-          </div> */}
-
           <div className="toForm">
-            <p>To</p>
-
             <ToFrom
               handleFromChange={handleFromChange}
               handleToChange={handleToChange}
             />
           </div>
-
+          <div className='flex date-container'>
           <div className="datepicker-container">
             <p>Departure Date</p>
             <DatePicker
@@ -184,13 +182,13 @@ const Flight = () => {
               placeholderText="Select Date"
               dateFormat="yyyy-MM-dd"
             />
-            <p>{getDayName(departureDate)}</p>
+            <p> <FontAwesomeIcon style={{color: '#FFC610'}} icon={faCalendarCheck} /> {' '}{getDayName(departureDate)}</p>
           </div>
 
-          <div className="datepicker-container">
+          <div className="return-container">
             <p>Return Date</p>
-            {selectedOption === 'roundTrip' ? (
-              <div>
+            {selectedOption === 'roundTrip'? (
+              <div className="date-picker-container">
                 <DatePicker
                   selected={returnDate}
                   onChange={handleReturnDateChange}
@@ -198,34 +196,36 @@ const Flight = () => {
                   placeholderText="Select Date"
                   dateFormat="yyyy-MM-dd"
                 />
-                <p>{getDayName(returnDate)}</p>
+                <p>{returnDate && <FontAwesomeIcon style={{color: '#FFC610'}} icon={faCalendarCheck} /> } {getDayName(returnDate)}</p>
               </div>
             ) : (
               <input type="text" disabled />
             )}
           </div>
+          </div>
+          
           <div>
             <button
               className="openModalBtn"
               onClick={() => {
                 setModalOpen(true);
-                handleSearchClick();
               }}
             >
               <div className="passenger-info">
-                <p>Total Passengers: {adultCount}</p>
-                <p>Cabin: {selectedCabin}</p>
+                <p>Passenger and Class</p>
+                <p className='font-bold'>{totalPassenger} Persons</p>
+                <p>{selectedCabin}</p>
               </div>
             </button>
-            
+            {modalOpen && <Modal setOpenModal={setModalOpen} />}
           </div>
-          <PassangerModal/>
+          {/* <PassangerModal/> */}
         </div>
         <div>
           {selectedOption === 'multiCity' && (
             <div className="p-0 city">
               {[...Array(cityCount)].map((_, index) => (
-                <div key={index} className="city-container">
+                <div key={index} className="city-container ">
                   <ToFrom
                     handleFromChange={handleFromChange}
                     handleToChange={handleToChange}
@@ -241,7 +241,7 @@ const Flight = () => {
                     />
                     <p>{getDayName(departureDate)}</p>
                   </div>
-                  {index > 1 && (
+                  {index > 0 && (
                     <button onClick={handleDeleteCity}>Delete</button>
                   )}
                 </div>
@@ -254,7 +254,7 @@ const Flight = () => {
             </div>
           )}
         </div>
-        <button onClick={handleSearchClick}>Search</button>
+        <button className='flightSearch-button' onClick={handleSearchClick}> <FontAwesomeIcon icon={faMagnifyingGlass}/>{' '}SEARCH FLIGHT</button>
       </div>
     </div>
   );
