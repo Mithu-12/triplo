@@ -11,6 +11,16 @@
     border-radius: 5px;
     margin: 22px 0;
 }
+.packageDetails-Button{
+    width: 100%;
+    background-color: #FFC610 !important;
+    font-weight: 600;
+    cursor: pointer;
+}
+.packageDetails-Button:hover{
+    background-color: #ffc400;
+    
+}
 .collapse{
     border-radius: 5px !important;
 }

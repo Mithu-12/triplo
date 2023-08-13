@@ -8,7 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import background from '../../assets/home.jpg';
 import './HeroBanner.css';
 import { setActiveOption } from '../../slices/navbarSlice';
-
+import { faUser, faPlaneUp, faUmbrellaBeach, faEarthEurope, faHotel} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HomeBanner = () => {
   const dispatch = useDispatch();
@@ -41,31 +42,35 @@ const HomeBanner = () => {
                 }`}
                 onClick={() => handleOptionClick('flight')}
               >
-                Flight
+               <FontAwesomeIcon className='menuItem-icons' icon={faPlaneUp} />
+                FLIGHT
               </li>
               <li
-                className={`menuItem ${
+                className={`menuItem borderItem ${
                   activeOption === 'holiday' ? 'active' : ''
                 }`}
                 onClick={() => handleOptionClick('holiday')}
               >
-                Holidays
+              <FontAwesomeIcon className='menuItem-icons' icon={faUmbrellaBeach} />
+                HOLIDAYS
               </li>
               <li
-                className={`menuItem ${
+                className={`menuItem borderItem ${
                   activeOption === 'visa' ? 'active' : ''
                 }`}
                 onClick={() => handleOptionClick('visa')}
               >
-                Visa
+              <FontAwesomeIcon className='menuItem-icons' icon={faEarthEurope} />
+                VISA
               </li>
               <li
-                className={`menuItem ${
+                className={`menuItem borderItem ${
                   activeOption === 'hotels' ? 'active' : ''
                 }`}
                 onClick={() => handleOptionClick('hotels')}
               >
-                Hotels
+              <FontAwesomeIcon className='menuItem-icons' icon={faHotel} />
+                HOTEL
               </li>
             </ul>
 

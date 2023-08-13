@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format } from 'date-fns';
@@ -19,6 +19,7 @@ import axios from 'axios';
 // import { fetchFlights } from '../../slices/airportSlice';
 import { setFlights } from '../../slices/airportSlice';
 import Modal from './Model';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const Flight = () => {
  
@@ -40,6 +41,7 @@ const Flight = () => {
   // const searchFlightsQuery = useSearchFlightsQuery()
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
+  const modalRef = useRef(null)
   console.log('departureDate', selectDepartureDate);
   console.log('passanger', adultCount);
 
@@ -135,6 +137,10 @@ const Flight = () => {
     } 
   };
   
+  useOutsideClick(modalRef, ()=>{
+    setModalOpen(false)
+  })
+
   return (
     <div className="flight-component bg-white">
       <div className="p-3 rounded-md">
@@ -207,6 +213,7 @@ const Flight = () => {
           <div>
             <button
               className="openModalBtn"
+              ref={modalRef}
               onClick={() => {
                 setModalOpen(true);
               }}

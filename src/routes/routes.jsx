@@ -1,12 +1,18 @@
 import React from 'react';
-import { createBrowserRouter } from 'react-router-dom';
+import { Route, Routes, createBrowserRouter } from 'react-router-dom';
 import Main from '../layout/Main';
 import Home from '../pages/home/Home';
-import Login from '../pages/login/Login';
 import PackageDetails from '../components/package/PackageDetails';
 import FlightList from '../pages/flightSearchList/FlightSearchList';
 import PackageMenu from '../components/package/PackageMenu';
 import VisaDetails from '../pages/visaDetails/VisaDetails';
+import Signup from '../pages/signup/Signup';
+import Login from '../pages/login/Login';
+import Profile from '../pages/profile/profile';
+import ProtectedRoute from './protectedRoute';
+import LoginSuccess from '../pages/login/LoginSuccess';
+import PackageReverse from '../components/package/PackageReverse';
+
 
 
 const router = createBrowserRouter([
@@ -17,10 +23,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
       },
       {
         path: '/packages/:id',
@@ -37,7 +39,30 @@ const router = createBrowserRouter([
       {
         path: '/visaDetails',
         element: <VisaDetails/>
-      }
+      },
+      {
+        path: '/register',
+        element: <Signup/>     
+      },
+      {
+        path: '/login',
+        element: <Login/>     
+      },
+      {
+        path: '/login/success',
+        element: <LoginSuccess/>     
+      },
+
+      {
+        path: '/profile',
+        element: <ProtectedRoute><Profile/></ProtectedRoute>
+      },
+      {
+        path: '/packageReserve/:id',
+        element: <ProtectedRoute><PackageReverse/></ProtectedRoute>
+      },
+      
+
     ],
   },
 ]);

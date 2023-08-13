@@ -1,17 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setActiveOption } from '../../slices/navbarSlice';
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
 import logo from '../../assets/react.svg';
-
+import {
+  faUser,
+  faPlaneUp,
+  faUmbrellaBeach,
+  faEarthEurope,
+  faHotel,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Navbar.css';
+import LogoutButton from '../../components/Logout/Logout';
+import useOutsideClick from '../../hooks/useOutsideClick';
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const dropdownRef = useRef(null);
+  const user = useSelector((state) => state.auth.user);
   const [selectedOption, setSelectedOption] = useState('flight');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  
+
   const handleOptionClick = (option) => {
     if (location.pathname !== '/') {
       navigate('/');
@@ -47,7 +62,12 @@ const Navbar = () => {
     };
   }, [lastScrollY]);
 
+
+  useOutsideClick(dropdownRef, () => {
+    setIsDropdownOpen(false);
+  });
   const isHomePage = location.pathname === '/';
+
 
   return (
     <header className={`header ${show} `}>
@@ -62,7 +82,10 @@ const Navbar = () => {
             } `}
             onClick={() => handleOptionClick('flight')}
           >
-            <Link to="/">Flight</Link>
+            <div className="flex flex-col">
+              <FontAwesomeIcon icon={faPlaneUp} />
+              <Link to="/">FLIGHT</Link>
+            </div>
           </li>
           <li
             className={`menuItem ${
@@ -70,13 +93,19 @@ const Navbar = () => {
             }`}
             onClick={() => handleOptionClick('holiday')}
           >
-            <Link to="/">Holiday</Link>
+            <div className="flex flex-col">
+              <FontAwesomeIcon icon={faUmbrellaBeach} />
+              <Link to="/">HOLIDAYS</Link>
+            </div>
           </li>
           <li
             className={`menuItem ${selectedOption === 'visa' ? 'active' : ''}`}
             onClick={() => handleOptionClick('visa')}
           >
-            <Link to="/">Visa</Link>
+            <div className="flex flex-col">
+              <FontAwesomeIcon icon={faEarthEurope} />
+              <Link to="/">VISA</Link>
+            </div>
           </li>
           <li
             className={`menuItem ${
@@ -84,11 +113,56 @@ const Navbar = () => {
             }`}
             onClick={() => handleOptionClick('hotels')}
           >
-            <Link to="/">Hotels</Link>
+            <div className="flex flex-col">
+              <FontAwesomeIcon icon={faHotel} />
+              <Link to="/">HOTEL</Link>
+            </div>
           </li>
         </ul>
 
-        <div className={`${isHomePage ? 'homeNavbar-color' : ''}`}>Sign-in</div>
+        <div className={`${isHomePage ? 'homeNavbar-color' : ''}`}>
+          {user ? (
+            <div className="navbar-user-dropdown">
+              <div
+                className="navbar-image-container"
+                ref={dropdownRef}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                {user.picture ? (
+                  <img
+                    className="navbar-image-content"
+                    src={user.picture}
+                    alt="User"
+                  />
+                ) : (
+                  <FontAwesomeIcon icon={faUser} />
+                )}
+              </div>
+              {isDropdownOpen && (
+                <div className="navbar-dropdown-menu">
+                  <Link to="/my-booking" className="navbar-dropdown-item">
+                    My Booking
+                  </Link>
+                  <Link to="/profile" className="navbar-dropdown-item">
+                    Profile
+                  </Link>
+                  {/* <button
+                  onClick={handleLogout}
+                   className="navbar-dropdown-item">
+                    logout
+                  </button> */}
+                  <button className="navbar-dropdown-item">
+                    <LogoutButton />
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link className="navbar-login-link" to="/login">
+              <FontAwesomeIcon icon={faUser} /> SIGN IN
+            </Link>
+          )}
+        </div>
       </ContentWrapper>
     </header>
   );

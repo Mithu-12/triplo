@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useGetPackageByIdQuery } from '../../api/packageApi';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -96,7 +96,6 @@ const PackageDetails = () => {
     }
   );
 
-  const handleButton = () => {};
 
   return (
     <ContentWrapper>
@@ -325,11 +324,11 @@ const PackageDetails = () => {
                 </h1>
               </div>
             </div>
-            <Button
-              title="SELECT OFFER"
-              onClick={handleButton}
-              className="text-lg w-full py-4"
-            />
+            <Link to={`/packageReserve/${packageDetails._id}`} className='packageDetails-Button text-center'>
+            <p className="text-lg w-full py-4  packageDetails-Button">
+              SELECT OFFER
+            </p>
+            </Link>
           </div>
         </div>
       </div>

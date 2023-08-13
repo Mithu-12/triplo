@@ -1,0 +1,10 @@
+.packageReverse-image{
+    margin: auto;
+    padding-top: 80px ;
+    display: block;
+}
+.packageReverse-img{
+    height: 430px !important;
+    width: 100%;
+    /* display: block; */
+}

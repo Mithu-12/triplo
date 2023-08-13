@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './Model.css';
 import Select from 'react-select';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,8 +12,8 @@ function Modal({ setOpenModal }) {
     const childrenCount = useSelector((state) => state.passenger.childrenCount);
     const infantsCount = useSelector((state) => state.passenger.infantsCount);
     const selectedCabin = useSelector((state) => state.passenger.selectedCabin);
-  
     const dispatch = useDispatch();
+    
   
     const handlePassengerCountChange = (adults, children, infants) => {
       dispatch(setPassengerCount({ adults, children, infants}));
