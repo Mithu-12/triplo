@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { setActiveOption } from '../../slices/navbarSlice';
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
-import logo from '../../assets/react.svg';
+import logo from '../../../public/logo.png';
 import {
   faUser,
   faPlaneUp,
@@ -25,7 +25,6 @@ const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('flight');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  
 
   const handleOptionClick = (option) => {
     if (location.pathname !== '/') {
@@ -73,7 +72,7 @@ const Navbar = () => {
     <header className={`header ${show} `}>
       <ContentWrapper>
         <div className="logo" onClick={() => navigate('/')}>
-          <img src={logo} alt="MovieNexus" />
+          <img src={logo} alt="Triplo" />
         </div>
         <ul className={`menuItems ${isHomePage ? 'homeNavbar-color' : ''}`}>
           <li

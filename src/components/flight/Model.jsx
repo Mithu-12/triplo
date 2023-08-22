@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import './Model.css';
 import Select from 'react-select';
 import { useSelector, useDispatch } from 'react-redux';
