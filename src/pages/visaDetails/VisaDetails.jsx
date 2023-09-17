@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
 import './VisaDetails.css';
+
 const VisaDetails = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,6 +30,11 @@ const VisaDetails = () => {
     );
   };
 
+  const handleBookSchedule = (index)=>{
+    navigate(`/visaBookSchedule/${index}`,
+    {state: { visa: visa }})
+  }
+
   return (
     <div className="visaDetails-container">
       <ContentWrapper>
@@ -53,12 +59,12 @@ const VisaDetails = () => {
           </div>
           <div className="basis-4/12 ml-8">
             <div className="">
-              {visa?.visaList.map((item) => {
+              {visa?.visaList.map((item, index) => {
                 return (
-                    <div>
-                  <div className="py-6 px-4 bg-white  shadow-md">
+                  <div>
+                    <div className="py-6 px-4 bg-white  shadow-md mt-6">
                     <div className="flex justify-between items-center">
-                      <h3 className="text-2xl font-semibold">{item.name[0]}</h3>
+                      <h3 className="text-2xl font-semibold">{item.name}</h3>
                       <img
                         style={{ width: '150px' }}
                         src={visaExpress}
@@ -77,43 +83,12 @@ const VisaDetails = () => {
                       Refundable : <b>No</b>
                     </p>
                   </div>
-                    <button type='button' style={{backgroundColor: '#FFC610'}}
-                    onMouseEnter={(e) => (e.target.style.backgroundColor = '#bb7900')}
-                    onMouseLeave={(e) => (e.target.style.backgroundColor = '#FFC610')} 
-                    className='visaDetails-price flex justify-between px-4 py-4 hover:bg-yellow-200 focus:ring-violet-300'>
-                      <p className='font-bold text-lg'>SPECIAL OFFER</p>
-                      <p className='font-bold text-lg'>{item.price[0]}</p>
-                    </button>
-
-
-
-                  <div className="py-6 px-4 bg-white  shadow-md mt-6">
-                    <div className="flex justify-between items-center">
-                      <h3 className="text-2xl font-semibold">{item.name[1]}</h3>
-                      <img
-                        style={{ width: '150px' }}
-                        src={visaExpress}
-                        alt=""
-                      />
-                    </div>
-                    <div className="flex justify-between pt-5 pb-2">
-                      <p>
-                        Visa Validity : <b>{item.validity} days</b>
-                      </p>
-                      <p>
-                        Stay Period : <b>{item.stayPeriod} days</b>
-                      </p>
-                    </div>
-                    <p>
-                      Refundable : <b>No</b>
-                    </p>
-                  </div>
-                    <button type='button' style={{backgroundColor: '#FFC610'}} 
+                    <button onClick={() => handleBookSchedule(index)} style={{backgroundColor: '#FFC610'}} 
                     onMouseEnter={(e) => (e.target.style.backgroundColor = '#bb7900')}
                     onMouseLeave={(e) => (e.target.style.backgroundColor = '#FFC610')}
                     className='visaDetails-price flex justify-between px-4 py-4 '>
                       <p className='font-bold text-lg'>SPECIAL OFFER</p>
-                      <p className='font-bold text-lg'>{item.price[1]}</p>
+                      <p className='font-bold text-lg'>{item.price}</p>
                     </button>
                   </div>
                 );

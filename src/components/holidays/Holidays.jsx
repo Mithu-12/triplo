@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Holidays.css'
-import ContentWrapper from '../wrapperComponent/ContentWrapper';
+
 
 
 const customStyles = {
@@ -73,16 +73,23 @@ export default function AnimatedMulti() {
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true);
   const navigate = useNavigate();
 
-  if (isLoading) {
-    return <progress className="progress w-56"></progress>;
-  }
-  if (isError) {
-    return (
-      <div>
-        <span>Error! Task failed successfully.</span>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return <progress className="progress w-56"></progress>;
+  // }
+  // if (isError) {
+  //   return (
+  //     <div>
+  //       <span>Error! Task failed.</span>
+  //     </div>
+  //   );
+  // }
+  const holidaysCountry = [
+    { value: 'Srilanka', label: 'Srilanka' },
+      { value: 'Nepal', label: 'Nepal' },
+      { value: 'Malaysia', label: 'Malaysia' },
+      { value: 'Thailand', label: 'Thailand' },
+      { value: 'Delhi', label: 'Delhi' },
+  ]
   const handleToChange = (selectValue)=>{
     setSelectedOptions(selectValue)
     setIsSearchButtonDisabled(false)
@@ -104,7 +111,7 @@ export default function AnimatedMulti() {
       closeMenuOnSelect={false}
       components={makeAnimated()}
       isMulti
-      options={packages.map((item) => ({ value: item.package, label: item.package }))}
+      options={holidaysCountry}
       value={selectedOptions}
       onChange={handleToChange}
       styles={customStyles}

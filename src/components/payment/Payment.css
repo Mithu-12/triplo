@@ -1,0 +1,18 @@
+.payment-option{
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    padding: 5px 5px;
+    
+}
+.payment-option.selected{
+    border: 2px solid black;
+    border-radius: 5px;
+    
+}
+.payment-contact-header{
+    width: 100%;
+    background-color: #FFC610;
+    padding: 10px 15px;
+    font-weight: 600;
+    font-size: large;
+}

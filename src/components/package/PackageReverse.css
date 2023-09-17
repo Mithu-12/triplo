@@ -24,10 +24,10 @@ text-align: start;
 
  
 }
+.reserved-content .react-datepicker__input-container input.error-border {
+    border: 1px solid red;
+  }
 
-.reserved-content .react-datepicker__calendar {
- 
-}
 .reserved-content .react-datepicker__month-container  {
  width: 300px;
  height: 300px;
@@ -42,6 +42,7 @@ text-align: start;
     border: 1px solid black;
     padding-left: 5px;
     border-radius: 5px;
+    height: 38px;
 }
 .reserve-input-width-last{
     width: 370px;
@@ -62,3 +63,28 @@ text-align: start;
     border-bottom: 1px solid lightgray;
     padding: 4px 0px;
 }
+.reserve-confirm-order{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: #FFC610;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+}
+.reserve-confirm-order:hover{
+    background-color: #a78800;
+    transition: ease 0.5s;
+    
+
+}
+.reserve-Inc-Dec{
+    width: 30px;
+    height: 30px;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+}
+.error-border {
+    border: 1px solid red;
+  }

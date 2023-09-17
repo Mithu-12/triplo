@@ -14,6 +14,13 @@ const countryOptions = Object.keys(countries).map((code) => ({
   label: countries[code].name,
 }));
 
+const visaCountry = [
+  { value: 'Srilanka', label: 'Srilanka' },
+    { value: 'Malaysia', label: 'Malaysia' },
+    { value: 'Singapore', label: 'Singapore' },
+    { value: 'Thailand', label: 'Thailand' },
+]
+
 const VisaCustomStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -78,16 +85,16 @@ const Visa = () => {
   const [selectedNationality, setSelectedNationality] = useState('Bangladesh');
   const travelers = useSelector((state)=> state.visa.travelers)
   const defaultNationality = useSelector((state)=> state.visa.nationality)
-  if (isLoading) {
-    return <progress className="progress w-56"></progress>;
-  }
-  if (isError) {
-    return (
-      <div>
-        <span>Error! Task failed successfully.</span>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return <progress className="progress w-56"></progress>;
+  // }
+  // if (isError) {
+  //   return (
+  //     <div>
+  //       <span>Error! Task failed successfully.</span>
+  //     </div>
+  //   );
+  // }
   console.log('select', selectedCountry)
     const handleTravelersCountChange = (travelers) => {
       dispatch(updateTravelers(travelers));
@@ -121,19 +128,14 @@ const Visa = () => {
       handleTravelersCountChange(travelers - 1);
     }
   };
-  // useEffect(()=>{
-  //   setSelectedNationality(defaultNationality)
-  // },[selectedNationality, defaultNationality])
+
 console.log('travelers', travelers)
   return (
     <div className='visa-container'>
     
       <div className='visa-content'>
       <Select
-        options={visa.map((item) => ({
-          value: item.country,
-          label: item.country,
-        }))}
+        options={visaCountry}
         onChange={handleCountryChange}
         placeholder="Select a Country..."
         styles={VisaCustomStyles}

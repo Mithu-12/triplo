@@ -12,6 +12,11 @@ import Profile from '../pages/profile/profile';
 import ProtectedRoute from './protectedRoute';
 import LoginSuccess from '../pages/login/LoginSuccess';
 import PackageReverse from '../components/package/PackageReverse';
+import Payment from '../pages/Payment/Payment';
+import PaymentFailed from '../pages/Payment/PaymentFailed';
+import PaymentCancel from '../pages/Payment/PaymentCancel';
+import VisaBookSchedule from '../pages/visaDetails/VisaBookSchedule';
+
 
 
 
@@ -61,6 +66,23 @@ const router = createBrowserRouter([
         path: '/packageReserve/:id',
         element: <ProtectedRoute><PackageReverse/></ProtectedRoute>
       },
+      {
+        path: '/visaBookSchedule/:index',
+        element: <ProtectedRoute><VisaBookSchedule/></ProtectedRoute>
+      },
+      {
+        path: '/payment/success/:id',
+        element: <ProtectedRoute><Payment/></ProtectedRoute>
+      },
+      {
+        path: '/payment/failed/:id',
+        element: <ProtectedRoute><PaymentFailed/></ProtectedRoute>
+      },
+      {
+        path: '/payment/cancel/:id',
+        element: <ProtectedRoute><PaymentCancel/></ProtectedRoute>
+      },
+     
       
 
     ],
