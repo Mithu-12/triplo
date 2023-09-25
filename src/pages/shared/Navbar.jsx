@@ -139,17 +139,13 @@ const Navbar = () => {
               </div>
               {isDropdownOpen && (
                 <div className="navbar-dropdown-menu">
-                  <Link to="/my-booking" className="navbar-dropdown-item">
+                  <Link to="/app/account/bookings" className="navbar-dropdown-item">
                     My Booking
                   </Link>
-                  <Link to="/profile" className="navbar-dropdown-item">
+                  <Link to="/app/account/profile" className="navbar-dropdown-item">
                     Profile
                   </Link>
-                  {/* <button
-                  onClick={handleLogout}
-                   className="navbar-dropdown-item">
-                    logout
-                  </button> */}
+                 
                   <button className="navbar-dropdown-item">
                     <LogoutButton />
                   </button>

@@ -48,6 +48,7 @@ const authSlice = createSlice({
       state.error = null;
     });
     
+    
     builder.addCase(loginSuccess.rejected, (state, action) => {
       console.log('Rejected:', action.error);
       state.error = action.error.data.message;

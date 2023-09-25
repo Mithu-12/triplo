@@ -15,6 +15,7 @@ import {
   setReserveAddress,
   setReservePrice,
 } from '../../slices/packageReserveOrderSlice';
+import PaymentOptions from '../payment/Payment';
 
 const PackageReverse = () => {
   const { id } = useParams();
@@ -268,8 +269,8 @@ const PackageReverse = () => {
     }));
   };
 
-  const handlePaymentOptionChange = (event) => {
-    setSelectedPayment(event.target.value);
+  const handlePaymentOptionChange = (option) => {
+    setSelectedPayment(option);
     setErrors({ ...errors, paymentOption: false });
   };
   const handleConfirmBooking = async () => {
@@ -315,7 +316,7 @@ const PackageReverse = () => {
       }
 
       const response = await axios.post(
-        'http://localhost:8800/api/payment/payment-process',
+        `http://localhost:8800/api/payment/payment-process/${selectedPayment}`,
         bookingData
       );
       if (response.status === 200) {
@@ -509,40 +510,12 @@ console.log(errors)
                     </div>
                   </div>
                   <div className="mt-10">
-                    <div className="bg-white shadow-lg">
-                      <div className="reserve-contact-header">
-                        <p className="text-lg font-semibold">
-                          Prepared Payment Option
-                        </p>
-                      </div>
-                      <div className="px-8 py-14">
-                        <label>
-                          <input
-                            type="radio"
-                            name="paymentOption"
-                            value="sslCommerze"
-                            checked={selectedPayment === 'sslCommerze'}
-                            onChange={handlePaymentOptionChange}
-                          />
-                          sslCommerze
-                        </label>
-                        <label>
-                          <input
-                            type="radio"
-                            name="paymentOption"
-                            value="bkash"
-                            checked={selectedPayment === 'bkash'}
-                            onChange={handlePaymentOptionChange}
-                          />
-                          Bkash
-                        </label>
-                        {errors.paymentOption && (
-                    <p className="error-message text-red-500">
-                      Please select a payment option
-                    </p>
-                  )}
-                      </div>
-                    </div>
+                    
+                      <PaymentOptions
+                        selectedOption={selectedPayment}
+                        onOptionSelect={handlePaymentOptionChange}
+                      />
+                    
                   </div>
                   <button
                     onClick={handleConfirmBooking}

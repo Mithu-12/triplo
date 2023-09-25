@@ -155,7 +155,7 @@ const VisaBookSchedule = () => {
 
   const handleSelectedPayment = (option) => {
     setSelectedPayment(option);
-    console.log(selectedPayment);
+    
   };
 
   const onSubmit = async (e) => {

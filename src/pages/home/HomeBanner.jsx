@@ -26,11 +26,13 @@ const HomeBanner = () => {
     { option: 'hotels', component: <Hotels /> },
   ];
 
+  const bg = '../../../public/bg.jpg'
+
   return (
     <div>
-      <div className="heroBanner">
-        <div className="backdrop-img">
-          <img src={background} alt="Background" />
+      <div className="heroBanner mb-6">
+        <div >
+          <img className="backdrop-img" src={bg} alt="Background" />
         </div>
         <div className="opacity-layer"></div>
         <ContentWrapper>
