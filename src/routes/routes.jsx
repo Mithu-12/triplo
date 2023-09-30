@@ -23,6 +23,10 @@ import HolidaysBooking from '../pages/dashboard/bookingList/HolidaysBooking';
 import VisaBooking from '../pages/dashboard/bookingList/VisaBooking';
 import HotelBooking from '../pages/dashboard/bookingList/HotelBooking';
 import Dashboard from '../layout/Dashboard';
+import AddTraveler from '../pages/dashboard/travelerList/AddTraveler';
+import RegularTravelers from '../pages/dashboard/travelerList/RegularTravelers';
+
+
 
 
 
@@ -97,6 +101,14 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element: <ProtectedRoute><Profile /></ProtectedRoute>,
+      },
+      {
+        path: 'regular-travelers',
+        element: <ProtectedRoute><AddTraveler/></ProtectedRoute>,
+      },
+      {
+        path: 'regular-travelers/:id',
+        element: <ProtectedRoute><RegularTravelers/></ProtectedRoute>,
       },
       {
         path: 'change-password',

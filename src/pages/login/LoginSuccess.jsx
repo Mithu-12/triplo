@@ -16,15 +16,14 @@ useEffect(()=>{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            // Add any additional headers if needed
+            
           },
-          credentials: 'include', // Include cookies in the request
+          credentials: 'include', 
         });
     
         const data = await response.json();
     
         if (response.ok) {
-          // Authentication successful
           const token = await data.access_token;
           localStorage.setItem('access_token', token)
           console.log('Authentication successful:', data);

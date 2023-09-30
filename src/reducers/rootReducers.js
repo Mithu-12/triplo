@@ -10,6 +10,7 @@ import { packageApi } from '../api/packageApi';
 import { visaApi } from '../api/visa';
 import authApi from '../api/authApi';
 import authReducer from '../slices/authSlice'
+import travelerReducer from '../slices/travelerSlice'
 import packageReserveOrderReducer from '../slices/packageReserveOrderSlice';
 const rootReducer = combineReducers({
   airport: airportReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   visa: visaReducer,
   auth: authReducer,
   packageReserveOrder: packageReserveOrderReducer,
+  traveler: travelerReducer,
   [packageApi.reducerPath]: packageApi.reducer,
   [visaApi.reducerPath]: visaApi.reducer,
   [authApi.reducerPath]: authApi.reducer,

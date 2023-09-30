@@ -1,0 +1,97 @@
+
+ .dashboardBookingContent {
+    display: flex;
+    flex-direction: column;
+    /* color: white; */
+    text-align: center;
+    position: relative;
+    /* max-width: 1300px; */
+    width: 100%;
+    /* margin: 0 auto; */
+    text-align: start;
+    
+  }
+  .dashboardBookingContent .active{
+    color: #00276C;
+    background-color: #FFC610;
+    text-align: start;
+  
+  }
+ .dashboardBookingContent  .menuItems {
+    list-style-type: none;
+    display: flex;
+    /* justify-content: space-between !important; */
+    bottom: 0px;
+    /* margin-top: 170px; */
+    cursor: pointer;
+    width: 100%;
+    font-weight: 300;
+    border-top-left-radius: 15px;
+  }
+ 
+  .dashboardBookingContent  .menuItems .menuItem {
+    height: 55px;
+    color: #00276C;
+    opacity: 1;
+    font-weight: 400;
+    position: relative;
+    width: 100%;
+    text-align: center !important;
+    background-color: #fff;
+    box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.2);
+    padding-top: 16px;
+    
+
+
+    &:first-child {
+      border-top-left-radius: 10px;
+    }
+  
+    &:last-child {
+      border-top-right-radius: 10px;
+    }
+  }
+.dashboardBookingContent  .menuItems .active{
+    background-color: #FFC610;
+    font-weight: 600;
+  }
+  .dashboardBookingContent .menuItem-icons{
+  /* padding-left: 10px; */
+  padding-right: 7px;
+}
+
+.dashboardBookingContent .borderItem{
+  border-left: 1px solid rgb(192, 190, 190);
+}
+
+.dashboardBookingContent .carousel-container {
+  display: flex;
+  /* width: 100%; */
+  height: 150vh;
+}
+
+.dashboardBookingContent .carousel-content {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* height: 500px; */
+}
+
+.dashboardBookingContent .slide {
+  flex: 0 0 100%; /* Each slide takes full width */
+}
+
+.dashboardBookingContent .slide.slide-flight {
+  transform: translateX(0);
+}
+
+.dashboardBookingContent .slide.slide-holiday {
+  transform: translateX(0%);
+}
+
+.dashboardBookingContent .slide.slide-visa {
+  transform: translateX(300%);
+}
+
+.dashboardBookingContent .slide.slide-hotels {
+  transform: translateX(400%);
+}

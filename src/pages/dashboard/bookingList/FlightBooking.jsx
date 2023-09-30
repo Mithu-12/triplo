@@ -2,7 +2,7 @@ import React from 'react'
 
 const FlightBooking = () => {
   return (
-    <div>FlightBooking</div>
+    <div className='w-full  bg-white '>FlightBooking</div>
   )
 }
 

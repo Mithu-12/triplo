@@ -29,7 +29,7 @@ const Dashboard = () => {
               </li>
               <li className="flex items-start">
                 <FontAwesomeIcon icon={faUserGroup} />
-                <Link to="/app/account/profile" className="ml-8">
+                <Link to="/app/account/regular-travelers" className="ml-8">
                   Regular Traveler
                 </Link>
               </li>
