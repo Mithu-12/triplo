@@ -18,6 +18,8 @@ import {
 import PaymentOptions from '../payment/Payment';
 
 const PackageReverse = () => {
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?._id;
   const { id } = useParams();
   const [travelDate, setTravelDate] = useState();
 
@@ -38,7 +40,6 @@ const PackageReverse = () => {
     isLoading,
     isError,
   } = useGetPackageByIdQuery(id);
-  console.log('omg', packageDetails);
 
   const dispatch = useDispatch();
   const travelers = useSelector((state) => state.packageReserveOrder.travelers);
@@ -268,7 +269,8 @@ const PackageReverse = () => {
       },
     }));
   };
-
+  const totalTravelers = travelers.adults + travelers.child +travelers.child2 + travelers.infants
+  console.log('traveler', totalTravelers)
   const handlePaymentOptionChange = (option) => {
     setSelectedPayment(option);
     setErrors({ ...errors, paymentOption: false });
@@ -278,14 +280,16 @@ const PackageReverse = () => {
       const bookingData = {
         travelDate: travelDate,
         rooms: rooms,
-        travelers: travelers,
-        address: JSON.stringify(address),
+        travelers: totalTravelers,
         email: address?.email,
         firstName: address?.firstName,
         paymentType: selectedPayment,
         price: totalPrice,
         productId: id,
         productData: packageDetails,
+        travelersData: address,
+        serviceType: 'holidays',
+        userId: userId,
         // Add more data fields as needed
       };
       const validationErrors = {};

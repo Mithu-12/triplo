@@ -119,7 +119,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><Booking /></ProtectedRoute>,
         children: [
           {
-            path: 'bookings',
+            path: '',
             element: <FlightBooking />,
           },
           {

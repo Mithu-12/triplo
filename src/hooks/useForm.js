@@ -60,8 +60,17 @@ const useForm = ({ init, validate }) => {
     setState(oldState);
   };
 
+
+  // const handleBlur = (e) => {
+  //   const { name: key } = e.target;
+  //   const oldState = deepClone(state);
+  //   oldState[key].focused = false;
+  //   setState(oldState);
+  // };
+
+  
   const handleSubmit = (e, cb) => {
-    e.preventDefault;
+    e.preventDefault();
     const {hasError, errors, values} = getErrors()
 
     cb({
@@ -126,6 +135,23 @@ const mapValuesToState = (values, reset=false) => {
     return acc;
   }, {});
 };
+
+// const mapValuesToState = (values, reset = false) => {
+//   if (!values) {
+//     return {}; // Return an empty object if values is not defined
+//   }
+
+//   return Object.keys(values).reduce((acc, key) => {
+//     acc[key] = {
+//       value: reset ? '' : values[key],
+//       error: '',
+//       focused: false,
+//       touched: false,
+//     };
+//     return acc;
+//   }, {});
+// };
+
 
 const mapStateToKeys = (state, key) => {
   return Object.keys(state).reduce((acc, cur) => {

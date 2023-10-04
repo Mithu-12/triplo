@@ -1,0 +1,7 @@
+.holidaysOrder-title{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 13px;
+    background-color: #00276C;
+}

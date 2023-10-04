@@ -13,6 +13,8 @@ import PaymentOptions from '../../components/payment/Payment';
 import axios from 'axios';
 
 const VisaBookSchedule = () => {
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?._id;
   const [travelerData, setTravelerData] = useState([]);
   const [travelerErrors, setTravelerErrors] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('travelerDrop');
@@ -27,15 +29,15 @@ const VisaBookSchedule = () => {
   const visaTravelers = useSelector((state) => state.visa);
   const travelersCount = visaTravelers?.travelers || 0;
   const inputRef = useRef([]);
-  const id = visa._id
+  const id = visa._id;
   const visaExpress = '../../../public/visaExpress.jpg';
 
   console.log('selectedVisa', travelerData[0]?.email);
 
   const basePrice = selectedVisa?.price;
   const priceWithTraveler = basePrice * travelersCount;
-  const TriploProcessingFee = 650;
-  const totalProcessingFee = TriploProcessingFee * travelersCount;
+  const visaProcessingFee = 650;
+  const totalProcessingFee = visaProcessingFee * travelersCount;
   const pickUpFee = 500;
   const totalPrice = priceWithTraveler + totalProcessingFee + pickUpFee;
 
@@ -155,7 +157,6 @@ const VisaBookSchedule = () => {
 
   const handleSelectedPayment = (option) => {
     setSelectedPayment(option);
-    
   };
 
   const onSubmit = async (e) => {
@@ -163,22 +164,27 @@ const VisaBookSchedule = () => {
 
     const bookingData = {
       deliveryDate: deliveryDate,
-        travelersData: travelerData,
-        address: travelerData[0]?.address,
-        pickUpAddress: pickUpAddress,
-        email: travelerData[0]?.email,
-        firstName: travelerData[0]?.firstName,
-        paymentType: selectedPayment,
-        price: totalPrice,
-        productId: id,
-    }
+      productData: visa,
+      travelersData: travelerData,
+      address: travelerData[0]?.address,
+      pickUpAddress: pickUpAddress,
+      email: travelerData[0]?.email,
+      firstName: travelerData[0]?.firstName,
+      paymentType: selectedPayment,
+      selectedPlan: selectedVisa,
+      price: totalPrice,
+      productId: id,
+      travelers: travelersCount,
+      userId: userId, 
+      serviceType: 'visa'
+    };
 
     if (!selectedPayment) {
       return; // Don't proceed if no payment option is selected
     }
     try {
-      const apiUrl = `http://localhost:8800/api/payment/payment-process/${selectedPayment}`
-      const response = await axios.post(apiUrl, bookingData)
+      const apiUrl = `http://localhost:8800/api/payment/payment-process/${selectedPayment}`;
+      const response = await axios.post(apiUrl,  bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
         console.log(response.data, 'Booking confirmed successfully!');
@@ -188,7 +194,7 @@ const VisaBookSchedule = () => {
       console.error('Error confirming booking:', error);
     }
     // console.log('Submitted traveler data:', response);
-    console.log('Submitted traveler data:',  bookingData);
+    console.log('Submitted traveler data:', bookingData);
   };
 
   return (
@@ -611,7 +617,7 @@ const VisaBookSchedule = () => {
                                 handleTravelerChange(index, 'image', files[i]);
                               }
                             }}
-                            required
+                            
                           />
                           <div className="flex justify-between py-5">
                             <div className="flex flex-col gap-3">

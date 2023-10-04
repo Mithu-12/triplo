@@ -1,0 +1,15 @@
+.input-field{
+    margin: 15px 0px;
+}
+.input-box{
+    width: 100%;
+    border: 1px solid #000;
+    position: relative;
+    padding: 10px 15px;
+    
+}
+.password-toggle-button{
+    position: absolute;
+    margin-left: -25px;
+    padding-top: 12px;
+}

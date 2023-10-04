@@ -49,7 +49,7 @@
     color: white;
     text-align: center;
     position: relative;
-    max-width: 1300px;
+    /* max-width: 1300px; */
     margin: 0 auto;
     text-align: center;
     
@@ -109,12 +109,13 @@
 
 .carousel-container {
   display: flex;
-  /* width: 100%; */
+  width: 100%;
   height: 150vh;
 }
 
 .carousel-content {
   display: flex;
+  width: 100%;
   transition: transform 0.5s ease-in-out;
   /* height: 500px; */
 }
@@ -124,7 +125,7 @@
 }
 
 .slide.slide-flight {
-  transform: translateX(0);
+  transform: translateX(0%);
 }
 
 .slide.slide-holiday {

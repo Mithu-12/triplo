@@ -2,7 +2,7 @@ import React from 'react'
 
 const HotelBooking = () => {
   return (
-    <div>HotelBooking</div>
+    <div className='bg-white w-full'>HotelBooking</div>
   )
 }
 
