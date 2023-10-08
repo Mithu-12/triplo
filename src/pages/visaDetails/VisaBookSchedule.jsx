@@ -175,8 +175,8 @@ const VisaBookSchedule = () => {
       price: totalPrice,
       productId: id,
       travelers: travelersCount,
-      userId: userId, 
-      serviceType: 'visa'
+      userId: userId,
+      serviceType: 'visa',
     };
 
     if (!selectedPayment) {
@@ -184,7 +184,7 @@ const VisaBookSchedule = () => {
     }
     try {
       const apiUrl = `http://localhost:8800/api/payment/payment-process/${selectedPayment}`;
-      const response = await axios.post(apiUrl,  bookingData);
+      const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
         console.log(response.data, 'Booking confirmed successfully!');
@@ -617,7 +617,6 @@ const VisaBookSchedule = () => {
                                 handleTravelerChange(index, 'image', files[i]);
                               }
                             }}
-                            
                           />
                           <div className="flex justify-between py-5">
                             <div className="flex flex-col gap-3">
@@ -734,7 +733,12 @@ const VisaBookSchedule = () => {
                     onOptionSelect={handleSelectedPayment}
                   />
 
-                  <button type="submit">Submit</button>
+                  <button
+                    className="w-full py-3 mt-5 profile-submit"
+                    type="submit"
+                  > 
+                    SUBMIT
+                  </button>
                 </form>
               </div>
               <div className="basis-4/12 ml-5">

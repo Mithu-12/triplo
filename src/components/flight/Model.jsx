@@ -71,87 +71,45 @@ function Modal({ setOpenModal }) {
             X
           </button>
         </div>
-        {/* <h2>Passenger Selection</h2>
+       
+        <h2 className='text-lg pb-3'>Passenger Selection</h2>
         <div className="passenger-container">
           <div className="passenger-option">
             <div className="passenger">
-              <h3>Adults</h3>
+              <h3 className='text-md font-semibold'>Adults</h3>
               <p>12-12+ years</p>
             </div>
             <div className="passenger-input">
-              <button onClick={handleDecrementAdultCount}>-</button>
+              <button className='flightPerson-count' onClick={handleDecrementAdultCount}>-</button>
               <p>{adultCount}</p>
-              <button onClick={handleIncrementAdultCount}>+</button>
+              <button className='flightPerson-count' onClick={handleIncrementAdultCount}>+</button>
             </div>
           </div>
           <div className="passenger-option">
             <div>
-              <h3>Children</h3>
+              <h3 className='text-md font-semibold'>Children</h3>
               <p>2 - less than 12 years</p>
             </div>
             <div className="passenger-input">
-              <button onClick={handleDecrementChildrenCount}>-</button>
+              <button className='flightPerson-count' onClick={handleDecrementChildrenCount}>-</button>
               <p>{childrenCount}</p>
-              <button onClick={handleIncrementChildrenCount}>+</button>
+              <button className='flightPerson-count' onClick={handleIncrementChildrenCount}>+</button>
             </div>
           </div>
           <div className="passenger-option">
             <div>
-              <h3>infants</h3>
+              <h3 className='text-md font-semibold'>infants</h3>
               <p>0 - less than 2 years</p>
             </div>
             <div className="passenger-input">
-              <button onClick={handleDecrementInfantsCount}>-</button>
-              <p>{childrenCount}</p>
-              <button onClick={handleIncrementInfantsCount}>+</button>
-            </div>
-          </div>
-          <div className="passenger-option">
-            <h3>Cabin Class</h3>
-            <Select
-              value={{ value: selectedCabin, label: selectedCabin }}
-              onChange={handleCabinSelection}
-              options={cabinOptions}
-            />
-          </div>
-        </div> */}
-        <h2>Passenger Selection</h2>
-        <div className="passenger-container">
-          <div className="passenger-option">
-            <div className="passenger">
-              <h3>Adults</h3>
-              <p>12-12+ years</p>
-            </div>
-            <div className="passenger-input">
-              <button onClick={handleDecrementAdultCount}>-</button>
-              <p>{adultCount}</p>
-              <button onClick={handleIncrementAdultCount}>+</button>
-            </div>
-          </div>
-          <div className="passenger-option">
-            <div>
-              <h3>Children</h3>
-              <p>2 - less than 12 years</p>
-            </div>
-            <div className="passenger-input">
-              <button onClick={handleDecrementChildrenCount}>-</button>
-              <p>{childrenCount}</p>
-              <button onClick={handleIncrementChildrenCount}>+</button>
-            </div>
-          </div>
-          <div className="passenger-option">
-            <div>
-              <h3>infants</h3>
-              <p>0 - less than 2 years</p>
-            </div>
-            <div className="passenger-input">
-              <button onClick={handleDecrementInfantsCount}>-</button>
+              <button className='flightPerson-count' onClick={handleDecrementInfantsCount}>-</button>
               <p>{infantsCount}</p>
-              <button onClick={handleIncrementInfantsCount}>+</button>
+              <button className='flightPerson-count' onClick={handleIncrementInfantsCount}>+</button>
             </div>
           </div>
+          <hr/>
           <div className="passenger-option">
-            <h3>Cabin Class</h3>
+            <h3 className='text-md font-semibold'>Cabin Class</h3>
             <Select
               value={{ value: selectedCabin, label: selectedCabin }}
               onChange={handleCabinSelection}
@@ -159,7 +117,7 @@ function Modal({ setOpenModal }) {
             />
           </div>
         </div>
-        <div className="total-count">
+        <div className="total-count text-lg pt-3">
           <p>Total Passengers: {totalCount}</p>
         </div>
       </div>

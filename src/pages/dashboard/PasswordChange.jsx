@@ -8,6 +8,8 @@ import InputField from '../../components/inputField/inputField';
 const PasswordChange = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
+  const [showResponse, setShowResponse] = useState('')
+  const [serverError, setServerError] = useState('')
 
   const initState = {
     currentPassword: '',
@@ -15,21 +17,25 @@ const PasswordChange = () => {
     confirmPassword: '',
   };
   const validateForm = (values) => {
-    const error = {};
+    const errors = {}; // Initialize an empty errors object
+  
     if (!values.currentPassword) {
-      error.currentPassword = 'Current Password is require';
+      errors.currentPassword = 'Current Password is required';
     }
     if (!values.newPassword) {
-      error.newPassword = 'New password is require';
+      errors.newPassword = 'New password is required';
     } else if (values.newPassword.length < 5) {
-      error.newPassword = 'New password must be 5 character or more';
+      errors.newPassword = 'New password must be 5 characters or more';
     }
     if (!values.confirmPassword) {
-      error.confirmPassword = 'Confirm Password is require';
+      errors.confirmPassword = 'Confirm Password is required';
     } else if (values.confirmPassword !== values.newPassword) {
-      error.confirmPassword = 'Password do not match';
+      errors.confirmPassword = 'Passwords do not match';
     }
+  
+    return errors; 
   };
+  
 
   const {
     formState,
@@ -54,9 +60,14 @@ const PasswordChange = () => {
             userId: userId,
           }
         );
+        reset()
+        setServerError('')
+        setShowResponse(response.data)
       }
     } catch (error) {
-      console.log('password-change', error);
+      console.log(error)
+      setServerError(error.response.data.message);
+      setShowResponse('')
     }
   };
 
@@ -71,6 +82,7 @@ const PasswordChange = () => {
             placeholder="Enter Your Current Password"
             value={formState.currentPassword.value}
             onChange={handleChange}
+            onFocus={handleFocus}
             onBlur={handleBlur}
             error={formState.currentPassword.error}
           />
@@ -81,6 +93,7 @@ const PasswordChange = () => {
             placeholder="Enter Your New Password"
             value={formState.newPassword.value}
             onChange={handleChange}
+            onFocus={handleFocus}
             onBlur={handleBlur}
             error={formState.newPassword.error}
           />
@@ -91,10 +104,12 @@ const PasswordChange = () => {
             placeholder="Enter Your Confirm Password"
             value={formState.confirmPassword.value}
             onChange={handleChange}
+            onFocus={handleFocus}
             onBlur={handleBlur}
             error={formState.confirmPassword.error}
           />
-
+            <p className='text-green-500'>{showResponse?? ''}</p>
+            <p className='text-red-500'>{serverError?? ''}</p>
           <button
             className="py-3 mt-5 passwordChange-submit w-96"
             type="submit"

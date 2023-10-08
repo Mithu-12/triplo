@@ -7,51 +7,65 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useRegisterMutation } from '../../api/authApi';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
+import useForm from '../../hooks/useForm';
+import InputField from '../../components/inputField/inputField';
 
 const Signup = () => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const [error, setError] = useState('');
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post(
-  //       'http://localhost:8800/api/auth/register',
-  //       {
-  //         userName: userName,
-  //         email: email,
-  //         password: password,
-  //       }
-  //     );
-  //     console.log('Registration Successful!', response.data);
-  //     console.log('access_token', response?.data?.access_token);
-      
-  //   } catch (error) {
-  //     setError(error.response?.data?.message || 'Something went wrong');
-  //   }
-  // };
-
   const [registerUser, { isLoading, isError, error }, ] = useRegisterMutation();
+  
+const initialState = {
+  userName: '',
+  email: '',
+  password: '',
+}
+const validateForm = (values)=>{
+  const errors = {}
+  if(!values.userName){
+    errors.userName = 'Username is required'
+  }
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  if(!values.email){
+    errors.email = 'Email is require'
+  }else if(!emailRegex.test(values.email)){
+    errors.email = 'Invalid Email Format'
+  }
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/
 
+  if(!values.password){
+    errors.password = 'Password is required'
+  }else if (values.password.length < 6) {
+    errors.password = 'Password must have at least 6 characters';
+  } else if(!passwordRegex.test(values.password)){
+    errors.password = 'one lowercase & one uppercase, one digit and  special character'
+  }
+
+  return errors;
+}
+
+  const {formState, handleBlur, handleChange, handleFocus, handleSubmit, reset} = useForm({
+    init: initialState,
+    validate: validateForm
+  })
+
+
+  const handleRegisterSubmit = async ({hasError,  errors, values}) => {
+ 
     try {
-      const { data } = await registerUser({
-        userName: userName,
-        email: email,
-        password: password,
-      });
-      const token = data?.access_token;
-      localStorage.setItem('access_token', token);
-      dispatch(setUser({...data.user, access_token: token}))
-      console.log('User1:', data);
-      navigate('/');
+      if(!hasError){
+        const { data } = await registerUser({
+          userName: values.userName,
+          email: values.email,
+          password: values.password,
+        });
+        const token = data?.access_token;
+        localStorage.setItem('access_token', token);
+        dispatch(setUser({...data.user, access_token: token}))
+        console.log('User1:', data);
+        navigate('/');
+      }
       // Handle successful registration (e.g., redirect to login page)
     } catch (error) {
       console.log(error)
@@ -66,6 +80,8 @@ const Signup = () => {
     window.location.href = 'http://localhost:8800/api/auth/facebook';
    
   };
+
+  
   return (
     <div className="signup-container">
       <div className="signup-content">
@@ -75,40 +91,49 @@ const Signup = () => {
         <h2 className="text-xl font-semibold py-2">
           Sign up to unlock the best of Tryotel
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e)=> handleSubmit(e, handleRegisterSubmit)}>
           <div className="custom-input-container">
-          <label>Username</label>
-            <input
-              type="text"
-              name="userName"
-              value={userName}
-              onChange={(e) => setUserName(e.target.value)}
-              required
-              className="custom-input"
-              placeholder="Username"
-            />
+            <InputField
+            label="Username"
+            type="text"
+            name="userName"
+            placeholder="Enter Your Username"
+            value={formState.userName.value}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={formState.userName.error}
+            
+          />
           </div>
           <div className="custom-input-container py-3">
-            <label>Email</label>
-            <input
+          <InputField
+              label={'Email'}
               type="email"
               name="email"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
+              value={formState.email.value}
+              placeholder="Enter Your Email"
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
               className="custom-input"
+              error={formState.email.error}
               required
             />
           </div>
           <div className="custom-input-container">
-            <label>Password</label>
-            <input
+            
+            <InputField
+              label={'Password'}
               type="password"
               name="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              value={formState.password.value}
+              placeholder="Enter Your Password"
+              onChange={handleChange}
+              onFocus={handleFocus}
+            onBlur={handleBlur}
               className="custom-input"
+              error={formState.password.error}
               required
             />
           </div>
@@ -137,3 +162,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

@@ -1,16 +1,54 @@
-.personalInfo{
+.flightPersonalContainer{
+    text-align: center;
+    /* height: 100%; */
+}
+.flightPersonalInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
     background-color: #FFF6D9;
     width: 100%;
-    /* height: 220px; */
+    height: 100%;
     text-align: center;
     padding: 3px 5px;
-   
     border-left: 1px dashed rgb(137, 116, 226);
 }
-.personalContainer{
-    text-align: center;
-}
+
 .arrowText{
     font-size: 10px;
     padding: 0px;
 }
+.flightLoading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+  }
+.flightNoFound-container {
+    display: flex;
+    background-image: url('../../../public/not-found.gif');
+    background-size: contain; /* Adjust as needed */
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    /* background-color: #f0f0f0; */
+    
+  }
+  .flightNotFound-image {
+    /* Adjust as needed */
+    /* Other background properties as needed */
+    width: 100%; 
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    /* margin-top: 20px; */
+  }
+  

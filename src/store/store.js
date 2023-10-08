@@ -8,6 +8,7 @@ import { packageApi } from '../api/packageApi';
 import { bookScheduleApi } from '../api/bookScheduleApi';
 import { userApi } from '../api/userApi';
 import { visaApi } from '../api/visa';
+import { airportApi } from '../api/airportApi';
 import authApi from '../api/authApi';
 
 // Configuration for redux-persist
@@ -29,7 +30,8 @@ const store = configureStore({
       bookScheduleApi.middleware,
       userApi.middleware,
       authApi.middleware,
-      visaApi.middleware
+      visaApi.middleware,
+      airportApi.middleware
       // Add other middleware here as needed
     ),
 });

@@ -1,21 +1,41 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useGetPackagesQuery } from '../../api/packageApi';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
 import './style.css';
-
-import { Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
-
+import ContentWrapper from '../wrapperComponent/ContentWrapper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 const Package = () => {
-
   const { data: packages, isLoading, isError } = useGetPackagesQuery();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselContainerRef = useRef(null);
+
+  const itemWidth = 320 ; 
+  const isLastItem = currentIndex === packages?.length - 1;
+  const isFirstItem = currentIndex === 0;
+
+  useEffect(() => {
+    if (carouselContainerRef.current) {
+      const translateX = -currentIndex * itemWidth;
+      carouselContainerRef.current.style.transform = `translateX(${translateX}px)`;
+    }
+  }, [currentIndex]);
+
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % packages?.length);
+  };
+
+  const handlePrevClick = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? packages?.length - 1 : prevIndex - 1
+    );
+  };
 
   if (isLoading) {
-    return <progress className="progress w-56"></progress>;
+    return <h5>Loading...</h5>;
   }
+  
   if (isError) {
     return (
       <div>
@@ -23,34 +43,54 @@ const Package = () => {
       </div>
     );
   }
-console.log(' package', packages)
-  return (
-    <div className="flex">
-      {packages.map((pack) => (
-        <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
-          className="mySwiper"
-        >
-          <div key={pack._id}>
-            <div className="card">
-              <img src={pack.image[0].img1} alt="Package" />
-              <div className="card-body">
-                <h2>{pack.name}</h2>
-                <p>{pack.description.slice(0, 100)}...</p>
-                <Link to={`/packages/${pack._id}`}>button</Link>
-              </div>
-            </div>
-          </div>
 
-          {/* </Link> */}
-        </Swiper>
-      ))}
-    </div>
+  return (
+    <ContentWrapper>
+      <div className="packageCarousel">
+        <div className="flex justify-between items-center">
+          <h2 className="text-4xl font-serif pt-7 pb-2">Hot Packages</h2>
+          <div>
+            <button
+              className="packageCarousel-button"
+              onClick={handlePrevClick}
+              disabled={isFirstItem}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
+            <button
+              className="packageCarousel-button"
+              onClick={handleNextClick}
+              disabled={isLastItem}
+            >
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+          </div>
+        </div>
+        <div className="packageCarousel-container" ref={carouselContainerRef}>
+          {packages.map((pack, index) => (
+              <div
+                className="packageCarousel-item"
+                key={pack._id}
+                style={{ width: `${itemWidth}px` }}
+              >
+            <Link
+              className=""
+              to={`/packages/${pack._id}`}
+            >
+                {/* Content for each carousel item */}
+                <div className="packageCarousel-card shadow-md">
+                  <img src={pack.image[0].img1} alt="Package" />
+                  <div className="packageCarousel-card-body p-4">
+                    <h2 className="text-2xl pb-2">{pack.name}</h2>
+                    <p>{pack.description.slice(0, 100)}...</p>
+                  </div>
+                </div>
+            </Link>
+              </div>
+          ))}
+        </div>
+      </div>
+    </ContentWrapper>
   );
 };
 

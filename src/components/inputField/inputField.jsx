@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import './inputField.css'
-const InputField = ({ label, type, name, value, onChange, onBlur, error, placeholder }) => {
+const InputField = ({ label, type, name, value, onChange, onFocus, onBlur, error, placeholder, customStyle }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  const inputClassName = error ? 'error-border' : '';
   return (
     <div className="input-field">
       <label htmlFor={name}>{label}</label>
@@ -21,7 +21,8 @@ const InputField = ({ label, type, name, value, onChange, onBlur, error, placeho
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          className='input-box'
+          onFocus={onFocus}
+          className={`input-box ${inputClassName}  ${customStyle}`}
           
         />
         {type === 'password' && (
@@ -34,7 +35,7 @@ const InputField = ({ label, type, name, value, onChange, onBlur, error, placeho
           </button>
         )}
       </div>
-      {error && <div className="error">{error}</div>}
+      {error && <div className="error text-red-500">{error}</div>}
     </div>
   );
 };

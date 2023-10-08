@@ -2,13 +2,8 @@ import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetPackageByIdQuery } from '../../api/packageApi';
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
-import 'swiper/css';
-import './PackageDetails.css';
 
-import 'swiper/css/pagination';
-import 'swiper/css/scrollbar';
+import './PackageDetails.css';
 import ContentWrapper from '../wrapperComponent/ContentWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -24,7 +19,7 @@ import {
   faSnowflake,
   faBangladeshiTakaSign,
 } from '@fortawesome/free-solid-svg-icons';
-import Button from '../button/Button';
+
 
 const PackageDetails = () => {
   const { id } = useParams();
@@ -36,7 +31,7 @@ const PackageDetails = () => {
   } = useGetPackageByIdQuery(id);
   console.log(packageDetails);
   if (isLoading) {
-    return <progress className="progress w-56"></progress>;
+    return <h4>Loading...</h4>;
   }
 
   if (isError) {
@@ -99,32 +94,17 @@ const PackageDetails = () => {
 
   return (
     <ContentWrapper>
-      <div className="image-container">
-        <Swiper
-          slidesPerView={'auto'}
-          spaceBetween={30}
-          pagination={{
-            clickable: true,
-          }}
-          autoplay={{
-            delay: 1000,
-            disableOnInteraction: false,
-          }}
-          modules={[Pagination]}
-          className="mySwiper"
-        >
-          {image.map((imageObj, index) => {
-            if (imageObj) {
-              return Object.entries(imageObj).map(([property, imageUrl]) => (
-                <SwiperSlide key={`${index}-${property}`}>
-                  <img className="img" src={imageUrl} alt="" />
-                </SwiperSlide>
-              ));
-            } else {
-              return [];
-            }
-          })}
-        </Swiper>
+      <div className="packageDetailsImage-container">
+      <div className="packageReverse-image">
+              {packageDetails.image ? (
+                <img
+                  className="packageReverse-img"
+                  src={packageDetails.image[0].img2}
+                />
+              ) : (
+                ''
+              )}
+            </div>
       </div>
       <div className="flex flex-row">
         <div className="basis-4/6">

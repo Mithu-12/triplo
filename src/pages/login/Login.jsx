@@ -10,10 +10,12 @@ import {
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
 import useLoginSuccess from '../../hooks/useLoginSuccess';
+import InputField from '../../components/inputField/inputField';
+import useForm from '../../hooks/useForm';
 
 const Login = ({onSuccessfulLogin}) => {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
+  // const [identifier, setIdentifier] = useState('');
+  // const [password, setPassword] = useState('');
 
   const [loginUser, { isLoading, isError, error }] = useLoginMutation();
   
@@ -23,33 +25,46 @@ const Login = ({onSuccessfulLogin}) => {
 
   const from = location.state?.from?.pathname || '/';
 
+  const initialState = {
+    identifier: '',
+    password: '',
+  }
+  const validateForm = (values)=>{
+    const errors = {}
+    if(!values.identifier){
+      errors.identifier = 'Username or Email is required'
+    }
+  
+    if(!values.password){
+      errors.password = 'Password is required'
+    }
+  
+    return errors;
+  }
+  
+    const {formState, handleBlur, handleChange, handleFocus, handleSubmit, reset} = useForm({
+      init: initialState,
+      validate: validateForm
+    })
+  
+ 
 
-  // const handleSuccessfulLogin = async (data) => {
-  //   try {
-  //     localStorage.setItem('access_token', data.access_token);
-  //     dispatch(setUser({...data.user, access_token: data.access_token}))
-  //     console.log('Login Successful!', data);
-  //     onSuccessfulLogin(data)
-  //     navigate(from, { replace: true }); 
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleLoginSubmit = async ({hasError, errors, values}) => {
+    
 
     try {
-      const { data } = await loginUser({
-        identifier: identifier,
-        password: password,
-      });
-      localStorage.setItem('access_token', data.access_token);
-      dispatch(setUser({...data.user, access_token: data.access_token}))
-      console.log('Login Successful!', data);
-
-      navigate(from, {replace: true}); 
+      if(!hasError){
+        const { data } = await loginUser({
+          identifier: values.identifier,
+          password: values.password,
+        });
+        localStorage.setItem('access_token', data.access_token);
+        dispatch(setUser({...data.user, access_token: data.access_token}))
+        console.log('Login Successful!', data);
+  
+        navigate(from, {replace: true});
+      } 
     } catch (error) {
       console.log(error);
     }
@@ -75,31 +90,36 @@ const Login = ({onSuccessfulLogin}) => {
         <h2 className="text-xl font-semibold py-5">
           Ready for your next trip?
         </h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e)=> handleSubmit(e, handleLoginSubmit)}>
           <div className="custom-login-input-container">
-            <label>UserName or Email</label>
-            <input
-              type="text"
-              name="identifier"
-              value={identifier}
-              onChange={(e) => setIdentifier(e.target.value)}
-              placeholder="UserName Or Email"
-              className="custom-input"
-              required
-            />
+            
+              <InputField
+            label="Email or Username"
+            type="text"
+            name="identifier"
+            placeholder="Enter Your Email or Username"
+            value={formState.identifier.value}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={formState.identifier.error}
+            required
+          />
           </div>
 
           <div className="custom-login-input-container">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              className="custom-input"
-              required
-            />
+          <InputField
+            label="Password"
+            type="password"
+            name="password"
+            placeholder="Enter Your Password"
+            value={formState.password.value}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            error={formState.password.error}
+            required
+          />
           </div>
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>
