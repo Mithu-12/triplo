@@ -48,17 +48,30 @@ const PasswordChange = () => {
     init: initState,
     validate: validateForm,
   });
+  // const token = localStorage.getItem('access_token');
+  // const headers = {
+  //   Authorization: `Bearer ${token}`,
+  //   'Content-Type': 'application/json',
+  // };
 
   const handlePasswordChange = async ({ hasError, errors, values }) => {
+    const token = localStorage.getItem('access_token');
     try {
       if (!hasError) {
         const response = await axios.post(
-          'http://localhost:8800/api/auth/change-password',
+          `http://localhost:8800/api/auth/change-password`,
           {
             currentPassword: values.currentPassword,
             newPassword: values.newPassword,
             userId: userId,
-          }
+           
+          },
+          {
+            headers:{
+              Authorization: `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            }
+          },
         );
         reset()
         setServerError('')

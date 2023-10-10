@@ -14,13 +14,14 @@ const FlightCarousel = ({ flight }) => {
   const handleButtonClick = (buttonNumber) => {
     setActiveButton(buttonNumber);
   };
+  console.log('carosuel', flights)
 const arrow = '../../../public/arrow.png'
   console.log('first flight carousel', flight)
     const getCarrierName = (carrierCode) => {
-      return flights.dictionaries.carriers[carrierCode] || '';
+      return flights?.dictionaries?.carriers[carrierCode] || '';
     };
     const getAircraftName = (aircraftCode) => {
-      return flights.dictionaries.aircraft[aircraftCode] || '';
+      return flights?.dictionaries?.aircraft[aircraftCode] || '';
     };
   
     const formatDateTime = (dateTime) => {

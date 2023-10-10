@@ -25,10 +25,7 @@ import HotelBooking from '../pages/dashboard/bookingList/HotelBooking';
 import Dashboard from '../layout/Dashboard';
 import AddTraveler from '../pages/dashboard/travelerList/AddTraveler';
 import RegularTravelers from '../pages/dashboard/travelerList/RegularTravelers';
-
-
-
-
+import FlightReview from '../pages/flightSearchList/flightReview';
 
 
 
@@ -46,7 +43,7 @@ const router = createBrowserRouter([
         element: <PackageDetails />,
       },
       {
-        path: '/flightList',
+        path: '/flight/search',
         element: <FlightList />,
       },
       {
@@ -77,6 +74,11 @@ const router = createBrowserRouter([
         path: '/visaBookSchedule/:index',
         element: <ProtectedRoute><VisaBookSchedule/></ProtectedRoute>
       },
+      {
+        path: '/flight/review/:index',
+        element: <ProtectedRoute><FlightReview/></ProtectedRoute>
+      },
+
       {
         path: '/payment/success/:id',
         element: <ProtectedRoute><Payment/></ProtectedRoute>

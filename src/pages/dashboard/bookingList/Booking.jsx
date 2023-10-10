@@ -1,14 +1,11 @@
 
 
 import React, { useState } from 'react';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import {  Outlet, useNavigate, useParams } from 'react-router-dom';
 import { faPlaneUp, faUmbrellaBeach, faEarthEurope, faHotel } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Booking.css';
-import FlightBooking from './FlightBooking';
-import HolidaysBooking from './HolidaysBooking';
-import VisaBooking from './VisaBooking';
-import HotelBooking from './HotelBooking';
+
 
 const Booking = () => {
   const navigate = useNavigate();

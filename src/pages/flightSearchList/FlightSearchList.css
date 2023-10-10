@@ -40,8 +40,6 @@
     
   }
   .flightNotFound-image {
-    /* Adjust as needed */
-    /* Other background properties as needed */
     width: 100%; 
     height: 100%; 
     display: flex;
@@ -52,3 +50,4 @@
     /* margin-top: 20px; */
   }
   
+ 

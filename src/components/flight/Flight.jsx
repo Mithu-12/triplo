@@ -113,7 +113,8 @@ const Flight = () => {
       };
 
       const queryString = new URLSearchParams(params).toString();
-      navigate(`/flightList?${queryString}`);
+      // navigate(`/flight/search?${queryString}`);
+      navigate(`/flight/search?${queryString}`);
       // navigate(`/flightList`, { state: { searchParams: params } }); when State pass
       // navigate(`/flightList?${searchParams.toString()}`); when params pass without url
     } catch (error) {
