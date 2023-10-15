@@ -3,18 +3,21 @@ import React, { useEffect, useState } from 'react';
 import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
 import './FlightSearchList.css';
 import Button from '../../components/button/Button';
-import arrow from '../../../public/arrow.png'
+import arrow from '../../../public/arrow.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import FlightAccordion from './AccordianFlight';
 import FlightInfo from './flightCard';
 import { useGetFlightsQuery } from '../../api/airportApi';
 import { setFlights } from '../../slices/airportSlice';
-
+import CountdownTimer from './CountdownTimer';
+import CountdownClock from './CountdownTimer';
+import SessionModal from './SessionModal';
 
 const FlightList = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [isOpenArray, setIsOpenArray] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
   const selectedFromAirport = useSelector((state) => state.toFrom.fromAirport);
   const selectedToAirport = useSelector((state) => state.toFrom.toAirport);
@@ -43,11 +46,7 @@ const FlightList = () => {
     optionalParams.infants = searchParams.get('infants');
   }
 
-  const {
-    data: flights,
-    isLoading,
-    isError,
-  } = useGetFlightsQuery({
+  const { data, isLoading, isError } = useGetFlightsQuery({
     originLocationCode,
     destinationLocationCode,
     departureDate,
@@ -57,6 +56,10 @@ const FlightList = () => {
     ...optionalParams,
   });
 
+  const flights = data?.flights;
+  const sessionStartTime = data?.sessionStartTime;
+  const sessionEndTime = data?.sessionEndTime;
+  const searchUid = data?.searchUid;
   const loading = '../../../public/flight-loading.svg';
 
   if (isLoading) {
@@ -69,7 +72,10 @@ const FlightList = () => {
   }
 
   console.log('new flight data', flights);
-dispatch(setFlights(flights))
+  console.log('new StartTime data', sessionStartTime);
+  console.log('new endTime data', sessionEndTime);
+  console.log('new searchUid data', searchUid);
+  dispatch(setFlights(flights));
   const isFlightListEmpty = !flights || flights.length === 0;
   // useEffect(() => {
   //   // Update isOpenArray when flights data changes
@@ -92,10 +98,8 @@ dispatch(setFlights(flights))
     BS: '../../../public/BS.png',
   };
 
-  // const getCarrierName = (carrierCode) => {
-  //   return flights?.dictionaries?.carriers[carrierCode] || '';
-  // };
-  // const carriers = flights?.dictionaries?.carriers;
+
+  
   const formatDateTime = (dateTime) => {
     const date = new Date(dateTime);
 
@@ -155,9 +159,12 @@ dispatch(setFlights(flights))
     navigate(-1);
   };
 
-  const handleFlightClick = ()=>{
-
+  function onTimeUp() {
+    setIsModalVisible(true);
   }
+
+  const handleFlightClick = () => {};
+ 
 
   return (
     <div
@@ -167,30 +174,34 @@ dispatch(setFlights(flights))
           : 'flightList-grey-background'
       }`}
     >
-
-      
-        {isFlightListEmpty ? (
-          // Render your white background content (e.g., image) here
-          <div className="white-background-content">
-            <div className="flightNoFound-container">
-              <div className="flightNotFound-image">
-                <h3 className="text-xl font-semibold">Not Result Found</h3>
-                <p>We're sorry. We were not able to find a match.</p>
-                <Button
-                  onClick={handleGoBack}
-                  className="px-6 py-3 text-sm rounded-sm text-white"
-                  title="Try Another Search?"
-                />
-              </div>
+      {isFlightListEmpty ? (
+        // Render your white background content (e.g., image) here
+        <div className="white-background-content">
+          <div className="flightNoFound-container">
+            <div className="flightNotFound-image">
+              <h3 className="text-xl font-semibold">Not Result Found</h3>
+              <p>We're sorry. We were not able to find a match.</p>
+              <Button
+                onClick={handleGoBack}
+                className="px-6 py-3 text-sm rounded-sm text-white"
+                title="Try Another Search?"
+              />
             </div>
           </div>
-        ) : (
-          // Render your flight list content here
-          <ContentWrapper>
+        </div>
+      ) : (
+        // Render your flight list content here
+        <ContentWrapper>
+        {/* {isModalVisible && <SessionModal  show={isModalVisible}/>} */}
           <div className="flex pt-16">
-            <div className="basis-3/12">hello</div>
+            <div className="basis-3/12">
+            <div className="p-8 shadow-sm">
+      <CountdownClock sessionStartTime={sessionStartTime} sessionEndTime={sessionEndTime} onTimeUp={onTimeUp} />
+      
+    </div>
+            </div>
             <div className="basis-9/12">
-              {flights && 
+              {flights && (
                 <div>
                   {flights.data?.map((flight, index) => {
                     const price = getTotalPrice(flight.travelerPricings);
@@ -260,8 +271,11 @@ dispatch(setFlights(flights))
                               <p className="text-lg font-bold py-1">
                                 {price.discountPrice}
                               </p>
-                              <Link to='#' onClick={handleFlightClick}>Book Now</Link>
-                              
+                              <Link to={`/flight/review?searchId=${searchUid}&index=${flight.id}`}
+                              state= {{sessionStartTime, sessionEndTime, flightData: flight }}
+                              >
+                                Book Now
+                              </Link>
                             </div>
                           </div>
                         </div>
@@ -275,12 +289,11 @@ dispatch(setFlights(flights))
                     );
                   })}
                 </div>
-              
-              }
+              )}
             </div>
           </div>
-      </ContentWrapper>
-        )}
+        </ContentWrapper>
+      )}
     </div>
   );
 };
@@ -299,7 +312,6 @@ export default FlightList;
 // import FlightInfo from './flightCard';
 // import { useGetFlightsQuery } from '../../api/airportApi';
 // import { setFlights } from '../../slices/airportSlice';
-
 
 // const FlightList = () => {
 //   const dispatch = useDispatch()
@@ -457,7 +469,6 @@ export default FlightList;
 //       }`}
 //     >
 
-      
 //         {isFlightListEmpty ? (
 //           // Render your white background content (e.g., image) here
 //           <div className="white-background-content">
@@ -479,7 +490,7 @@ export default FlightList;
 //           <div className="flex pt-16">
 //             <div className="basis-3/12">hello</div>
 //             <div className="basis-9/12">
-//               {flights && 
+//               {flights &&
 //                 <div>
 //                   {flights.data?.map((flight, index) => {
 //                     const price = getTotalPrice(flight.travelerPricings);
@@ -550,7 +561,7 @@ export default FlightList;
 //                                 {price.discountPrice}
 //                               </p>
 //                               <Link to='#' onClick={handleFlightClick}>Book Now</Link>
-                              
+
 //                             </div>
 //                           </div>
 //                         </div>
@@ -564,7 +575,7 @@ export default FlightList;
 //                     );
 //                   })}
 //                 </div>
-              
+
 //               }
 //             </div>
 //           </div>
@@ -575,4 +586,3 @@ export default FlightList;
 // };
 
 // export default FlightList;
-

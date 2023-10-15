@@ -8,7 +8,7 @@ import {
 } from '../../slices/passengerSlice';
 
 function Modal({ setOpenModal }) {
-    const adultCount = useSelector((state) => state.passenger.adultsCount);
+const adultCount = useSelector((state) => state.passenger.adultsCount);
     const childrenCount = useSelector((state) => state.passenger.childrenCount);
     const infantsCount = useSelector((state) => state.passenger.infantsCount);
     const selectedCabin = useSelector((state) => state.passenger.selectedCabin);

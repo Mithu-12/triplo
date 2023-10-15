@@ -10,7 +10,7 @@
   text-align: center;
 }
 .flight-component {
-  max-width: 1300px;
+  /* max-width: 1300px; */
   background-color: #fcfcfc;
   padding: 12px 20px;
   color: black;
@@ -22,6 +22,7 @@
   transition: all 0.3s;
 }
 .flight-content {
+  /* height: 300px; */
   /* width: 900px !important; */
 }
 .multiCity {

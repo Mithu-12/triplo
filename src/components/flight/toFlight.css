@@ -10,7 +10,7 @@
   color: '#00276c';
   padding: 5px 2px;
   width: 285px;
-  
+  position: relative;
   &:first-child {
     border-right: 1px solid rgb(179, 178, 178);
   }
@@ -21,6 +21,7 @@
   text-align: center;
   color: '#00276c';
   border:rgba(0, 0, 0, 0);
+  
   
 }
 
@@ -55,8 +56,10 @@
     padding: 5px 8px;
 
     left: 0; 
-    max-height: 300px;
+    height: 230px;
     overflow: auto;
+    z-index: 2000;
+    
   } 
    .suggestionBox-to {
     width: 400px;
@@ -64,9 +67,7 @@
     position: absolute;
     color: black;
     padding: 5px 8px;
-
-    /* left: 0;  */
-    max-height: 300px;
+    height: 230px;
     overflow: auto;
   } 
 
