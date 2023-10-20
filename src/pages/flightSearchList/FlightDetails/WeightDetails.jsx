@@ -13,42 +13,42 @@ const WeightDetails = ({ flight }) => {
   ).length;
 
   // Calculate total weight for each category (assuming the weight is the same for all travelers)
-  const adultsWeight = numAdults * flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight;
+  const adultsWeight = numAdults * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
   const childrenWeight = numChildren
-    ? numChildren * flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight
-    : null;
+    ? numChildren * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
+    : 0;
   const infantsWeight = numInfants
-    ? numInfants * flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight
-    : null;
+    ? numInfants * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
+    : 0;
 
   // Calculate the total number of rows needed in the table
   const numRows = Math.max(numAdults, numChildren, numInfants);
 
   return (
-    <table className='table-container'>
-      <thead className='border'>
-        <tr>
-          <th>Category</th>
-          <th>Total Weight (KG)</th>
+    <table style={{ borderCollapse: 'collapse', width: '40%', backgroundColor: '#F9FAFF' }} className='table-container'>
+      <thead>
+        <tr style={{ border: '1px solid gray' }}>
+          <th style={{ border: '1px solid gray' }}>Category</th>
+          <th style={{ border: '1px solid gray' }}>Total Weight (KG)</th>
         </tr>
       </thead>
       <tbody>
         {[...Array(numRows).keys()].map((index) => (
-          <tr key={index}>
-            <td>{index === 0 ? 'Adults' : ''}</td>
-            <td>{index === 0 ? adultsWeight : ''}</td>
+          <tr style={{ border: '1px solid gray' }} key={index}>
+            <td style={{ border: '1px solid gray' }}>{index === 0 ? 'Adults' : ''}</td>
+            <td style={{ border: '1px solid gray' }}>{index === 0  ? adultsWeight : ''}</td>
           </tr>
         ))}
         {numChildren > 0 && (
-          <tr>
-            <td>Children</td>
-            <td>{childrenWeight}</td>
+          <tr style={{ border: '1px solid gray' }}>
+            <td style={{ border: '1px solid gray' }}>Children</td>
+            <td style={{ border: '1px solid gray' }}>{childrenWeight}</td>
           </tr>
         )}
         {numInfants > 0 && (
-          <tr>
-            <td>Infants</td>
-            <td>{infantsWeight}</td>
+          <tr style={{ border: '1px solid gray' }}>
+            <td style={{ border: '1px solid gray' }}>Infants</td>
+            <td style={{ border: '1px solid gray' }}>{infantsWeight}</td>
           </tr>
         )}
       </tbody>

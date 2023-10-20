@@ -126,7 +126,7 @@ const arrow = '../../../public/arrow.png'
                 <div className={`slide slide-${activeButton}`}>
                   <div
                     key={flight.id}
-                    className=" bg-white shadow-lg flex py-10 px-6  justify-between align-middle items-center"
+                    className=" bg-white h-52 flex py-12 px-6  justify-between  items-center"
                   >
                     <div className="text-center">
                       <p className="text-xs font-semibold w-20 text-center">{airlineName}</p>

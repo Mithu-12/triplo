@@ -182,7 +182,7 @@ const PackageDetails = () => {
               </div>
             </div>
           </div>
-          <div className="collapse collapse-arrow container-shadow">
+          {/* <div className="collapse collapse-arrow container-shadow">
             <input type="radio" name="my-accordion-2" checked="checked" />
             <div className="collapse-title text-xl font-medium">Itenery</div>
             <div className="collapse-content">
@@ -269,7 +269,7 @@ const PackageDetails = () => {
             <div className="collapse-content">
               <p className="pb-4 text-sm">{packageDetails.generalCondition}</p>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="basis-2/6">
           <div className="container-shadow ml-5 ">

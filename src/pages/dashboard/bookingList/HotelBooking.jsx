@@ -1,8 +1,11 @@
 import React from 'react'
 
 const HotelBooking = () => {
+  const hotelsImg = '../../../public/coming-soon.png'
   return (
-    <div className='bg-white w-full'>HotelBooking</div>
+    <div className='w-full flex justify-center items-center bg-white py-7'>
+    <img className='w-48' src={hotelsImg} alt="Hotel Img" />
+    </div>
   )
 }
 

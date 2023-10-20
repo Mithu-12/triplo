@@ -75,7 +75,7 @@ const router = createBrowserRouter([
         element: <ProtectedRoute><VisaBookSchedule/></ProtectedRoute>
       },
       {
-        path: '/flight/review/',
+        path: '/flight/booking/',
         element: <ProtectedRoute><FlightReview/></ProtectedRoute>
       },
 

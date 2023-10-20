@@ -30,7 +30,7 @@ const HolidaysBooking = () => {
   }, [userId, serviceType]);
   return (
     <div className=" w-full">
-      {orderList ? (
+      {orderList.length > 0 ? (
         <div>
           {orderList?.map((order) => {
             const travelersDate = order?.travelersData.travelDate;
@@ -95,7 +95,7 @@ const HolidaysBooking = () => {
           })}
         </div>
       ) : (
-        <div>You have not any order of List</div>
+        <div className='flex items-center justify-center bg-white w-full h-48 font-semibold text-lg '>You have not any holidays order of List</div>
       )}
     </div>
   );

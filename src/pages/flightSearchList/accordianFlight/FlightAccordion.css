@@ -1,18 +1,12 @@
-/* FlightAccordion.css */
-.flight-accordion {
+
+ .flight-accordion {
   border: 1px solid #ccc;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   margin-bottom: 10px;
-  margin-left: 25px;
-  transition: max-height 0.6s ease;
 }
 
-.flight-accordion.open {
-  height: auto;
-  transition: max-height 0.6s ease;
-}
-.accordion-header {
+.flight-accordion .accordion-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,10 +14,10 @@
   cursor: pointer;
   background-color: #00276c;
   color: #ffffff;
-  transition: background-color 0.3s ease;
+  transition: 0.3s ease;
 }
 
-.accordion-header h3 {
+.flight-accordion .accordion-header h3 {
   font-weight: bold;
   margin: 0;
 }
@@ -38,15 +32,14 @@
   transition: transform 0.4s ease;
 }
 
-.accordion-content {
+.flight-accordion .accordion-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.5s ease;
 }
+
 .flight-accordion.open .accordion-content {
-  max-height: 200px;
+  /* max-height: 200px; */
+  transition: max-height 0.5s ease;
 }
-
-
-
 

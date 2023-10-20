@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setFromAirport, setToAirport } from '../../slices/toFromSlice';
 import useOutsideClick from '../../hooks/useOutsideClick';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight} from '@fortawesome/free-solid-svg-icons';
-const ToFrom = ({ handleFromChange, handleToChange }) => {
+import { faArrowRightLong, faArrowRightArrowLeft} from '@fortawesome/free-solid-svg-icons';
+const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
   const dispatch = useDispatch();
+  const selectReturnDate = useSelector((state) => state.toFrom.returnDate);
   const [fromValue, setFromValue] = useState('');
   const [fromSuggestions, setFromSuggestions] = useState([]);
   const [toValue, setToValue] = useState('');
@@ -178,11 +179,18 @@ const ToFrom = ({ handleFromChange, handleToChange }) => {
           </div>
         )}
       </div>
-      <button onClick={handleSwap} className="swap-button" title="Swap From and To">
+      { selectedOption !== 'multiCity' &&
+        <button onClick={handleSwap} className="swap-button" title="Swap From and To">
        
-        <FontAwesomeIcon icon={faArrowRight} />
+      
+      {selectReturnDate !== null ? (
+              <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+            ) : (
+              <FontAwesomeIcon icon={faArrowRightLong} />
+            )}
        
       </button>
+      }
       <div className="input-content">
         <p>To</p>
         <input

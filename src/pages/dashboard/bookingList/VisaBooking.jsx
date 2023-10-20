@@ -30,7 +30,7 @@ const VisaBooking = () => {
   }, [userId, serviceType]);
   return (
     <div className=" w-full">
-      {orderList ? (
+      {orderList.length > 0 ? (
         <div>
           {orderList?.map((order) => {
             console.log('order',order)
@@ -89,7 +89,7 @@ const VisaBooking = () => {
           })}
         </div>
       ) : (
-        <div>You have not any order of List</div>
+        <div className='flex items-center justify-center bg-white w-full h-48 font-semibold text-lg '>You have not any Visa order of List</div>
       )}
     </div>
   )

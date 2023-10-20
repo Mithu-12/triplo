@@ -15,7 +15,7 @@ import axios from 'axios';
 const VisaBookSchedule = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
-  const [travelerData, setTravelerData] = useState([]);
+  const [travelerData, setTravelerData] = useState([]); 
   const [travelerErrors, setTravelerErrors] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState('travelerDrop');
   const [deliveryDate, setDeliveryDate] = useState('');

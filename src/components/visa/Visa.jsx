@@ -26,7 +26,7 @@ const VisaCustomStyles = {
     ...provided,
     borderRadius: 5,
     height: '60px',
-    width: '420px',
+    width: '380px',
     cursor: 'pointer',
     borderColor: state.isFocused ? '#00276C' : 'gray',
     boxShadow: state.isFocused ? '0 2px 4px rgba(0, 39, 108, 0.5)' : 'none',

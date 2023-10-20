@@ -1,0 +1,12 @@
+.bestDeal-container{
+    height: 250px;
+    width: 100%;
+    background-color: #eb1933;
+    border-radius: 10px;
+    margin-bottom: 80px;
+}
+.loveHandImg{
+    width: 250px;
+    height: 250px;
+    bottom: 0px;
+}

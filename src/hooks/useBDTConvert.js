@@ -1,5 +1,5 @@
 import React from 'react'
-const exchangeRate = 120;
+const exchangeRate = 80;
 const useBDTConvert = (euroAmount) => {
   const bdtAmount = Math.floor(euroAmount * exchangeRate);
 
