@@ -32,8 +32,27 @@ const Package = () => {
     );
   };
 
+  const skItem = () => {
+    return (
+      <div className="packageSkeletonItem">
+     <ContentWrapper>
+        <div className="countdown-container skeleton"></div>
+        <div className="singleFlight-container skeleton">
+        </div>
+     </ContentWrapper>
+      </div>
+    );
+  };
   if (isLoading) {
-    return <h5>Loading...</h5>;
+    return (
+      <div className="packageSkeleton">
+          {skItem()}
+          {skItem()}
+          {skItem()}
+          {skItem()}
+          {skItem()}
+        </div>
+    );
   }
   
   if (isError) {

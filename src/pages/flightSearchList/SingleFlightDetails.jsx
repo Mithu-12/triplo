@@ -63,7 +63,8 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
   };
 
   return (
-    <div key={flight.id} className="my-8 ml-6">
+    <div>
+      {flight ? (<div key={flight.id} className="my-8 ml-6 singleFlight-container">
       <div className="flex border">
         <div
           key={flight.id}
@@ -130,6 +131,10 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
         isOpen={isOpenArray[index]}
         toggleAccordion={() => toggleAccordion(index)}
       />
+    </div>) : <div>
+      <p>There have  no flight list</p>
+    </div> }
+
     </div>
   );
 };

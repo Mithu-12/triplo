@@ -59,8 +59,8 @@ const FlightList = () => {
   const skItem = () => {
     return (
       <div className="skeletonItem">
-        <div className="posterBlock skeleton"></div>
-        <div className="textBlock skeleton">
+        <div className="countdown-container skeleton"></div>
+        <div className="singleFlight-container skeleton">
           <div className="title skeleton"></div>
           <div className="date skeleton"></div>
         </div>
@@ -70,15 +70,15 @@ const FlightList = () => {
  
   if (isLoading) {
     return (
-      <div className="flightLoading-container w-full">
-       <div className="loadingSkeleton">
-            {skItem()}
-            {skItem()}
-            {skItem()}
-            {skItem()}
-            {skItem()}
-          </div>
-      </div>
+      
+        <div className="loadingSkeleton">
+          {skItem()}
+          {skItem()}
+          {skItem()}
+          {skItem()}
+          {skItem()}
+        </div>
+      
     );
   }
   

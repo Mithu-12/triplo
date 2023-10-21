@@ -9,7 +9,7 @@ import { faInstagram, faFacebook, faLinkedin } from '@fortawesome/free-brands-sv
 const Footer = () => {
   const sslcommerzImg = '../../../public/paysslc.png';
   return (
-    <div className="footer-container mt-14">
+    <div className="footer-container">
       <ContentWrapper>
         <div className="flex justify-between">
           <div className="flex flex-col gap-3 ">
