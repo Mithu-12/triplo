@@ -2,7 +2,7 @@ import React from 'react';
 import ContentWrapper from '../wrapperComponent/ContentWrapper';
 import './BestDeal.css';
 const BestDeal = () => {
-  const loveHand = '../../../public/hand-love.png';
+  const loveHand = '/public/hand-love.png';
   return (
     <ContentWrapper>
       <div className="bestDeal-container flex justify-around items-center">

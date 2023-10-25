@@ -40,7 +40,7 @@ const HomeBanner = () => {
         <div>
           <img
             className="backdrop-img"
-            src="../../../public/bg.jpg"
+            src="/bg.jpg"
             alt="Background"
           />
         </div>

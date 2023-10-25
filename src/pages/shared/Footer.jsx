@@ -7,7 +7,7 @@ import {faEnvelope, faPhone} from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faFacebook, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 const Footer = () => {
-  const sslcommerzImg = '../../../public/paysslc.png';
+  const sslcommerzImg = '/public/paysslc.png';
   return (
     <div className="footer-container">
       <ContentWrapper>
