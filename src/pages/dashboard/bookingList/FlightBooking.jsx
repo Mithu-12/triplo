@@ -28,7 +28,7 @@ const FlightBooking = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8800/api/payment/${userId}/${serviceType}`)
+      .get(`https://triplo.cyclic.app/api/payment/${userId}/${serviceType}`)
       .then((response) => {
         console.log('flight booking', response.data);
         setOrderList(response.data);

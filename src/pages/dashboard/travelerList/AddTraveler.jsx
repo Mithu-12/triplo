@@ -28,7 +28,7 @@ const AddTraveler = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8800/api/traveler/${userId}`)
+      .get(`https://triplo.cyclic.app/api/traveler/${userId}`)
       .then((response) => {
         const allTravelers = response.data;
         setGetTravelers(allTravelers)

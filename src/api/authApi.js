@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { setUser, logout } from '../slices/authSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const baseUrl = 'http://localhost:8800/api/auth';
+const baseUrl = 'https://triplo.cyclic.app/api/auth';
 
 // Async thunk for registering a new user
 export const registerUser = createAsyncThunk(

@@ -59,7 +59,7 @@ const PasswordChange = () => {
     try {
       if (!hasError) {
         const response = await axios.post(
-          `http://localhost:8800/api/auth/change-password`,
+          `https://triplo.cyclic.app/api/auth/change-password`,
           {
             currentPassword: values.currentPassword,
             newPassword: values.newPassword,

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const airportApi = createApi({
   reducerPath: 'airportApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8800/api/airport' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo.cyclic.app/api/airport' }),
   endpoints: (builder) => ({
         
     getFlights: builder.query({

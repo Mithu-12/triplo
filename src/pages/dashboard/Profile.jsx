@@ -38,7 +38,7 @@ const Profile = () => {
 
     // Make an API request to update the user data
     axios
-      .put(`http://localhost:8800/api/users/${userId}`, updateUser, {
+      .put(`https://triplo.cyclic.app/api/users/${userId}`, updateUser, {
         headers,
         withCredentials: true,
       })

@@ -72,7 +72,7 @@ const Login = ({onSuccessfulLogin}) => {
   
 
   const handleGoogleLogin = () => {
-    window.open( 'http://localhost:8800/api/auth/google', '_self');
+    window.open( 'https://triplo.cyclic.app/api/auth/google', '_self');
 
   };
 
@@ -80,7 +80,7 @@ const Login = ({onSuccessfulLogin}) => {
 
 
   const handleFacebookLogin = () => {
-    window.open = 'http://localhost:8800/api/auth/facebook', '_self';
+    window.open = 'https://triplo.cyclic.app/api/auth/facebook', '_self';
   };
 
   

@@ -10,7 +10,7 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       // Call the /logout route to log the user out of the authentication session
-      const response = await fetch('http://localhost:8800/api/auth/logout', {
+      const response = await fetch('https://triplo.cyclic.app/api/auth/logout', {
         method: 'POST',
         credentials: 'include', // Include cookies in the request
       });

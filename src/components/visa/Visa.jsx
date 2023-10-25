@@ -85,16 +85,16 @@ const Visa = () => {
   const [selectedNationality, setSelectedNationality] = useState('Bangladesh');
   const travelers = useSelector((state)=> state.visa.travelers)
   const defaultNationality = useSelector((state)=> state.visa.nationality)
-  // if (isLoading) {
-  //   return <progress className="progress w-56"></progress>;
-  // }
-  // if (isError) {
-  //   return (
-  //     <div>
-  //       <span>Error! Task failed successfully.</span>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (isError) {
+    return (
+      <div>
+        <span>Error! Task failed successfully.</span>
+      </div>
+    );
+  }
   console.log('select', selectedCountry)
     const handleTravelersCountChange = (travelers) => {
       dispatch(updateTravelers(travelers));

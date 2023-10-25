@@ -37,7 +37,7 @@
 // utils/auth.js
 export const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:8800/api/auth/login/success', {
+      const response = await fetch('https://triplo.cyclic.app/api/auth/login/success', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

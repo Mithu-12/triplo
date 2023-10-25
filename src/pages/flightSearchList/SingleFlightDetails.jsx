@@ -64,10 +64,10 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
 
   return (
     <div>
-      {flight ? (<div key={flight.id} className="my-8 ml-6 singleFlight-container">
+      {flight ? (<div key={flight?.id} className="my-8 ml-6 singleFlight-container">
       <div className="flex border">
         <div
-          key={flight.id}
+          key={flight?.id}
           className="basis-10/12 bg-white shadow-lg  px-6 py-12  cursor-pointer"
           onClick={() => toggleAccordion(index)}
         >
@@ -114,7 +114,7 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
 
             <p className="text-lg font-bold py-1">৳ {totalFare}</p>
             <Link style={{backgroundColor: '#FFC610', padding: '8px 16px', borderRadius: '5px'}}
-              to={`/flight/booking?searchId=${searchUid}&index=${flight.id}`}
+              to={`/flight/booking?searchId=${searchUid}&index=${flight?.id}`}
               state={{
                 sessionEndTime,
                 flightData: flight,
@@ -126,7 +126,7 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
         </div>
       </div>
       <FlightAccordion
-        key={flight.id}
+        key={flight?.id}
         flight={flight}
         isOpen={isOpenArray[index]}
         toggleAccordion={() => toggleAccordion(index)}

@@ -2,34 +2,32 @@ import { useEffect } from 'react';
 import { setUser } from '../../slices/authSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import './Login.css'
-const LoginSuccess = () => {
-   const dispatch = useDispatch()
-   const navigate = useNavigate()
-   const location = useLocation()
+import axios from 'axios'; // Import Axios
+import './Login.css';
 
-   const from = location.state?.from?.pathname || '/';
-useEffect(()=>{
+const LoginSuccess = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
+  useEffect(() => {
     async function handleLoginSuccess() {
       try {
-        const response = await fetch('http://localhost:8800/api/auth/login/success', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            
-          },
-          credentials: 'include', 
+        const response = await axios.get('https://triplo.cyclic.app/api/auth/login/success', {
+          withCredentials: true,
         });
-    
-        const data = await response.json();
-    
-        if (response.ok) {
-          const token = await data.access_token;
-          localStorage.setItem('access_token', token)
+
+        const data = response.data;
+        console.log('google', data);
+
+        if (response.status === 200) {
+          const token = data.access_token;
+          localStorage.setItem('access_token', token);
           console.log('Authentication successful:', data);
-  
-          dispatch(setUser({...data.user, access_token: token})); 
-          navigate(from, {replace: true})
+
+          dispatch(setUser({ ...data.user, access_token: token }));
+          navigate(from, { replace: true });
         } else {
           // Authentication failed
           console.error('Authentication failed:', data);
@@ -41,14 +39,11 @@ useEffect(()=>{
       }
     }
 
-    handleLoginSuccess()
-   
-  },[])
+    handleLoginSuccess();
+  }, [dispatch, navigate, from]);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      
-    }, 5000);
+    const timeout = setTimeout(() => {}, 5000);
 
     return () => {
       clearTimeout(timeout);
@@ -56,9 +51,10 @@ useEffect(()=>{
     };
   }, [navigate, from]);
 
-  return(
-    <div className='success-login'>Thanks for Login Triplo</div>
-  )
+  return (
+    <div className="success-login">Thanks for Login Triplo</div>
+  );
 };
 
 export default LoginSuccess;
+

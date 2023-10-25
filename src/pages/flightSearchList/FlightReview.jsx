@@ -22,16 +22,13 @@ const FlightReview = () => {
   const [travelerData, setTravelerData] = useState([]);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [travelerErrors, setTravelerErrors] = useState([]);
-  const selectedCabin = useSelector((state) => state.passenger.selectedCabin);
-  const selectedFromAirport = useSelector((state) => state.toFrom.fromAirport);
-  const selectedToAirport = useSelector((state) => state.toFrom.toAirport);
   const selectDepartureDate = useSelector(
     (state) => state.toFrom.departureDate
   );
   const selectReturnDate = useSelector((state) => state.toFrom.returnDate);
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
-  const id = flight.id;
+  const id = flight?.id;
 
   console.log('flightData', flight);
 
@@ -150,7 +147,7 @@ const FlightReview = () => {
       return;
     }
     try {
-      const apiUrl = `http://localhost:8800/api/payment/payment-process/${selectedPayment}`;
+      const apiUrl = `https://triplo.cyclic.app/api/payment/payment-process/${selectedPayment}`;
       const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
@@ -190,7 +187,7 @@ const FlightReview = () => {
                   {Array.from({ length: totalPassenger }).map((_, index) => {
                     const traveler = travelerData[index];
                     return (
-                      <div className=" pb-12">
+                      <div className=" pb-12" key={index}>
                         <div className="flex gap-3  items-center bookSchedule-traveler-person mb-6">
                           <FontAwesomeIcon
                             icon={faUser}
@@ -518,13 +515,6 @@ const FlightReview = () => {
                 <p>Discount </p>
                 <p className="font-semibold">BDT {totalDiscount}</p>
               </div>
-
-              {/* {selectedMethod === 'pickUp' && (
-                    <div className="flex justify-between py-2">
-                      <p>Pick Up Charge</p>
-                      <p className="font-semibold">BDT {pickUpFee}</p>
-                    </div>
-                  )} */}
               <hr />
               <div className="flex justify-between font-semibold text-lg py-3">
                 <p>Total Payable:</p>

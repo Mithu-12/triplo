@@ -21,7 +21,7 @@ const useFlightPrice = (flight) => {
 
   const adultPrice = useBDTConvert(
     parseFloat(
-      flight.travelerPricings.find(
+      flight?.travelerPricings?.find(
         (pricing) => pricing.travelerType === 'ADULT'
       )?.price?.total || '0'
     )
@@ -29,7 +29,7 @@ const useFlightPrice = (flight) => {
 
   const childPrice = useBDTConvert(
     parseFloat(
-      flight.travelerPricings.find(
+      flight?.travelerPricings.find(
         (pricing) => pricing.travelerType === 'CHILD'
       )?.price?.total || '0'
     )
@@ -37,7 +37,7 @@ const useFlightPrice = (flight) => {
 
   const infantsPrice = useBDTConvert(
     parseFloat(
-      flight.travelerPricings.find(
+      flight?.travelerPricings.find(
         (pricing) => pricing.travelerType === 'HELD_INFANT'
       )?.price?.total || '0'
     )
