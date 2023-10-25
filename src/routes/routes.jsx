@@ -25,7 +25,8 @@ import HotelBooking from '../pages/dashboard/bookingList/HotelBooking';
 import Dashboard from '../layout/Dashboard';
 import AddTraveler from '../pages/dashboard/travelerList/AddTraveler';
 import RegularTravelers from '../pages/dashboard/travelerList/RegularTravelers';
-import FlightReview from '../pages/flightSearchList/flightReview';
+import FlightReview from '../pages/flightSearchList/FlightReview';
+// import FlightReview from '../pages/flightSearchList/flightReview';
 
 
 
