@@ -13,9 +13,7 @@ import useLoginSuccess from '../../hooks/useLoginSuccess';
 import InputField from '../../components/inputField/inputField';
 import useForm from '../../hooks/useForm';
 
-const Login = ({onSuccessfulLogin}) => {
-  // const [identifier, setIdentifier] = useState('');
-  // const [password, setPassword] = useState('');
+const Login = () => {
 
   const [loginUser, { isLoading, isError, error }] = useLoginMutation();
   
@@ -51,8 +49,6 @@ const Login = ({onSuccessfulLogin}) => {
 
 
   const handleLoginSubmit = async ({hasError, errors, values}) => {
-    
-
     try {
       if(!hasError){
         const { data } = await loginUser({
