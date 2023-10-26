@@ -85,7 +85,7 @@ const FlightInfo = ({ flight, itineraryIndex, selectedFromAirport, selectedToAir
   const departure = formatDateAndTime(flightData.departureDateTime);
   const arrival = formatDateAndTime(flightData.arrivalDateTime);
 
-  const arrow = '/public/arrow.png';
+  const arrow = '/arrow.png';
 
   return (
     <div>

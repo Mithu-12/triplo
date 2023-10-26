@@ -35,9 +35,9 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
 //  const arrow = '/arrow.png';
 
   const airlineImages = {
-    BG: '/public/BG.png',
-    VQ: '/public/VQ.png',
-    BS: '/public/BS.png',
+    BG: '/BG.png',
+    VQ: '/VQ.png',
+    BS: '/BS.png',
   };
 
   
