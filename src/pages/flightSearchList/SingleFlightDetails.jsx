@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useFlightPrice from '../../hooks/useFlightPrice';
 import FlightInfo from './flightCard';
 import FlightAccordion from './accordianFlight/AccordianFlight';
-import arrow from '../../../public/arrow.png';
+
 import {  useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
   } = useFlightPrice(flight);
 
   const weight =
-    flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags
+    flight?.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags
       .weight;
 
   const toggleAccordion = (index) => {
@@ -32,31 +32,15 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
     });
   };
 
+//  const arrow = '/arrow.png';
+
   const airlineImages = {
-    BG: '../../../public/BG.png',
-    VQ: '../../../public/VQ.png',
-    BS: '../../../public/BS.png',
+    BG: '/public/BG.png',
+    VQ: '/public/VQ.png',
+    BS: '/public/BS.png',
   };
 
-  const formatDateTime = (dateTime) => {
-    const date = new Date(dateTime);
-
-    const timeOptions = {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-    };
-    const time = date.toLocaleString('en-US', timeOptions);
-
-    const dateOptions = {
-      month: 'long',
-      day: 'numeric',
-      weekday: 'short',
-    };
-    const newDate = date.toLocaleString('en-US', dateOptions);
-
-    return { time, newDate };
-  };
+  
 
   const handleGoBack = () => {
     navigate(-1);

@@ -14,6 +14,9 @@ const LoginSuccess = () => {
   useEffect(() => {
     async function handleLoginSuccess() {
       try {
+        // const response = await axios.get('http://localhost:8800/api/auth/login/success', {
+        //   withCredentials: true,
+        // });
         const response = await axios.get('https://triplo.cyclic.app/api/auth/login/success', {
           withCredentials: true,
         });
