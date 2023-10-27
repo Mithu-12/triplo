@@ -18,8 +18,9 @@ import {
   faTrain,
   faSnowflake,
   faBangladeshiTakaSign,
+  faSpinner
 } from '@fortawesome/free-solid-svg-icons';
-import Loader from '../loder/loader';
+// import Loader from '../loder/loader';
 
 
 
@@ -33,7 +34,11 @@ const PackageDetails = () => {
   } = useGetPackageByIdQuery(id);
   console.log(packageDetails);
   if (isLoading) {
-    return <Loader/>
+    return <div className="loader-overlay">
+    <div className="loader">
+      <FontAwesomeIcon icon={faSpinner} spin />
+    </div>
+  </div>
   }
 
   if (isError) {
