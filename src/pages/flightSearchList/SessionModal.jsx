@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const SessionModal = ({ show }) => {
   const navigate = useNavigate()
-  const failureImg = '../../../public/failure.gif'
+  const failureImg = '/failure.gif'
   const handleClick = ()=>{
     navigate('/')
   }

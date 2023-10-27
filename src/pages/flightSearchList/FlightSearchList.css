@@ -52,12 +52,13 @@
 
 
 
-  .loadingSkeleton {
+  .flightLoadingSkeleton {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* height: 300px; */
     gap: 10px;
     overflow-y: hidden;
-    margin-right: -20px;
-    margin-left: -20px;
     padding: 0 20px;
 
     /* Media Query for larger screens */
@@ -68,7 +69,7 @@
         padding: 0;
     }
 
-    .skeletonItem {
+    .flightSkeletonItem {
         width: 100%;
 
         /* Media Query for medium-sized screens */
@@ -78,7 +79,8 @@
 
         /* Media Query for larger screens */
         @media (min-width: 1024px) {
-            width: calc(20% - 16px);
+            width: 100%;
+            /* width: calc(90% - 96px); */
         }
 
         flex-shrink: 0;
@@ -90,7 +92,7 @@
             margin-bottom: 30px;
         }
 
-        .singleFlight-container {
+         .singleFlight-container {
             display: flex;
             flex-direction: column;
 
@@ -104,38 +106,40 @@
                 width: 75%;
                 height: 20px;
             }
-        }
+        } 
     }
 }
 
   
-  .skeleton {
-    position: relative;
-    overflow: hidden;
-    background-color: #0a2955;
+.flightSkeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: #98aecc;
+  height: 300px;
+}
+
+.flightSkeleton::after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(25, 55, 99, 0) 0,
+    rgba(25, 55, 99, 0.2) 20%,
+    rgba(25, 55, 99, 0.5) 60%,
+    rgba(25, 55, 99, 0)
+  );
+  animation: shimmer 2s infinite;
+  content: "";
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
   }
-  
-  .skeleton::after {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    transform: translateX(-100%);
-    background-image: linear-gradient(
-      90deg,
-      rgba(25, 55, 99, 0) 0,
-      rgba(25, 55, 99, 0.2) 20%,
-      rgba(25, 55, 99, 0.5) 60%,
-      rgba(25, 55, 99, 0)
-    );
-    animation: shimmer 2s infinite;
-    content: "";
-  }
-  
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
-  }
+}
+
   

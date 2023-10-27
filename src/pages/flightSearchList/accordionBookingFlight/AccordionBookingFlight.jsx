@@ -38,13 +38,13 @@ const AccordionFlightBooking = ({ flight, isOpen, toggleAccordion }) => {
             ) : (
               <FontAwesomeIcon icon={faArrowRightLong} />
             )}
-            <p>{selectedToAirport.code}</p>
+            <span>{selectedToAirport.code}</span> {selectReturnDate && <span>{selectReturnDate}</span>}
           </div>
 
           <div className="flex gap-3">
             <div className="flex items-center gap-2">
               <FontAwesomeIcon icon={faCalendarCheck} />
-              <p>{selectDepartureDate}</p>
+              <p>{selectDepartureDate}</p> 
             </div>
             <div className="flex gap-1 items-center">
               <FontAwesomeIcon icon={faUser} />

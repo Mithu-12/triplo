@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Holidays.css'
+import Loader from '../loder/loader';
 
 
 
@@ -71,6 +72,7 @@ export default function AnimatedMulti() {
   const { data: packages, isLoading, isError } = useGetPackagesQuery();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true);
+
   const navigate = useNavigate();
 
   // if (isLoading) {
@@ -95,11 +97,24 @@ export default function AnimatedMulti() {
     setIsSearchButtonDisabled(false)
   }
   const handleSearch = () => {
+   
+    if (!packages) {
+      // Handle the case where packages is undefined or null
+      // setSearchError('No packages available.'); 
+      return;
+    }
     // Filter the data based on the selected options
-    const searchData = packages.filter((item) =>
+    const searchData = packages?.filter((item) =>
       selectedOptions.some((selected) => selected.value === item.package)
     );
-    navigate('/packageMenu', {state: {data: searchData}})
+
+    if (searchData.length === 0) {
+      // No flights found, set the flag to indicate an error
+      navigate('/packageMenu', { state: { hasData: false } });
+    } else {
+      // Flights found, navigate to the next page with the data
+      navigate('/packageMenu', { state: { hasData: true, data: searchData } });
+    }
   };
 
   return (
@@ -122,6 +137,8 @@ export default function AnimatedMulti() {
         <FontAwesomeIcon icon={faMagnifyingGlass} />{' '}
         SEARCH VISA</button>
       </div>
+      {/* {isLoading && <Loader />} */}
+   
    </div>
     
   </div>

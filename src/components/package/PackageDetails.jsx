@@ -19,6 +19,7 @@ import {
   faSnowflake,
   faBangladeshiTakaSign,
 } from '@fortawesome/free-solid-svg-icons';
+import Loader from '../loder/loader';
 
 
 const PackageDetails = () => {
@@ -31,7 +32,7 @@ const PackageDetails = () => {
   } = useGetPackageByIdQuery(id);
   console.log(packageDetails);
   if (isLoading) {
-    return <h4>Loading...</h4>;
+    return <Loader/>;
   }
 
   if (isError) {

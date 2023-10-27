@@ -5,12 +5,11 @@ import Button from '../../components/button/Button';
 import { useDispatch } from 'react-redux';
 import {  useLocation, useNavigate } from 'react-router-dom';
 import { useGetFlightsQuery } from '../../api/airportApi';
-import { setFlights } from '../../slices/airportSlice';
+import { setFlights, setSearchUid, setSessionEndTime } from '../../slices/airportSlice';
 import CountdownClock from './CountdownTimer';
 import SessionModal from './SessionModal';
 import SingleFlightDetails from './SingleFlightDetails';
-// import Skeleton from 'react-loading-skeleton';
-// import 'react-loading-skeleton/dist/skeleton.css';
+
 
 
 const FlightList = () => {
@@ -54,24 +53,27 @@ const FlightList = () => {
   const sessionStartTime = data?.sessionStartTime;
   const sessionEndTime = data?.sessionEndTime;
   const searchUid = data?.searchUid;
-  const loading = '../../../public/flight-loading.svg';
   
   const skItem = () => {
     return (
-      <div className="skeletonItem">
-        <div className="countdown-container skeleton"></div>
-        <div className="singleFlight-container skeleton">
-          <div className="title skeleton"></div>
-          <div className="date skeleton"></div>
-        </div>
+      <ContentWrapper className='pt-16'>
+        <div className='flex '>
+        {/* <div className='basis-3/12 mr-5 flightSkeletonItem'>
+        <div className="countdown-container flightSkeleton "></div>
+        </div> */}
+        <div className=" flightSkeletonItem w-full">
+        <div className="countdown-container flightSkeleton "></div>
+        
       </div>
+        </div>
+      </ContentWrapper>
     );
   };
  
   if (isLoading) {
     return (
       
-        <div className="loadingSkeleton">
+        <div className="flightLoadingSkeleton w-full">
           {skItem()}
           {skItem()}
           {skItem()}
@@ -83,17 +85,11 @@ const FlightList = () => {
   }
   
   
-  // if (isLoading) {
-  //   return (
-  //     <div className="flightLoading-container bg-red-500">
-  //       <img className="bg-red-500" src={loading}></img>
-  //       {/* <img className='' src={loadingGif}></img> */}
-  //     </div>
-  //   );
-  // }
 
   console.log('new flight data', flights);
   dispatch(setFlights(flights));
+  dispatch(setSearchUid(searchUid))
+  dispatch(setSessionEndTime(sessionEndTime))
 
   const isFlightListEmpty = !flights || flights.data.length === 0;
 

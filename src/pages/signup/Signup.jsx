@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
 import useForm from '../../hooks/useForm';
 import InputField from '../../components/inputField/inputField';
+import Loader from '../../components/loder/loader';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -137,6 +138,9 @@ const validateForm = (values)=>{
               required
             />
           </div>
+          {
+            isLoading ? <Loader/> : null
+          }
         {isError && <span className='text-red-600 '>{error.data.message}</span>}
           <div className="signup-button-container">
           <button className='signup-button' type="submit">Sign Up</button>

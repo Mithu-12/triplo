@@ -3,15 +3,19 @@ import useFlightPrice from '../../hooks/useFlightPrice';
 import FlightInfo from './flightCard';
 import FlightAccordion from './accordianFlight/AccordianFlight';
 
-import {  useSelector } from 'react-redux';
+import {  useDispatch, useSelector } from 'react-redux';
 import { Link} from 'react-router-dom';
+import { setSelectedFlight } from '../../slices/airportSlice';
 
 
 const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
+  const dispatch = useDispatch()
   const [isOpenArray, setIsOpenArray] = useState([]);
   const selectedFromAirport = useSelector((state) => state.toFrom.fromAirport);
   const selectedToAirport = useSelector((state) => state.toFrom.toAirport);
   const flights = useSelector((state) => state.airport.flights);
+
+  dispatch(setSelectedFlight(flight))
   const {
     totalBaseFare,
     totalFare,
@@ -99,10 +103,6 @@ const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
             <p className="text-lg font-bold py-1">৳ {totalFare}</p>
             <Link style={{backgroundColor: '#FFC610', padding: '8px 16px', borderRadius: '5px'}}
               to={`/flight/booking?searchId=${searchUid}&index=${flight?.id}`}
-              state={{
-                sessionEndTime,
-                flightData: flight,
-              }}
             >
               Book Now
             </Link>

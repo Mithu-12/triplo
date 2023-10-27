@@ -3,7 +3,6 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import rootReducer from '../reducers/rootReducers'; // Import the root reducer
-import { flightApi } from '../api/flightApi';
 import { packageApi } from '../api/packageApi';
 import { bookScheduleApi } from '../api/bookScheduleApi';
 import { userApi } from '../api/userApi';
@@ -25,7 +24,6 @@ const store = configureStore({
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
-      flightApi.middleware,
       packageApi.middleware,
       bookScheduleApi.middleware,
       userApi.middleware,

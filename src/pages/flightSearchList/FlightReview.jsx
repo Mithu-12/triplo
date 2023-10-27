@@ -15,8 +15,8 @@ import axios from 'axios';
 import useFlightPrice from '../../hooks/useFlightPrice';
 
 const FlightReview = () => {
-  const location = useLocation();
-  const { sessionEndTime, flightData: flight } = location.state || {};
+  const flight = useSelector((state) => state.airport.selectedFlight);
+  const sessionEndTime = useSelector((state) => state.airport.sessionEndTime);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isOpenArray, setIsOpenArray] = useState(false);
   const [travelerData, setTravelerData] = useState([]);
@@ -25,7 +25,8 @@ const FlightReview = () => {
   const selectDepartureDate = useSelector(
     (state) => state.toFrom.departureDate
   );
-  const selectReturnDate = useSelector((state) => state.toFrom.returnDate);
+  
+
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   const id = flight?.id;

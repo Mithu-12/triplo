@@ -8,7 +8,7 @@ const VisaDetails = () => {
   const navigate = useNavigate();
   const visa = location.state?.data || [];
   console.log('firstss', visa);
-  const visaExpress = '../../../public/visaExpress.jpg';
+  const visaExpress = '/visaExpress.jpg';
   const getItem = (person, items) => {
     return (
       <div>
@@ -21,8 +21,8 @@ const VisaDetails = () => {
         >
           {person} :{' '}
         </div>
-        {items.map((item) => (
-          <ul style={{ listStyleType: 'disc', padding: '0 0 0 35px' }}>
+        {items.map((item, index) => (
+          <ul key={index} style={{ listStyleType: 'disc', padding: '0 0 0 35px' }}>
             <li>{item}</li>
           </ul>
         ))}
@@ -61,7 +61,7 @@ const VisaDetails = () => {
             <div className="">
               {visa?.visaList.map((item, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <div className="py-6 px-4 bg-white  shadow-md mt-6">
                     <div className="flex justify-between items-center">
                       <h3 className="text-2xl font-semibold">{item.name}</h3>

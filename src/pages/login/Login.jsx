@@ -9,10 +9,9 @@ import {
 } from '../../api/authApi';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
-import useLoginSuccess from '../../hooks/useLoginSuccess';
 import InputField from '../../components/inputField/inputField';
 import useForm from '../../hooks/useForm';
-
+import Loader from '../../components/loder/loader';
 const Login = () => {
 
   const [loginUser, { isLoading, isError, error }] = useLoginMutation();
@@ -20,6 +19,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation()
+
+
 
   const from = location.state?.from?.pathname || '/';
 
@@ -117,6 +118,9 @@ const Login = () => {
             required
           />
           </div>
+          {
+            isLoading ? <Loader/> : null
+          }
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>
           )}
