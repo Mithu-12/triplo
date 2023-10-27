@@ -22,6 +22,7 @@ import {
 import Loader from '../loder/loader';
 
 
+
 const PackageDetails = () => {
   const { id } = useParams();
 
@@ -32,7 +33,7 @@ const PackageDetails = () => {
   } = useGetPackageByIdQuery(id);
   console.log(packageDetails);
   if (isLoading) {
-    return <Loader/>;
+    return <Loader/>
   }
 
   if (isError) {
