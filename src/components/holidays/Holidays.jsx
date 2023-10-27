@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Holidays.css'
-import Loader from '../loder/loader';
+
 
 
 
@@ -137,7 +137,7 @@ export default function AnimatedMulti() {
         <FontAwesomeIcon icon={faMagnifyingGlass} />{' '}
         SEARCH VISA</button>
       </div>
-      {/* {isLoading && <Loader />} */}
+      
    
    </div>
     
