@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {faArrowLeft, faSpinner} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
 import useForm from '../../hooks/useForm';
 import InputField from '../../components/inputField/inputField';
-import Loader from '../../components/loder/loader';
+import Loader from '../../components/Loader/loader';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -139,7 +139,11 @@ const validateForm = (values)=>{
             />
           </div>
           {
-            isLoading ? <Loader/> : null
+            isLoading ? <div className="loader-overlay">
+      <div className="loader">
+        <FontAwesomeIcon icon={faSpinner} spin />
+      </div>
+    </div> : null
           }
         {isError && <span className='text-red-600 '>{error.data.message}</span>}
           <div className="signup-button-container">

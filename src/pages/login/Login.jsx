@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './Login.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   useLoginMutation,
@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
 import InputField from '../../components/inputField/inputField';
 import useForm from '../../hooks/useForm';
-import Loader from '../../components/loder/loader';
+
 const Login = () => {
 
   const [loginUser, { isLoading, isError, error }] = useLoginMutation();
@@ -119,7 +119,11 @@ const Login = () => {
           />
           </div>
           {
-            isLoading ? <Loader/> : null
+            isLoading ? <div className="loader-overlay">
+      <div className="loader">
+        <FontAwesomeIcon icon={faSpinner} spin />
+      </div>
+    </div> : null
           }
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>
