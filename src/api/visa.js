@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const visaApi = createApi({
   reducerPath: 'visaApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo.cyclic.app/api/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/' }),
   endpoints: (builder) => ({
     getVisa: builder.query({
       query: () => ({ url: '/visa' }),

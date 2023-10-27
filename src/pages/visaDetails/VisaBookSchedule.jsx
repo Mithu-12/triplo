@@ -183,7 +183,7 @@ const VisaBookSchedule = () => {
       return; // Don't proceed if no payment option is selected
     }
     try {
-      const apiUrl = `https://triplo.cyclic.app/api/payment/payment-process/${selectedPayment}`;
+      const apiUrl = `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`;
       const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);

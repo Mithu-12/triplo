@@ -68,7 +68,7 @@ const Login = () => {
   
 
   const handleGoogleLogin = () => {
-    window.open( 'https://triplo.cyclic.app/api/auth/google', '_self');
+    window.open( 'https://triplo-flight.onrender.com/api/auth/google', '_self');
 
   };
 
@@ -76,7 +76,7 @@ const Login = () => {
 
 
   const handleFacebookLogin = () => {
-    window.open = 'https://triplo.cyclic.app/api/auth/facebook', '_self';
+    window.open = 'https://triplo-flight.onrender.com/api/auth/facebook', '_self';
   };
 
   

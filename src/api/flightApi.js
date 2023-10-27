@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const flightApi = createApi({
   reducerPath: 'flightApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo.cyclic.app/api/flight' }), // Adjust the base URL based on your backend API endpoint
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/flight' }), // Adjust the base URL based on your backend API endpoint
   endpoints: (builder) => ({
     getFlights: builder.query({
       query: () => 'flight', // Endpoint URL for fetching all flights

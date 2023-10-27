@@ -119,7 +119,7 @@ const FlightList = () => {
           <div className="flightNoFound-container">
             <div className="flightNotFound-image">
               <h3 className="text-xl font-semibold">Not Result Found</h3>
-              <p>We're sorry. We were not able to find a match.</p>
+              <p>{`We're sorry. We were not able to find a match.`}</p>
               <Button
                 onClick={handleGoBack}
                 className="px-6 py-3 text-sm rounded-sm text-white"
@@ -147,7 +147,7 @@ const FlightList = () => {
                 <div>
                   {flights.data?.map((flight, index) => {
                     return (
-                      <SingleFlightDetails flight={flight} index={index} searchUid={searchUid} sessionEndTime={sessionEndTime}/>
+                      <SingleFlightDetails key={index} flight={flight} index={index} searchUid={searchUid} sessionEndTime={sessionEndTime}/>
                     );
                   })}
                 </div>

@@ -43,33 +43,33 @@ const arrow = '../../../public/arrow.png'
   
       return { time, newDate };
     };
-    const airlineCode = flight.validatingAirlineCodes[0];
+    const airlineCode = flight?.validatingAirlineCodes[0];
     const airlineName = getCarrierName(
-      flight.itineraries[0].segments[0].carrierCode
+      flight?.itineraries[0].segments[0].carrierCode
     );
     const aircraftName = getAircraftName(
-      flight.itineraries[0].segments[0].aircraft.code
+      flight?.itineraries[0].segments[0].aircraft.code
     )
     const departureAirportCode =
-      flight.itineraries[0].segments[0].departure.iataCode;
+      flight?.itineraries[0].segments[0].departure.iataCode;
     const arrivalAirportCode =
-      flight.itineraries[0].segments[0].arrival.iataCode;
+      flight?.itineraries[0].segments[0].arrival.iataCode;
 
     const departureDateTime =
-      flight.itineraries[0].segments[0].departure.at;
+      flight?.itineraries[0].segments[0].departure.at;
     const arrivalDateTime =
-      flight.itineraries[0].segments[0].arrival.at;
+      flight?.itineraries[0].segments[0].arrival.at;
 
     const departure = formatDateTime(departureDateTime);
     const arrival = formatDateTime(arrivalDateTime);
 
   
 
-    const duration = flight.itineraries[0].segments[0].duration;
+    const duration = flight?.itineraries[0].segments[0].duration;
     const numberOfStops =
-      flight.itineraries[0].segments[0].numberOfStops;
+      flight?.itineraries[0].segments[0].numberOfStops;
     const durationRegex = /PT(\d+H)?(\d+M)/;
-    const match = duration.match(durationRegex);
+    const match = duration?.match(durationRegex);
     let hours = 0;
     let minutes = 0;
 
@@ -125,7 +125,7 @@ const arrow = '../../../public/arrow.png'
               >
                 <div className={`slide slide-${activeButton}`}>
                   <div
-                    key={flight.id}
+                    key={flight?.id}
                     className=" bg-white h-52 flex py-12 px-6  justify-between  items-center"
                   >
                     <div className="text-center">

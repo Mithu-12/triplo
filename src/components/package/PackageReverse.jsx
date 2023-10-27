@@ -320,7 +320,7 @@ const PackageReverse = () => {
       }
 
       const response = await axios.post(
-        `https://triplo.cyclic.app/api/payment/payment-process/${selectedPayment}`,
+        `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`,
         bookingData
       );
       if (response.status === 200) {

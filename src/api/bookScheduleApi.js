@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const bookScheduleApi = createApi({
   reducerPath: 'bookScheduleApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo.cyclic.app/api/' }), // Adjust the base URL based on your backend API endpoint
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/' }), // Adjust the base URL based on your backend API endpoint
   endpoints: (builder) => ({
     getBookSchedules: builder.query({
       query: () => 'bookSchedule', // Endpoint URL for fetching all book schedules

@@ -2,23 +2,23 @@ import React from 'react';
 
 const WeightDetails = ({ flight }) => {
   // Extracting the number of adults, children, and infants from the flight data
-  const numAdults = flight.travelerPricings.filter(
+  const numAdults = flight?.travelerPricings.filter(
     (traveler) => traveler.travelerType === 'ADULT'
   ).length;
-  const numChildren = flight.travelerPricings.filter(
+  const numChildren = flight?.travelerPricings.filter(
     (traveler) => traveler.travelerType === 'CHILD'
   ).length;
-  const numInfants = flight.travelerPricings.filter(
+  const numInfants = flight?.travelerPricings.filter(
     (traveler) => traveler.travelerType === 'HELD_INFANT'
   ).length;
 
   // Calculate total weight for each category (assuming the weight is the same for all travelers)
-  const adultsWeight = numAdults * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
+  const adultsWeight = numAdults * (flight?.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
   const childrenWeight = numChildren
-    ? numChildren * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
+    ? numChildren * (flight?.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
     : 0;
   const infantsWeight = numInfants
-    ? numInfants * (flight.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
+    ? numInfants * (flight?.travelerPricings[0].fareDetailsBySegment[0].includedCheckedBags.weight ?? 0)
     : 0;
 
   // Calculate the total number of rows needed in the table
@@ -33,7 +33,7 @@ const WeightDetails = ({ flight }) => {
         </tr>
       </thead>
       <tbody>
-        {[...Array(numRows).keys()].map((index) => (
+        {numRows && [...Array(numRows).keys()]?.map((index) => (
           <tr style={{ border: '1px solid gray' }} key={index}>
             <td style={{ border: '1px solid gray' }}>{index === 0 ? 'Adults' : ''}</td>
             <td style={{ border: '1px solid gray' }}>{index === 0  ? adultsWeight : ''}</td>

@@ -158,7 +158,7 @@ const RegularTravelers = () => {
     e.preventDefault();
     console.log(travelerData);
     try {
-      const response = await axios.post('https://triplo.cyclic.app/api/traveler/', {
+      const response = await axios.post('https://triplo-flight.onrender.com/api/traveler/', {
         ...travelerData,
         userId: userId,
         travelerId: id,

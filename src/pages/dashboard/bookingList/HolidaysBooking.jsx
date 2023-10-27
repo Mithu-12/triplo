@@ -19,7 +19,7 @@ const HolidaysBooking = () => {
 
   useEffect(() => {
     axios
-      .get(`https://triplo.cyclic.app/api/payment/${userId}/${serviceType}`)
+      .get(`https://triplo-flight.onrender.com/api/payment/${userId}/${serviceType}`)
       .then((response) => {
         console.log('flight booking', response.data);
         setOrderList(response.data);

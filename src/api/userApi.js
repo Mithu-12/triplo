@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo.cyclic.app/api/users' }), 
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/users' }), 
   endpoints: (builder) => ({
     getUser: builder.query({
       query: (id) => `/${id}`,

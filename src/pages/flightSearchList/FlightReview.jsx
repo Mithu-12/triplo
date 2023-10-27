@@ -147,7 +147,7 @@ const FlightReview = () => {
       return;
     }
     try {
-      const apiUrl = `https://triplo.cyclic.app/api/payment/payment-process/${selectedPayment}`;
+      const apiUrl = `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`;
       const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
@@ -168,7 +168,7 @@ const FlightReview = () => {
         <div className="flex pt-24">
           <div className="basis-8/12 w-full mr-8">
             <AccordionFlightBooking
-              key={flight.id}
+              key={flight?.id}
               flight={flight}
               isOpen={isOpenArray}
               toggleAccordion={() => toggleAccordion()}
