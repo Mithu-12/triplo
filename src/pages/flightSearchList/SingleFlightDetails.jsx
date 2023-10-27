@@ -8,7 +8,7 @@ import { Link} from 'react-router-dom';
 import { setSelectedFlight } from '../../slices/airportSlice';
 
 
-const SingleFlightDetails = ({ flight, index, searchUid, sessionEndTime }) => {
+const SingleFlightDetails = ({ flight, index, searchUid,  }) => {
   const dispatch = useDispatch()
   const [isOpenArray, setIsOpenArray] = useState([]);
   const selectedFromAirport = useSelector((state) => state.toFrom.fromAirport);
