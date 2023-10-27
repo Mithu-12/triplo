@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import './Login.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
