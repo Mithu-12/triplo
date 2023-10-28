@@ -119,13 +119,6 @@ const Login = () => {
             required
           />
           </div>
-          {/* {
-            isLoading ? <div className="loader-overlay">
-      <div className="loader">
-        <FontAwesomeIcon icon={faSpinner} spin />
-      </div>
-    </div> : null
-          } */}
 
           {
             isLoading ? <LoaderSpiner/> : null

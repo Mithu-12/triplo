@@ -90,8 +90,6 @@ export default function AnimatedMulti() {
   const handleSearch = () => {
    
     if (!packages) {
-      // Handle the case where packages is undefined or null
-      // setSearchError('No packages available.'); 
       return;
     }
     // Filter the data based on the selected options

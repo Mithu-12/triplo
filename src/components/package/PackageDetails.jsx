@@ -20,6 +20,7 @@ import {
   faBangladeshiTakaSign,
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
+import LoaderSpiner from '../Loader/LoaderSpiner';
 // import Loader from '../loder/loader';
 
 
@@ -34,11 +35,7 @@ const PackageDetails = () => {
   } = useGetPackageByIdQuery(id);
   console.log(packageDetails);
   if (isLoading) {
-    return <div className="loader-overlay">
-    <div className="loader">
-      <FontAwesomeIcon icon={faSpinner} spin />
-    </div>
-  </div>
+    return <LoaderSpiner/>
   }
 
   if (isError) {
