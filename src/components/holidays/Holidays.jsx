@@ -75,16 +75,7 @@ export default function AnimatedMulti() {
 
   const navigate = useNavigate();
 
-  // if (isLoading) {
-  //   return <progress className="progress w-56"></progress>;
-  // }
-  // if (isError) {
-  //   return (
-  //     <div>
-  //       <span>Error! Task failed.</span>
-  //     </div>
-  //   );
-  // }
+ 
   const holidaysCountry = [
     { value: 'Srilanka', label: 'Srilanka' },
       { value: 'Nepal', label: 'Nepal' },

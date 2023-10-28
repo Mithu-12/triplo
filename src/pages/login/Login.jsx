@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../slices/authSlice';
 import InputField from '../../components/inputField/inputField';
 import useForm from '../../hooks/useForm';
+import LoaderSpiner from '../../components/Loader/LoaderSpiner';
 
 const Login = () => {
 
@@ -118,12 +119,16 @@ const Login = () => {
             required
           />
           </div>
-          {
+          {/* {
             isLoading ? <div className="loader-overlay">
       <div className="loader">
         <FontAwesomeIcon icon={faSpinner} spin />
       </div>
     </div> : null
+          } */}
+
+          {
+            isLoading ? <LoaderSpiner/> : null
           }
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>

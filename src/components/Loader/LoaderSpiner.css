@@ -11,7 +11,7 @@
     z-index: 1000; /* Ensure the loader is on top of other elements */
   }
   
-  .loader {
+  .loaderSpiner {
     font-size: 2rem;
     color: #fff;
     background: rgba(0, 0, 0, 0.8);

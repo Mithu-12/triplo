@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import './Loader.css'
 
-const Loader = () => {
+const LoaderSpiner = () => {
   return (
     <div className="loader-overlay">
-      <div className="loader">
+      <div className="loaderSpiner">
         <FontAwesomeIcon icon={faSpinner} spin />
       </div>
     </div>
   );
 };
 
-export default Loader;
+export default LoaderSpiner;
