@@ -1,10 +1,10 @@
 import React from 'react';
 import './Payment.css';
 
-const bkash = '../../../public/bkash.png';
-const nogod = '../../../public/nogod.png';
-const nexus = '../../../public/nexus.jpg';
-const sslCommerz = '../../../public/ssl.png';
+const bkash = '/bkash.png';
+const nogod = '/nogod.png';
+const nexus = '/nexus.jpg';
+const sslCommerz = '/ssl.png';
 
 const paymentOptions = [
   {

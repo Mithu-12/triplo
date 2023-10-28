@@ -18,7 +18,6 @@ import {
   faTrain,
   faSnowflake,
   faBangladeshiTakaSign,
-  faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import LoaderSpiner from '../Loader/LoaderSpiner';
 // import Loader from '../loder/loader';

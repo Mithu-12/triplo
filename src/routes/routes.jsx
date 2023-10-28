@@ -11,9 +11,6 @@ import Login from '../pages/login/Login';
 import ProtectedRoute from './protectedRoute';
 import LoginSuccess from '../pages/login/LoginSuccess';
 import PackageReverse from '../components/package/PackageReverse';
-import Payment from '../pages/Payment/Payment';
-import PaymentFailed from '../pages/Payment/PaymentFailed';
-import PaymentCancel from '../pages/Payment/PaymentCancel';
 import VisaBookSchedule from '../pages/visaDetails/VisaBookSchedule';
 import Profile from '../pages/dashboard/Profile';
 import PasswordChange from '../pages/dashboard/PasswordChange';
@@ -79,21 +76,7 @@ const router = createBrowserRouter([
         path: '/flight/booking/',
         element: <ProtectedRoute><FlightReview/></ProtectedRoute>
       },
-
-      {
-        path: '/payment/success/:id',
-        element: <ProtectedRoute><Payment/></ProtectedRoute>
-      },
-      {
-        path: '/payment/failed/:id',
-        element: <ProtectedRoute><PaymentFailed/></ProtectedRoute>
-      },
-      {
-        path: '/payment/cancel/:id',
-        element: <ProtectedRoute><PaymentCancel/></ProtectedRoute>
-      },
       
-
     ],
   },
   {
