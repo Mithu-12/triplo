@@ -5,10 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Profile.css';
 import axios from 'axios';
 import { setUser } from '../../slices/authSlice';
+import LoaderSpiner from '../../components/Loader/LoaderSpiner';
 // import jwt from 'jsonwebtoken';
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
+  const [loading, setLoading] = useState(false)
   const userId = user?._id;
   const [updateUser, setUpdateUser] = useState({
     name: user?.name || '',
@@ -33,9 +35,12 @@ const Profile = () => {
     'Content-Type': 'application/json',
   };
 
+  if(loading){
+    return <LoaderSpiner/>
+  }
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  setLoading(true)
     // Make an API request to update the user data
     axios
       .put(`https://triplo-flight.onrender.com/api/users/${userId}`, updateUser, {
@@ -50,17 +55,18 @@ const Profile = () => {
         };
         dispatch(setUser(updatedUser))
       })
+      
       .catch((error) => {
         console.error('Error updating user data:', error);
         // Handle errors here
+      })
+      .finally(() => {
+        setLoading(false); 
       });
   };
  
 
 
-
-  console.log(user);
-  console.log(token);
   return (
     <div className="w-full shadow-lg bg-white ml-10 p-9">
       <div className="flex gap-4">
