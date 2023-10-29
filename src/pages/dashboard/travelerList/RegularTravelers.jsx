@@ -41,7 +41,9 @@ const RegularTravelers = () => {
     images: traveler?.images || [],
   });
 
-  const [travelerErrors, setTravelerErrors] = useState([]);
+  const [successMessage, setSuccessMessage] = useState(null);
+const [errorMessage, setErrorMessage] = useState(null);
+console.log('success', successMessage)
   const [loading, setLoading] = useState(false)
   const inputRef = useRef([]);
 
@@ -170,9 +172,15 @@ const RegularTravelers = () => {
         const newTraveler = response.data;
         dispatch(setTraveler([...newTraveler]));
         console.log(newTraveler);
+        setSuccessMessage(response.data.message || 'user created or successfully');
+        setErrorMessage(null);
       }
     } catch (error) {
-      console.log('some wrong');
+      // Handle the error
+      console.log('Error:', error);
+      
+        setErrorMessage(error);
+      
     } finally {
       setLoading(false);
     }
@@ -207,9 +215,7 @@ const RegularTravelers = () => {
                     </option>
                   ))}
                 </select>
-                {travelerErrors?.title && (
-                  <div className="error">{travelerErrors?.title}</div>
-                )}
+                
               </div>
               <div>
                 <select
@@ -228,9 +234,7 @@ const RegularTravelers = () => {
                     </option>
                   ))}
                 </select>
-                {travelerErrors?.gender && (
-                  <div className="error">{travelerErrors?.gender}</div>
-                )}
+               
               </div>
               <div>
                 <input
@@ -244,9 +248,7 @@ const RegularTravelers = () => {
                   }
                   required
                 />
-                {travelerErrors?.firstName && (
-                  <div className="error">{travelerErrors?.firstName}</div>
-                )}
+               
               </div>
               <div>
                 <input
@@ -260,9 +262,7 @@ const RegularTravelers = () => {
                   }
                   required
                 />
-                {travelerErrors?.lastName && (
-                  <div className="error">{travelerErrors?.lastName}</div>
-                )}
+               
               </div>
             </div>
             <div>
@@ -532,6 +532,19 @@ const RegularTravelers = () => {
           </div>
         </div>
         {loading ? <LoaderSpiner/> : null}
+
+        {successMessage && (
+  <div className="success-message">
+    {successMessage}
+  </div>
+)}
+
+{errorMessage && (
+  <div className="error-message">
+    {errorMessage}
+  </div>
+)}
+
         <button className="w-full py-3 mt-5 regular-traveler-submit text-white rounded-md" type="submit">
             {Object.keys(traveler).length === 0 ? 'ADD TRAVELER'  : 'UPDATE DETAILS'}
           </button>

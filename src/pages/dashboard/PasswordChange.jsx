@@ -4,12 +4,14 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './PasswordChange.css';
 import InputField from '../../components/inputField/inputField';
+import LoaderSpiner from '../../components/Loader/LoaderSpiner';
 
 const PasswordChange = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   const [showResponse, setShowResponse] = useState('')
   const [serverError, setServerError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const initState = {
     currentPassword: '',
@@ -51,6 +53,7 @@ const PasswordChange = () => {
 
   const handlePasswordChange = async ({ hasError, errors, values }) => {
     const token = localStorage.getItem('access_token');
+    setLoading(true)
     try {
       if (!hasError) {
         const response = await axios.post(
@@ -76,6 +79,8 @@ const PasswordChange = () => {
       console.log(error)
       setServerError(error.response.data.message);
       setShowResponse('')
+    } finally{
+      setLoading(false)
     }
   };
 
@@ -118,6 +123,7 @@ const PasswordChange = () => {
           />
             <p className='text-green-500'>{showResponse?? ''}</p>
             <p className='text-red-500'>{serverError?? ''}</p>
+            {loading ? <LoaderSpiner/> : null}
           <button
             className="py-3 mt-5 passwordChange-submit w-96"
             type="submit"
