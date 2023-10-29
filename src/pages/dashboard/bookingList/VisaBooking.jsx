@@ -10,9 +10,11 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
+import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
 
 const VisaBooking = () => {
   const user = useSelector((state) => state.auth.user);
+  const [loading, setLoading] = useState(true)
   const userId = user?._id;
   const serviceType = 'visa'
   const [orderList, setOrderList] = useState([]);
@@ -26,16 +28,19 @@ const VisaBooking = () => {
       })
       .catch((error) => {
         console.error('Error fetching payment data:', error);
+      }).finally(() => {
+        setLoading(false); 
       });
   }, [userId, serviceType]);
   return (
     <div className=" w-full">
-      {orderList.length > 0 ? (
+     {loading ? <LoaderSpiner/> : (
+      orderList.length > 0 ? (
         <div>
-          {orderList?.map((order) => {
+          {orderList?.map((order, index) => {
             console.log('order',order)
             return (
-              <div className="bg-white my-7">
+              <div className="bg-white my-7" key={index}>
                 <div className="holidaysOrder-title mb-2 text-white font-bold text-lg">
                   <p>Get your tourist visa for any destination </p>
                   <p>৳ {order.price}</p>
@@ -90,7 +95,8 @@ const VisaBooking = () => {
         </div>
       ) : (
         <div className='flex items-center justify-center bg-white w-full h-48 font-semibold text-lg '>You have not any Visa order of List</div>
-      )}
+      )
+     )}
     </div>
   )
 }

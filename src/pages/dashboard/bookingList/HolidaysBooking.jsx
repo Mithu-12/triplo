@@ -11,8 +11,10 @@ import {
   faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
 const HolidaysBooking = () => {
   const [orderList, setOrderList] = useState([]);
+  const [loading, setLoading] = useState(true)
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   const serviceType = 'holidays';
@@ -26,19 +28,22 @@ const HolidaysBooking = () => {
       })
       .catch((error) => {
         console.error('Error fetching payment data:', error);
+      }).finally(() => {
+        setLoading(false); 
       });
   }, [userId, serviceType]);
   return (
     <div className=" w-full">
-      {orderList.length > 0 ? (
+     {loading ? <LoaderSpiner/> :(
+      orderList.length > 0 ? (
         <div>
-          {orderList?.map((order) => {
+          {orderList?.map((order, index) => {
             const travelersDate = order?.travelersData.travelDate;
             const formattedDate = new Date(travelersDate)
               .toISOString()
               .split('T')[0];
             return (
-              <div className="bg-white my-5">
+              <div key={index} className="bg-white my-5">
                 <div className="holidaysOrder-title mb-2 text-white font-bold text-lg">
                   <p>{order.productData.package}</p>
                   <p>৳ {order.price}</p>
@@ -96,7 +101,8 @@ const HolidaysBooking = () => {
         </div>
       ) : (
         <div className='flex items-center justify-center bg-white w-full h-48 font-semibold text-lg '>You have not any holidays order of List</div>
-      )}
+      )
+     )}
     </div>
   );
 };
