@@ -150,14 +150,14 @@ const validateForm = (values)=>{
         <div className='signup-or'>
           <p>OR</p>
         </div>
-        <div className=' m-auto w-full google-signup ' onClick={handleGoogleSignup}>
+        {/* <div className=' m-auto w-full google-signup ' onClick={handleGoogleSignup}>
         <img className='w-6 mr-4' src="https://i.ibb.co/qjPpT1m/images.png" alt="" />
         <button>Signup with Google</button>
         </div>
         <div className='mt-4 w-full facebook-signup ' onClick={handleFacebookSignup}>
         <img className='w-6 mr-4' src="https://i.ibb.co/VQwXnCd/download.jpg" alt="" />
         <button>Signup with Facebook</button>
-        </div>
+        </div> */}
         <div className='my-3'>
           <p>Already have an account? <Link className='text-blue-800 font-bold' to='/login'>Login!</Link></p>
         </div>

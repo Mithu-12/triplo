@@ -48,11 +48,6 @@ const PasswordChange = () => {
     init: initState,
     validate: validateForm,
   });
-  // const token = localStorage.getItem('access_token');
-  // const headers = {
-  //   Authorization: `Bearer ${token}`,
-  //   'Content-Type': 'application/json',
-  // };
 
   const handlePasswordChange = async ({ hasError, errors, values }) => {
     const token = localStorage.getItem('access_token');

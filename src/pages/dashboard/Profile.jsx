@@ -10,12 +10,14 @@ import LoaderSpiner from '../../components/Loader/LoaderSpiner';
 
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
+  const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false)
   const userId = user?._id;
   const [updateUser, setUpdateUser] = useState({
     name: user?.name || '',
     gender: user?.gender || '',
-    phone: user?.phone || ''
+    phone: user?.phone || '',
+   
   });
   const token = localStorage.getItem('access_token');
   const dispatch = useDispatch()
@@ -35,9 +37,7 @@ const Profile = () => {
     'Content-Type': 'application/json',
   };
 
-  if(loading){
-    return <LoaderSpiner/>
-  }
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
   setLoading(true)
@@ -54,10 +54,12 @@ const Profile = () => {
           ...updateUser,
         };
         dispatch(setUser(updatedUser))
+        setMessage('user update successfully')
       })
       
       .catch((error) => {
         console.error('Error updating user data:', error);
+        setMessage('Error to Update')
         // Handle errors here
       })
       .finally(() => {
@@ -122,9 +124,13 @@ const Profile = () => {
             onChange={(e) => handleUserChange('phone', e.target.value)}
             required
           />
+          {loading ? <LoaderSpiner/> : null}
+          {message && <div className={message.includes('Error') ? 'error-message' : 'success-message'}>{message}</div>}
           <button className="w-full py-3 mt-5 profile-submit" type="submit">
             SAVE
           </button>
+          
+
         </form>
       </div>
     </div>

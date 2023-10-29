@@ -22,3 +22,11 @@
 .regular-traveler-submit{
     background-color: #00276C !important;
 }
+.success-message {
+    color: green;
+  }
+  
+  .error-message {
+    color: red;
+  }
+  

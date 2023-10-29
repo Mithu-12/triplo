@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTraveler } from '../../../slices/travelerSlice';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
 
 const RegularTravelers = () => {
   const navigate = useNavigate()
@@ -41,6 +42,7 @@ const RegularTravelers = () => {
   });
 
   const [travelerErrors, setTravelerErrors] = useState([]);
+  const [loading, setLoading] = useState(false)
   const inputRef = useRef([]);
 
   const titleOptions = [
@@ -156,6 +158,7 @@ const RegularTravelers = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
     console.log(travelerData);
     try {
       const response = await axios.post('https://triplo-flight.onrender.com/api/traveler/', {
@@ -170,7 +173,10 @@ const RegularTravelers = () => {
       }
     } catch (error) {
       console.log('some wrong');
+    } finally {
+      setLoading(false);
     }
+
   };
 
   return (
@@ -182,9 +188,7 @@ const RegularTravelers = () => {
         <div className="bg-white shadow-md">
           <div className="px-9 pt-4">
     <h2 className='text-xl font-bold py-5'>PERSONAL DETAILS</h2>
-            {/* <div className="flex gap-3  items-center bookSchedule-traveler-person my-4">
-              <FontAwesomeIcon icon={faUser} style={{ color: '#3679ec' }} />
-            </div> */}
+            
             <div className="flex justify-between pb-5">
               <div>
                 <select
@@ -527,6 +531,7 @@ const RegularTravelers = () => {
             </div>
           </div>
         </div>
+        {loading ? <LoaderSpiner/> : null}
         <button className="w-full py-3 mt-5 regular-traveler-submit text-white rounded-md" type="submit">
             {Object.keys(traveler).length === 0 ? 'ADD TRAVELER'  : 'UPDATE DETAILS'}
           </button>

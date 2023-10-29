@@ -133,7 +133,7 @@ const Login = () => {
           </div>
         </form>
         {/* {isError && <span>{error}</span>} */}
-        <div
+        {/* <div
           className=" m-auto w-full google-login "
           onClick={handleGoogleLogin}
         >
@@ -154,7 +154,7 @@ const Login = () => {
             alt=""
           />
           <button>Login with Facebook</button>
-        </div>
+        </div> */}
         <div className="login-or">
           <p>OR</p>
         </div>
