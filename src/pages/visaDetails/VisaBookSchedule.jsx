@@ -32,8 +32,6 @@ const VisaBookSchedule = () => {
   const id = visa._id;
   const visaExpress = '../../../public/visaExpress.jpg';
 
-  console.log('selectedVisa', travelerData[0]?.email);
-
   const basePrice = selectedVisa?.price;
   const priceWithTraveler = basePrice * travelersCount;
   const visaProcessingFee = 650;
@@ -193,8 +191,7 @@ const VisaBookSchedule = () => {
     } catch (error) {
       console.error('Error confirming booking:', error);
     }
-    // console.log('Submitted traveler data:', response);
-    console.log('Submitted traveler data:', bookingData);
+
   };
 
   return (
@@ -215,8 +212,8 @@ const VisaBookSchedule = () => {
                   {Array.from({ length: travelersCount }).map((_, index) => {
                     const traveler = travelerData[index];
                     return (
-                      <div className="bg-white shadow-md">
-                        <div className="px-9 pt-4" key={index}>
+                      <div className="bg-white shadow-md" key={index}>
+                        <div className="px-9 pt-4" >
                           <div className="flex gap-3  items-center bookSchedule-traveler-person my-4">
                             <FontAwesomeIcon
                               icon={faUser}

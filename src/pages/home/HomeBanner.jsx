@@ -5,7 +5,6 @@ import Flight from '../../components/flight/Flight';
 import Holidays from '../../components/holidays/Holidays';
 import Visa from '../../components/visa/Visa';
 import Hotels from '../../components/hotels/Hotels';
-import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './HeroBanner.css';
 import {

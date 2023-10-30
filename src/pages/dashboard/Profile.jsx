@@ -48,7 +48,6 @@ const Profile = () => {
         withCredentials: true,
       })
       .then((response) => {
-        console.log('User data updated:', response.data);
         const updatedUser = {
           ...user,
           ...updateUser,

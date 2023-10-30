@@ -39,6 +39,18 @@
     /* background-color: #f0f0f0; */
     
   }
+  .FlightSearchLoading {
+    display: flex;
+    background-image: url('../../../public/flight-loading.gif');
+    background-size: contain; /* Cover the entire div */
+    background-repeat: no-repeat;
+    background-position: center center;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; 
+    background-color: #d8eaf0;
+  }
   .flightNotFound-image {
     width: 100%; 
     height: 100%; 

@@ -15,8 +15,8 @@ const FlightCarousel = ({ flight }) => {
     setActiveButton(buttonNumber);
   };
   console.log('carosuel', flights)
-const arrow = '../../../public/arrow.png'
-  console.log('first flight carousel', flight)
+const arrow = '/arrow.png'
+
     const getCarrierName = (carrierCode) => {
       return flights?.dictionaries?.carriers[carrierCode] || '';
     };
@@ -170,7 +170,7 @@ const arrow = '../../../public/arrow.png'
                 </div>
 
                 <div className={`slide slide-${activeButton}`}>
-                  <p>Content for Button 4 Add your content here </p>
+                  <p className='p-5 font-semibold'>No Fare Rule Found </p>
                 </div>
               </div>
             </div>
