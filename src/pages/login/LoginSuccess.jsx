@@ -1,3 +1,4 @@
+
 import { useEffect } from 'react';
 import { setUser } from '../../slices/authSlice';
 import { useDispatch } from 'react-redux';
@@ -14,10 +15,12 @@ const LoginSuccess = () => {
   useEffect(() => {
     async function handleLoginSuccess() {
       try {
-        // const response = await axios.get('http://localhost:8800/api/auth/login/success', {
-        //   withCredentials: true,
-        // });
-        const response = await axios.get('https://triplo-flight.onrender.com/api/auth/login/success', {
+        const searchParams = new URLSearchParams(location.search);
+        const userParam = searchParams.get('user');
+        const userData = JSON.parse(decodeURIComponent(userParam));
+        console.log(userData, 'userData')
+
+        const response = await axios.post('https://triplo-flight.onrender.com/api/auth/login/success', { user: userData },  {
           withCredentials: true,
         });
 
@@ -60,4 +63,3 @@ const LoginSuccess = () => {
 };
 
 export default LoginSuccess;
-
