@@ -4,7 +4,6 @@ import storage from 'redux-persist/lib/storage';
 
 import rootReducer from '../reducers/rootReducers'; // Import the root reducer
 import { packageApi } from '../api/packageApi';
-import { bookScheduleApi } from '../api/bookScheduleApi';
 import { userApi } from '../api/userApi';
 import { visaApi } from '../api/visa';
 import { airportApi } from '../api/airportApi';
@@ -25,7 +24,6 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       packageApi.middleware,
-      bookScheduleApi.middleware,
       userApi.middleware,
       authApi.middleware,
       visaApi.middleware,

@@ -18,14 +18,12 @@ const LoginSuccess = () => {
         const searchParams = new URLSearchParams(location.search);
         const userParam = searchParams.get('user');
         const userData = JSON.parse(decodeURIComponent(userParam));
-        console.log(userData, 'userData')
 
         const response = await axios.post('https://triplo-flight.onrender.com/api/auth/login/success', { user: userData },  {
           withCredentials: true,
         });
 
         const data = response.data;
-        console.log('google', data);
 
         if (response.status === 200) {
           const token = data.access_token;

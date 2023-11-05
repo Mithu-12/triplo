@@ -59,7 +59,6 @@ const Login = () => {
         });
         localStorage.setItem('access_token', data.access_token);
         dispatch(setUser({...data.user, access_token: data.access_token}))
-        console.log('Login Successful!', data);
   
         navigate(from, {replace: true});
       } 

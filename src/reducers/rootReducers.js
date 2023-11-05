@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import airportReducer from '../slices/airportSlice';
-import bookScheduleReducer from '../slices/bookScheduleSlice';
+
 import navbarReducer from '../slices/navbarSlice';
 import toFromReducer from '../slices/toFromSlice';
 import passengerReducer from '../slices/passengerSlice';
@@ -15,7 +15,7 @@ import travelerReducer from '../slices/travelerSlice'
 import packageReserveOrderReducer from '../slices/packageReserveOrderSlice';
 const rootReducer = combineReducers({
   airport: airportReducer,
-  bookSchedule: bookScheduleReducer,
+
   navbar: navbarReducer,
   toFrom: toFromReducer,
   passenger: passengerReducer,

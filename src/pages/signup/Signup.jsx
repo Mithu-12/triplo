@@ -78,10 +78,10 @@ const validateForm = (values)=>{
     window.open( 'https://triplo-flight.onrender.com/api/auth/google', '_self')
     
   };
-  const handleFacebookSignup =  () => {
-    window.location.href = 'https://triplo-flight.onrender.com/api/auth/facebook';
+  // const handleFacebookSignup =  () => {
+  //   window.location.href = 'https://triplo-flight.onrender.com/api/auth/facebook';
    
-  };
+  // };
 
   
   return (
