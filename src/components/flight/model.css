@@ -33,8 +33,10 @@
   border: none;
   font-size: 25px;
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 25px;
+  top: 10px
 }
 
 

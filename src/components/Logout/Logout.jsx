@@ -23,8 +23,8 @@ const LogoutButton = () => {
 
         dispatch(logout());
 
-        window.location.reload();
-        // navigate('/')
+        // window.location.reload();
+        navigate('/')
       } else {
         console.error('Logout failed');
       }
