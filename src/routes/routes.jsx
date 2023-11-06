@@ -23,6 +23,9 @@ import Dashboard from '../layout/Dashboard';
 import AddTraveler from '../pages/dashboard/travelerList/AddTraveler';
 import RegularTravelers from '../pages/dashboard/travelerList/RegularTravelers';
 import FlightReview from '../pages/flightSearchList/FlightReview';
+import ForgotPassword from '../pages/login/ForgotPassword';
+import ResetPassword from '../pages/login/ResetPassword';
+import ForgotPasswordInstruction from '../pages/login/ForgotPasswordInstruction';
 
 
 
@@ -63,6 +66,18 @@ const router = createBrowserRouter([
       {
         path: '/login/success',
         element: <LoginSuccess/>     
+      },
+      {
+        path: '/forgot-password',
+        element: <ForgotPassword/>     
+      },
+      {
+        path: '/forgot-password-instruction',
+        element: <ForgotPasswordInstruction/>     
+      },
+      {
+        path: '/reset-password/:id/:token',
+        element: <ResetPassword/>     
       },
       {
         path: '/packageReserve/:id',

@@ -87,7 +87,7 @@ const Login = () => {
         <h2 className="text-xl font-semibold py-5">
           Ready for your next trip?
         </h2>
-        <form onSubmit={(e)=> handleSubmit(e, handleLoginSubmit)}>
+        <form className='relative' onSubmit={(e)=> handleSubmit(e, handleLoginSubmit)}>
           <div className="custom-login-input-container">
             
               <InputField
@@ -125,6 +125,9 @@ const Login = () => {
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>
           )}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', padding: "5px 0px", color: "blue"}}>
+            <Link to={'/forgot-password'}>Forgot Password</Link>
+          </div>
           <div className="signup-button-container">
             <button className="signup-button" type="submit">
               Login
