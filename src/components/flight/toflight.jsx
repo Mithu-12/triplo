@@ -16,17 +16,17 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
   const [selectedFromAirport, setSelectedFromAirport] = useState(null);
   const [selectedToAirport, setSelectedToAirport] = useState(null);
   const [defaultFromAirport, setDefaultFromAirport] = useState({
-    city: 'Dhaka',
-    country: 'Bangladesh',
-    name: "Hazrat Shahjalal International Airport",
-    code: "DAC",
+    city: 'New York',
+    country: 'USA',
+    name: "John F. Kennedy International Airport",
+    code: "JFK",
   });
   
   const [defaultToAirport, setDefaultToAirport] = useState({
-    city: "Cox's Bazar",
-    country: 'Bangladesh',
-    name: "Cox's Bazar Airport",
-    code: "CGP",
+    city: "Bangkok",
+    country: 'Thailand',
+    name: "Suvarnabhumi Airport",
+    code: "BKK",
   });
   const fromInputRef = useRef(null);
   const toInputRef = useRef(null);
@@ -41,7 +41,8 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
       .filter(
         (airport) =>
           airport.city.toLowerCase().includes(searchInput.toLowerCase()) ||
-          airport.country.toLowerCase().includes(searchInput.toLowerCase())
+          airport.country.toLowerCase().includes(searchInput.toLowerCase()) ||
+          airport.code.toLowerCase().includes(searchInput.toLowerCase())
       );
     setFromSuggestions(filteredAirports);
     handleFromChange(searchInput);
@@ -67,7 +68,7 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
     setFromValue('');
     if (fromSuggestions.length === 0) {
       const filteredAirports = airportData.find(
-        (country) => country.country === 'Bangladesh'
+        (country) => country.country === 'USA'
       ).airports;
       setFromSuggestions(filteredAirports);
     } else {
@@ -79,7 +80,7 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
     setToValue('');
     if (toSuggestions.length === 0) {
       const filteredAirports = airportData.find(
-        (country) => country.country === 'Bangladesh'
+        (country) => country.country === 'Thailand'
       ).airports;
       setToSuggestions(filteredAirports);
     } else {
