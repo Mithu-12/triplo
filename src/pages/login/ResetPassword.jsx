@@ -31,7 +31,7 @@ const [error, setError] = useState(null)
     return errors;
   }
   
-    const {formState, handleBlur, handleChange, handleFocus, handleSubmit, reset} = useForm({
+    const {formState, handleBlur, handleChange, handleFocus, handleSubmit} = useForm({
       init: initialState,
       validate: validateForm
     })
