@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import useForm from '../../hooks/useForm';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './PasswordChange.css';
 import InputField from '../../components/inputField/inputField';
 import LoaderSpiner from '../../components/Loader/LoaderSpiner';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const PasswordChange = () => {
   const user = useSelector((state) => state.auth.user);
@@ -12,7 +12,7 @@ const PasswordChange = () => {
   const [showResponse, setShowResponse] = useState('')
   const [serverError, setServerError] = useState('')
   const [loading, setLoading] = useState(false)
-
+  const axios = useAxiosSecure()
   const initState = {
     currentPassword: '',
     newPassword: '',
@@ -57,18 +57,12 @@ const PasswordChange = () => {
     try {
       if (!hasError) {
         const response = await axios.post(
-          `https://triplo-flight.onrender.com/api/auth/change-password`,
+          `/api/auth/change-password`,
           {
             currentPassword: values.currentPassword,
             newPassword: values.newPassword,
             userId: userId,
            
-          },
-          {
-            headers:{
-              Authorization: `Bearer ${token}`,
-              'Content-Type': 'application/json',
-            }
           },
         );
         reset()

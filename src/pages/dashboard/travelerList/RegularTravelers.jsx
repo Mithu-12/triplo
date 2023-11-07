@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { getDaysInMonth } from 'date-fns';
 import { countries } from 'countries-list';
-import axios from 'axios';
+// import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTraveler } from '../../../slices/travelerSlice';
+import { setSelectedTraveler, setTraveler } from '../../../slices/travelerSlice';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
-
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+// import axios from '../../../hooks/useAxiosSecure'
 const RegularTravelers = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch();
@@ -17,9 +18,10 @@ const RegularTravelers = () => {
   const { id } = useParams();
   const location = useLocation();
   const traveler = location.state?.data || {};
-
+  const singleTraveler = useSelector((state)=> state.traveler.selectedTraveler)
+const axios = useAxiosSecure()
   console.log('regularTraveler', traveler);
-  console.log('regularTraveler', id);
+  console.log('regularTraveler', singleTraveler);
 
   const [travelerData, setTravelerData] = useState({
     title: traveler?.title || '',
@@ -163,7 +165,7 @@ console.log('success', successMessage)
     setLoading(true)
     console.log(travelerData);
     try {
-      const response = await axios.post('https://triplo-flight.onrender.com/api/traveler/', {
+      const response = await axios.post('/api/traveler/', {
         ...travelerData,
         userId: userId,
         travelerId: id,
@@ -171,6 +173,7 @@ console.log('success', successMessage)
       if (response.status === 201) {
         const newTraveler = response.data;
         dispatch(setTraveler([...newTraveler]));
+        dispatch(setSelectedTraveler(newTraveler))
         console.log(newTraveler);
         setSuccessMessage(response.data.message || 'user created or successfully');
         setErrorMessage(null);
@@ -541,7 +544,7 @@ console.log('success', successMessage)
 
 {errorMessage && (
   <div className="error-message">
-    {errorMessage}
+    {errorMessage.message}
   </div>
 )}
 

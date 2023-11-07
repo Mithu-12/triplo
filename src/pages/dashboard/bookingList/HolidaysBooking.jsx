@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './HolidaysBooking.css';
@@ -12,16 +11,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 const HolidaysBooking = () => {
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(true)
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   const serviceType = 'holidays';
-
+  const axios = useAxiosSecure()
   useEffect(() => {
     axios
-      .get(`https://triplo-flight.onrender.com/api/payment/${userId}/${serviceType}`)
+      .get(`/api/payment/${userId}/${serviceType}`)
       .then((response) => {
         console.log('flight booking', response.data);
         setOrderList(response.data);

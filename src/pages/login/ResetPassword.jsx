@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 
 import './Login.css';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import InputField from '../../components/inputField/inputField';
 import useForm from '../../hooks/useForm';

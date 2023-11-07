@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Profile.css';
-import axios from 'axios';
 import { setUser } from '../../slices/authSlice';
 import LoaderSpiner from '../../components/Loader/LoaderSpiner';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 // import jwt from 'jsonwebtoken';
 
 const Profile = () => {
@@ -13,6 +13,7 @@ const Profile = () => {
   const [message, setMessage] = useState(null);
   const [loading, setLoading] = useState(false)
   const userId = user?._id;
+  const axios = useAxiosSecure()
   const [updateUser, setUpdateUser] = useState({
     name: user?.name || '',
     gender: user?.gender || '',
@@ -43,10 +44,7 @@ const Profile = () => {
   setLoading(true)
     // Make an API request to update the user data
     axios
-      .put(`https://triplo-flight.onrender.com/api/users/${userId}`, updateUser, {
-        headers,
-        withCredentials: true,
-      })
+      .put(`/api/users/${userId}`, updateUser)
       .then((response) => {
         const updatedUser = {
           ...user,

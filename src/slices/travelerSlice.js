@@ -14,8 +14,12 @@ const travelerSlice = createSlice({
             state.traveler = action.payload
         },
         setSelectedTraveler: (state, action)=>{
-            state.traveler = action
+            state.traveler = action.payload
         }
+        // setSelectedTraveler: (state, action) => {
+        //     const travelerId = action.payload.id; 
+        //     state.selectedTraveler = state.traveler.find((traveler) => traveler.id === travelerId);
+        //   },
     }
 })
 

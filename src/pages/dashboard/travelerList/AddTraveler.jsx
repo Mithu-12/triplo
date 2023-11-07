@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { faUser, faChevronRight, faUserPlus} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setTraveler } from '../../../slices/travelerSlice';
 import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const AddTraveler = () => {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const AddTraveler = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   console.log('userId', userId);
-
+const axios = useAxiosSecure()
   const navigate = useNavigate();
   const generateRandomId = () => {
     const timestamp = Date.now().toString(36); 
@@ -31,7 +33,7 @@ const AddTraveler = () => {
 
   useEffect(() => {
     axios
-      .get(`https://triplo-flight.onrender.com/api/traveler/${userId}`)
+      .get(`/api/traveler/${userId}`)
       .then((response) => {
         const allTravelers = response.data.travelers;
         console.log(allTravelers)
