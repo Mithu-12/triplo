@@ -144,7 +144,7 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
           onClick={handleFromClick}
           onChange={handleFromChangeInternal}
           ref={fromInputRef}
-          placeholder="Airport"
+          placeholder="Airport Search"
         />
         {selectedFromAirport ? (
           <div className="selected-airport">
@@ -200,7 +200,7 @@ const ToFrom = ({ handleFromChange, handleToChange, selectedOption}) => {
           onClick={handleToClick}
           onChange={handleToChangeInternal}
           ref={toInputRef}
-          placeholder="Airport"
+          placeholder="Airport Search"
           className="to font-bold"
         />
         {selectedToAirport ? (
