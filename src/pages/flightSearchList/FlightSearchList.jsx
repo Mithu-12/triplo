@@ -26,7 +26,7 @@ const FlightList = () => {
   const adults = searchParams.get('adults');
   const travelClass = searchParams.get('travelClass');
   const max = searchParams.get('max');
-
+ 
   const optionalParams = {};
 
   if (searchParams.has('returnDate')) {

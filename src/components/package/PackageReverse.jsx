@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useGetPackageByIdQuery } from '../../api/packageApi';
-import ContentWrapper from '../wrapperComponent/ContentWrapper';
-import DatePicker from 'react-datepicker';
-import './PackageReverse.css';
-import Select from 'react-select';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useGetPackageByIdQuery } from "../../api/packageApi";
+import ContentWrapper from "../wrapperComponent/ContentWrapper";
+import DatePicker from "react-datepicker";
+import "./PackageReverse.css";
+import Select from "react-select";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setReserveRooms,
   setReserveTravelers,
@@ -14,8 +14,8 @@ import {
   setReserveDate,
   setReserveAddress,
   setReservePrice,
-} from '../../slices/packageReserveOrderSlice';
-import PaymentOptions from '../payment/Payment';
+} from "../../slices/packageReserveOrderSlice";
+import PaymentOptions from "../payment/Payment";
 
 const PackageReverse = () => {
   const user = useSelector((state) => state.auth.user);
@@ -26,11 +26,11 @@ const PackageReverse = () => {
   const reserveCustomStyle = {
     control: (provided, state) => ({
       ...provided,
-      cursor: 'pointer',
-      borderColor: state.isFocused ? '#00276C' : 'black',
-      boxShadow: state.isFocused ? '0 2px 4px rgba(0, 39, 108, 0.5)' : 'none',
-      '&:hover': {
-        borderColor: '#00276C',
+      cursor: "pointer",
+      borderColor: state.isFocused ? "#00276C" : "black",
+      boxShadow: state.isFocused ? "0 2px 4px rgba(0, 39, 108, 0.5)" : "none",
+      "&:hover": {
+        borderColor: "#00276C",
       },
     }),
   };
@@ -49,12 +49,12 @@ const PackageReverse = () => {
   const [selectedRooms, setSelectedRooms] = useState(0);
   const [selectedPayment, setSelectedPayment] = useState(null);
   const [addressList, setAddressList] = useState({
-    title: '',
-    gender: '',
-    firstName: '',
-    lastName: '',
-    number: '',
-    email: '',
+    title: "",
+    gender: "",
+    firstName: "",
+    lastName: "",
+    number: "",
+    email: "",
   });
   const [errors, setErrors] = useState({
     date: false,
@@ -110,7 +110,7 @@ const PackageReverse = () => {
   }, [rooms]);
 
   const handleIncrement = (type, key) => {
-    if (type === 'rooms') {
+    if (type === "rooms") {
       // Define the value here
 
       const updatedRooms = {
@@ -120,9 +120,9 @@ const PackageReverse = () => {
 
       // Check if all other room types have a quantity of 0
       const allOtherRoomsZero =
-        key !== 'singleRoom' &&
+        key !== "singleRoom" &&
         Object.keys(updatedRooms)
-          .filter((roomKey) => roomKey !== 'singleRoom')
+          .filter((roomKey) => roomKey !== "singleRoom")
           .every((roomKey) => updatedRooms[roomKey] === 0);
 
       if (allOtherRoomsZero) {
@@ -139,7 +139,7 @@ const PackageReverse = () => {
       dispatch(setReserveRooms(updatedRooms));
     }
 
-    if (type === 'travelers') {
+    if (type === "travelers") {
       const maxTravelers = selectedRooms;
       if (travelers[key] < maxTravelers) {
         dispatch(
@@ -153,14 +153,14 @@ const PackageReverse = () => {
   };
 
   const handleDecrement = (type, key) => {
-    if (type === 'travelers') {
+    if (type === "travelers") {
       dispatch(
         setReserveTravelers({
           ...travelers,
           [key]: Math.max(travelers[key] - 1, 0),
         })
       );
-    } else if (type === 'rooms') {
+    } else if (type === "rooms") {
       const updatedRooms = {
         ...rooms,
         [key]: Math.max(rooms[key] - 1, 0),
@@ -168,9 +168,9 @@ const PackageReverse = () => {
 
       // Check if all other room types have a quantity of 0
       const allOtherRoomsZero =
-        key !== 'singleRoom' &&
+        key !== "singleRoom" &&
         Object.keys(updatedRooms)
-          .filter((roomKey) => roomKey !== 'singleRoom')
+          .filter((roomKey) => roomKey !== "singleRoom")
           .every((roomKey) => updatedRooms[roomKey] === 0);
 
       if (allOtherRoomsZero) {
@@ -203,15 +203,15 @@ const PackageReverse = () => {
         <div>
           <p className="text-lg">{label}</p>
           <p>
-            {keys === 'adults'
-              ? '12+ years'
-              : keys === 'child'
-              ? '7-12 years'
-              : keys === 'child2'
-              ? '3-6 years'
-              : keys === 'infants'
-              ? 'Under 3 years'
-              : ''}
+            {keys === "adults"
+              ? "12+ years"
+              : keys === "child"
+              ? "7-12 years"
+              : keys === "child2"
+              ? "3-6 years"
+              : keys === "infants"
+              ? "Under 3 years"
+              : ""}
           </p>
         </div>
         <div className="flex items-center text-xl">
@@ -219,13 +219,13 @@ const PackageReverse = () => {
             className="reserve-Inc-Dec"
             onClick={() => handleDecrement(type, keys)}
           >
-            {' '}
-            -{' '}
+            {" "}
+            -{" "}
           </button>
           <p className="px-3">
-            {type === 'travelers' && travelers[keys] >= maxTravelers
+            {type === "travelers" && travelers[keys] >= maxTravelers
               ? maxTravelers
-              : type === 'travelers'
+              : type === "travelers"
               ? travelers[keys]
               : rooms[keys]}
           </p>
@@ -233,8 +233,8 @@ const PackageReverse = () => {
             className="reserve-Inc-Dec"
             onClick={() => handleIncrement(type, keys)}
           >
-            {' '}
-            +{' '}
+            {" "}
+            +{" "}
           </button>
         </div>
       </div>
@@ -242,15 +242,15 @@ const PackageReverse = () => {
   };
 
   const titleOptions = [
-    { value: 'Mr.', label: 'Mr.' },
-    { value: 'Md.', label: 'Md.' },
-    { value: 'Ms.', label: 'Ms.' },
-    { value: 'Miss.', label: 'Miss.' },
-    { value: 'Mrs.', label: 'Mrs.' },
+    { value: "Mr.", label: "Mr." },
+    { value: "Md.", label: "Md." },
+    { value: "Ms.", label: "Ms." },
+    { value: "Miss.", label: "Miss." },
+    { value: "Mrs.", label: "Mrs." },
   ];
   const genderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
   ];
 
   const handleAddressFieldChange = (field, value) => {
@@ -258,7 +258,7 @@ const PackageReverse = () => {
       ...address,
       [field]: value,
     };
-  
+
     dispatch(setReserveAddress(updatedAddress));
     setAddressList(updatedAddress);
     setErrors((prevErrors) => ({
@@ -269,8 +269,9 @@ const PackageReverse = () => {
       },
     }));
   };
-  const totalTravelers = travelers.adults + travelers.child +travelers.child2 + travelers.infants
-  console.log('traveler', totalTravelers)
+  const totalTravelers =
+    travelers.adults + travelers.child + travelers.child2 + travelers.infants;
+  console.log("traveler", totalTravelers);
   const handlePaymentOptionChange = (option) => {
     setSelectedPayment(option);
     setErrors({ ...errors, paymentOption: false });
@@ -288,7 +289,7 @@ const PackageReverse = () => {
         productId: id,
         productData: packageDetails,
         travelersData: address,
-        serviceType: 'holidays',
+        serviceType: "holidays",
         userId: userId,
         // Add more data fields as needed
       };
@@ -320,24 +321,24 @@ const PackageReverse = () => {
       }
 
       const response = await axios.post(
-        `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`,
+        `https://tame-leggings-goat.cyclic.app/api/payment/payment-process/${selectedPayment}`,
         bookingData
       );
       if (response.status === 200) {
         window.location.replace(response.data.url);
-        console.log(response.data, 'Booking confirmed successfully!');
+        console.log(response.data, "Booking confirmed successfully!");
       }
     } catch (error) {
-      console.error('Error confirming booking:', error);
+      console.error("Error confirming booking:", error);
       // Handle error cases if needed
     }
-    if (selectedPayment === 'sslCommerze') {
+    if (selectedPayment === "sslCommerze") {
       dispatch(setReservePaymentType(selectedPayment));
-    } else if (selectedPayment === 'bkash') {
+    } else if (selectedPayment === "bkash") {
       dispatch(setReservePaymentType(selectedPayment));
     }
   };
-console.log(errors)
+  console.log(errors);
   return (
     <div>
       <ContentWrapper>
@@ -350,7 +351,7 @@ console.log(errors)
                   src={packageDetails.image[0].img2}
                 />
               ) : (
-                ''
+                ""
               )}
             </div>
             <div className="reserved-content flex mt-5">
@@ -362,7 +363,7 @@ console.log(errors)
                   <div className="reserve-datepicker pb-3">
                     <p>Travel Date</p>
                     <DatePicker
-                      className={`w-full ${errors.date ? 'error-border' : ''}`}
+                      className={`w-full ${errors.date ? "error-border" : ""}`}
                       selected={travelDate}
                       onChange={handleTravelDate}
                       minDate={new Date()}
@@ -376,23 +377,21 @@ console.log(errors)
                     </p>
                   )}
 
-                  
-
                   <div className="reserve-room">
                     <div>
                       Rooms
-                      {renderControls('rooms', 'Single Room', 'singleRoom')}
-                      {renderControls('rooms', 'Double Room', 'doubleRoom')}
-                      {renderControls('rooms', 'Twin Room', 'twinRoom')}
-                      {renderControls('rooms', 'Triple Room', 'tripleRoom')}
+                      {renderControls("rooms", "Single Room", "singleRoom")}
+                      {renderControls("rooms", "Double Room", "doubleRoom")}
+                      {renderControls("rooms", "Twin Room", "twinRoom")}
+                      {renderControls("rooms", "Triple Room", "tripleRoom")}
                     </div>
                   </div>
                   <div>
                     Travelers
-                    {renderControls('travelers', 'Adults', 'adults')}
-                    {renderControls('travelers', 'Child', 'child')}
-                    {renderControls('travelers', 'Child', 'child2')}
-                    {renderControls('travelers', 'Infants', 'infants')}
+                    {renderControls("travelers", "Adults", "adults")}
+                    {renderControls("travelers", "Child", "child")}
+                    {renderControls("travelers", "Child", "child2")}
+                    {renderControls("travelers", "Infants", "infants")}
                   </div>
                 </div>
                 <div>
@@ -409,7 +408,7 @@ console.log(errors)
                             styles={reserveCustomStyle}
                             onChange={(selectedOption) =>
                               handleAddressFieldChange(
-                                'title',
+                                "title",
                                 selectedOption.value
                               )
                             }
@@ -421,7 +420,7 @@ console.log(errors)
                             styles={reserveCustomStyle}
                             onChange={(selectedOption) =>
                               handleAddressFieldChange(
-                                'gender',
+                                "gender",
                                 selectedOption.value
                               )
                             }
@@ -432,11 +431,11 @@ console.log(errors)
                               type="text"
                               placeholder="First Name"
                               className={`reserve-input-width ${
-                                errors.firstName ? 'error-border' : ''
+                                errors.firstName ? "error-border" : ""
                               }`}
                               onChange={(e) =>
                                 handleAddressFieldChange(
-                                  'firstName',
+                                  "firstName",
                                   e.target.value
                                 )
                               }
@@ -455,7 +454,7 @@ console.log(errors)
                               className="reserve-input-width"
                               onChange={(e) =>
                                 handleAddressFieldChange(
-                                  'lastName',
+                                  "lastName",
                                   e.target.value
                                 )
                               }
@@ -476,7 +475,7 @@ console.log(errors)
                               placeholder="Mobile Number"
                               onChange={(e) =>
                                 handleAddressFieldChange(
-                                  'number',
+                                  "number",
                                   e.target.value
                                 )
                               }
@@ -496,7 +495,7 @@ console.log(errors)
                               placeholder="Email"
                               onChange={(e) =>
                                 handleAddressFieldChange(
-                                  'email',
+                                  "email",
                                   e.target.value
                                 )
                               }
@@ -514,12 +513,10 @@ console.log(errors)
                     </div>
                   </div>
                   <div className="mt-10">
-                    
-                      <PaymentOptions
-                        selectedOption={selectedPayment}
-                        onOptionSelect={handlePaymentOptionChange}
-                      />
-                    
+                    <PaymentOptions
+                      selectedOption={selectedPayment}
+                      onOptionSelect={handlePaymentOptionChange}
+                    />
                   </div>
                   <button
                     onClick={handleConfirmBooking}
@@ -540,16 +537,16 @@ console.log(errors)
                   {Object.entries(roomPrices).map(([key, price]) => (
                     <div key={key} className="reserve-price-list my-3">
                       <div className="text-lg font-semibold">
-                        Adults{' '}
-                        {key === 'singleRoom'
-                          ? '(1 X per single room)'
-                          : key === 'doubleRoom'
-                          ? '(2 X per Double)'
-                          : key === 'twinRoom'
-                          ? '(2 X per Twin)'
-                          : key === 'tripleRoom'
-                          ? '(2 X per Triple)'
-                          : ''}
+                        Adults{" "}
+                        {key === "singleRoom"
+                          ? "(1 X per single room)"
+                          : key === "doubleRoom"
+                          ? "(2 X per Double)"
+                          : key === "twinRoom"
+                          ? "(2 X per Twin)"
+                          : key === "tripleRoom"
+                          ? "(2 X per Triple)"
+                          : ""}
                       </div>
                       <div className="flex justify-between">
                         <p>Base Fire</p>
@@ -563,7 +560,7 @@ console.log(errors)
                       </div>
                     </div>
                   ))}
-                  
+
                   <div className="flex justify-between font-semibold text-lg">
                     <p>Total Payable:</p>
                     <p className="font-semibold">BDT {calculateTotalPrice()}</p>

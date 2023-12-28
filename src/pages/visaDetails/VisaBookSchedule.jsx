@@ -1,25 +1,25 @@
-import React, { useRef, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
-import { useSelector } from 'react-redux';
-import './VisaBookSchedule.css';
-import DatePicker from 'react-datepicker';
-import { getDaysInMonth } from 'date-fns';
-import { countries } from 'countries-list';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import usePaymentOptions from '../../hooks/usePaymentHook';
-import PaymentOptions from '../../components/payment/Payment';
-import axios from 'axios';
+import React, { useRef, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import ContentWrapper from "../../components/wrapperComponent/ContentWrapper";
+import { useSelector } from "react-redux";
+import "./VisaBookSchedule.css";
+import DatePicker from "react-datepicker";
+import { getDaysInMonth } from "date-fns";
+import { countries } from "countries-list";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import usePaymentOptions from "../../hooks/usePaymentHook";
+import PaymentOptions from "../../components/payment/Payment";
+import axios from "axios";
 
 const VisaBookSchedule = () => {
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
-  const [travelerData, setTravelerData] = useState([]); 
+  const [travelerData, setTravelerData] = useState([]);
   const [travelerErrors, setTravelerErrors] = useState([]);
-  const [selectedMethod, setSelectedMethod] = useState('travelerDrop');
-  const [deliveryDate, setDeliveryDate] = useState('');
-  const [pickUpAddress, setPickUpAddress] = useState('');
+  const [selectedMethod, setSelectedMethod] = useState("travelerDrop");
+  const [deliveryDate, setDeliveryDate] = useState("");
+  const [pickUpAddress, setPickUpAddress] = useState("");
   const [selectedPayment, setSelectedPayment] = useState(null);
 
   const location = useLocation();
@@ -30,7 +30,7 @@ const VisaBookSchedule = () => {
   const travelersCount = visaTravelers?.travelers || 0;
   const inputRef = useRef([]);
   const id = visa._id;
-  const visaExpress = '../../../public/visaExpress.jpg';
+  const visaExpress = "../../../public/visaExpress.jpg";
 
   const basePrice = selectedVisa?.price;
   const priceWithTraveler = basePrice * travelersCount;
@@ -40,16 +40,16 @@ const VisaBookSchedule = () => {
   const totalPrice = priceWithTraveler + totalProcessingFee + pickUpFee;
 
   const titleOptions = [
-    { value: 'Mr.', label: 'Mr.' },
-    { value: 'Md.', label: 'Md.' },
-    { value: 'Ms.', label: 'Ms.' },
-    { value: 'Miss.', label: 'Miss.' },
-    { value: 'Mrs.', label: 'Mrs.' },
+    { value: "Mr.", label: "Mr." },
+    { value: "Md.", label: "Md." },
+    { value: "Ms.", label: "Ms." },
+    { value: "Miss.", label: "Miss." },
+    { value: "Mrs.", label: "Mrs." },
   ];
 
   const genderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
   ];
   const countryOptions = Object.keys(countries).map((code) => ({
     value: code,
@@ -68,18 +68,18 @@ const VisaBookSchedule = () => {
 
   const monthOptions = () => {
     const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     return months.map((month, index) => (
       <option key={index + 1} value={index + 1}>
@@ -133,7 +133,7 @@ const VisaBookSchedule = () => {
     const updatedTravelerData = [...travelerData];
     const travelerToUpdate = { ...updatedTravelerData[travelerIndex] };
 
-    if (field === 'image') {
+    if (field === "image") {
       const images = travelerToUpdate.images || [];
       images.push(value);
       travelerToUpdate.images = images;
@@ -174,24 +174,23 @@ const VisaBookSchedule = () => {
       productId: id,
       travelers: travelersCount,
       userId: userId,
-      serviceType: 'visa',
+      serviceType: "visa",
     };
 
     if (!selectedPayment) {
       return; // Don't proceed if no payment option is selected
     }
     try {
-      const apiUrl = `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`;
+      const apiUrl = `https://tame-leggings-goat.cyclic.app/api/payment/payment-process/${selectedPayment}`;
       const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
-        console.log(response.data, 'Booking confirmed successfully!');
+        console.log(response.data, "Booking confirmed successfully!");
       }
-      console.log('API Response:', response.data);
+      console.log("API Response:", response.data);
     } catch (error) {
-      console.error('Error confirming booking:', error);
+      console.error("Error confirming booking:", error);
     }
-
   };
 
   return (
@@ -213,11 +212,11 @@ const VisaBookSchedule = () => {
                     const traveler = travelerData[index];
                     return (
                       <div className="bg-white shadow-md" key={index}>
-                        <div className="px-9 pt-4" >
+                        <div className="px-9 pt-4">
                           <div className="flex gap-3  items-center bookSchedule-traveler-person my-4">
                             <FontAwesomeIcon
                               icon={faUser}
-                              style={{ color: '#3679ec' }}
+                              style={{ color: "#3679ec" }}
                             />
                             <p>Traveler {index + 1}</p>
                           </div>
@@ -226,11 +225,11 @@ const VisaBookSchedule = () => {
                               <select
                                 name="title"
                                 className="custom-select"
-                                value={travelerData[index]?.title || ''}
+                                value={travelerData[index]?.title || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'title',
+                                    "title",
                                     e.target.value
                                   )
                                 }
@@ -256,11 +255,11 @@ const VisaBookSchedule = () => {
                               <select
                                 name="gender"
                                 className="custom-select"
-                                value={travelerData[index]?.gender || ''}
+                                value={travelerData[index]?.gender || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'gender',
+                                    "gender",
                                     e.target.value
                                   )
                                 }
@@ -288,11 +287,11 @@ const VisaBookSchedule = () => {
                                 name="firstName"
                                 placeholder="Enter Your First Name"
                                 className="visaBookSchedule-input-width"
-                                value={travelerData[index]?.firstName || ''}
+                                value={travelerData[index]?.firstName || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'firstName',
+                                    "firstName",
                                     e.target.value
                                   )
                                 }
@@ -310,11 +309,11 @@ const VisaBookSchedule = () => {
                                 name="lastName"
                                 placeholder="Enter Your Last Name"
                                 className="visaBookSchedule-input-width"
-                                value={travelerData[index]?.lastName || ''}
+                                value={travelerData[index]?.lastName || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'lastName',
+                                    "lastName",
                                     e.target.value
                                   )
                                 }
@@ -334,11 +333,11 @@ const VisaBookSchedule = () => {
                                 <select
                                   name="birthYear"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthYear || ''}
+                                  value={travelerData[index]?.birthYear || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthYear',
+                                      "birthYear",
                                       e.target.value
                                     )
                                   }
@@ -352,11 +351,11 @@ const VisaBookSchedule = () => {
                                 <select
                                   name="birthMonth"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthMonth || ''}
+                                  value={travelerData[index]?.birthMonth || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthMonth',
+                                      "birthMonth",
                                       e.target.value
                                     )
                                   }
@@ -370,11 +369,11 @@ const VisaBookSchedule = () => {
                                 <select
                                   name="birthDay"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthDay || ''}
+                                  value={travelerData[index]?.birthDay || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthDay',
+                                      "birthDay",
                                       e.target.value
                                     )
                                   }
@@ -394,12 +393,12 @@ const VisaBookSchedule = () => {
                               <div>
                                 <select
                                   name={`nationality-${index}`}
-                                  value={travelerData[index]?.nationality || ''}
+                                  value={travelerData[index]?.nationality || ""}
                                   className="custom-select"
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'nationality',
+                                      "nationality",
                                       e.target.value
                                     )
                                   }
@@ -413,7 +412,7 @@ const VisaBookSchedule = () => {
                                       label={code.name}
                                       value={code.name}
                                     >
-                                      {' '}
+                                      {" "}
                                       {code.name}
                                     </option>
                                   ))}
@@ -429,12 +428,12 @@ const VisaBookSchedule = () => {
                                   name="passportExYear"
                                   className="custom-select"
                                   value={
-                                    travelerData[index]?.passportExYear || ''
+                                    travelerData[index]?.passportExYear || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'passportExYear',
+                                      "passportExYear",
                                       e.target.value
                                     )
                                   }
@@ -449,12 +448,12 @@ const VisaBookSchedule = () => {
                                   name="passportExMonth"
                                   className="custom-select"
                                   value={
-                                    travelerData[index]?.passportExMonth || ''
+                                    travelerData[index]?.passportExMonth || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'passportExMonth',
+                                      "passportExMonth",
                                       e.target.value
                                     )
                                   }
@@ -469,12 +468,12 @@ const VisaBookSchedule = () => {
                                   name="passportExDay"
                                   className="custom-select"
                                   value={
-                                    travelerData[index]?.passportExDay || ''
+                                    travelerData[index]?.passportExDay || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'passportExDay',
+                                      "passportExDay",
                                       e.target.value
                                     )
                                   }
@@ -497,12 +496,12 @@ const VisaBookSchedule = () => {
                                   name={`passportNumber-${index}`}
                                   className="visaBookSchedule-input-width"
                                   value={
-                                    travelerData[index]?.passportNumber || ''
+                                    travelerData[index]?.passportNumber || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'passportNumber',
+                                      "passportNumber",
                                       e.target.value
                                     )
                                   }
@@ -519,13 +518,13 @@ const VisaBookSchedule = () => {
                                 <select
                                   name={`countryCode-${index}`}
                                   value={
-                                    travelerData[index]?.selectedCode || ''
+                                    travelerData[index]?.selectedCode || ""
                                   }
                                   // className="custom-select"
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'selectedCode',
+                                      "selectedCode",
                                       e.target.value
                                     )
                                   }
@@ -537,7 +536,7 @@ const VisaBookSchedule = () => {
                                       label={`${code.emoji}  (+${code.phone})`}
                                       value={code.phone}
                                     >
-                                      {' '}
+                                      {" "}
                                       +{code.phone}
                                     </option>
                                   ))}
@@ -548,12 +547,12 @@ const VisaBookSchedule = () => {
                                   name={`mobileNumber-${index}`}
                                   className="visaSchedule-number-input"
                                   value={
-                                    travelerData[index]?.mobileNumber || ''
+                                    travelerData[index]?.mobileNumber || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'mobileNumber',
+                                      "mobileNumber",
                                       e.target.value
                                     )
                                   }
@@ -568,12 +567,12 @@ const VisaBookSchedule = () => {
                                 type="email"
                                 name={`email-${index}`}
                                 className="visaBookSchedule-input-width"
-                                style={{ width: '350px' }}
-                                value={travelerData[index]?.email || ''}
+                                style={{ width: "350px" }}
+                                value={travelerData[index]?.email || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'email',
+                                    "email",
                                     e.target.value
                                   )
                                 }
@@ -587,13 +586,13 @@ const VisaBookSchedule = () => {
                             <input
                               type="text"
                               name={`address-${index}`}
-                              value={travelerData[index]?.address || ''}
+                              value={travelerData[index]?.address || ""}
                               placeholder="Enter your full address"
                               className="visaBookSchedule-input-width"
                               onChange={(e) =>
                                 handleTravelerChange(
                                   index,
-                                  'address',
+                                  "address",
                                   e.target.value
                                 )
                               }
@@ -611,7 +610,7 @@ const VisaBookSchedule = () => {
                             onChange={(e) => {
                               const files = e.target.files;
                               for (let i = 0; i < files.length; i++) {
-                                handleTravelerChange(index, 'image', files[i]);
+                                handleTravelerChange(index, "image", files[i]);
                               }
                             }}
                           />
@@ -645,13 +644,13 @@ const VisaBookSchedule = () => {
                                         </button>
                                       </div>
                                     ))
-                                  : 'No document uploaded'}
+                                  : "No document uploaded"}
                               </div>
                             </div>
                             ;
                             <div onClick={() => handleImageRefOnclick(index)}>
                               <p className="visaBookSchedule-add-document">
-                                {' '}
+                                {" "}
                                 + ADD A DOCUMENT
                               </p>
                             </div>
@@ -671,11 +670,11 @@ const VisaBookSchedule = () => {
                           type="radio"
                           name="deliveryMethod"
                           value="travelerDrop"
-                          checked={selectedMethod === 'travelerDrop'}
-                          onChange={() => setSelectedMethod('travelerDrop')}
+                          checked={selectedMethod === "travelerDrop"}
+                          onChange={() => setSelectedMethod("travelerDrop")}
                         />
                         <React.Fragment>
-                          {' '}
+                          {" "}
                           I will drop-off my documents
                         </React.Fragment>
                       </label>
@@ -685,17 +684,17 @@ const VisaBookSchedule = () => {
                             type="radio"
                             name="deliveryMethod"
                             value="pickUp"
-                            checked={selectedMethod === 'pickUp'}
-                            onChange={() => setSelectedMethod('pickUp')}
+                            checked={selectedMethod === "pickUp"}
+                            onChange={() => setSelectedMethod("pickUp")}
                           />
                           <React.Fragment>
-                            {' '}
+                            {" "}
                             Pick up from my location
                           </React.Fragment>
                         </label>
                         <p className="font-bold">BDT 500TK</p>
                       </div>
-                      {selectedMethod === 'pickUp' && (
+                      {selectedMethod === "pickUp" && (
                         <div>
                           <p className="text">Document Pickup Address</p>
                           <input
@@ -706,14 +705,14 @@ const VisaBookSchedule = () => {
                       )}
                     </div>
                   </div>
-                  {selectedMethod === 'pickUp' && (
+                  {selectedMethod === "pickUp" && (
                     <div className="my-4 bg-white">
                       <div className="visaBookSchedule-contact-header">
                         <p>Choose Delivery Schedule</p>
                       </div>
                       <div className="visaBookSchedule-datePicker p-9">
                         <DatePicker
-                          className={'w-full'}
+                          className={"w-full"}
                           selected={deliveryDate}
                           onChange={handleDeliveryDate}
                           minDate={new Date()}
@@ -733,7 +732,7 @@ const VisaBookSchedule = () => {
                   <button
                     className="w-full py-3 mt-5 profile-submit"
                     type="submit"
-                  > 
+                  >
                     SUBMIT
                   </button>
                 </form>
@@ -756,7 +755,7 @@ const VisaBookSchedule = () => {
                     <p>Triplo Processing Fee </p>
                     <p className="font-semibold">BDT {totalProcessingFee}</p>
                   </div>
-                  {selectedMethod === 'pickUp' && (
+                  {selectedMethod === "pickUp" && (
                     <div className="flex justify-between py-2">
                       <p>Pick Up Charge </p>
                       <p className="font-semibold">BDT {pickUpFee}</p>
@@ -773,7 +772,7 @@ const VisaBookSchedule = () => {
                     <h3 className="text-2xl font-semibold">
                       {selectedVisa.name}
                     </h3>
-                    <img style={{ width: '150px' }} src={visaExpress} alt="" />
+                    <img style={{ width: "150px" }} src={visaExpress} alt="" />
                   </div>
                   <div className="flex justify-between pt-5 pb-2">
                     <p>

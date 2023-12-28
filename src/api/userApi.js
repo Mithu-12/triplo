@@ -1,29 +1,36 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/users' }), 
+  reducerPath: "userApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://tame-leggings-goat.cyclic.app/api/users",
+  }),
   endpoints: (builder) => ({
     getUser: builder.query({
       query: (id) => `/${id}`,
     }),
     getAllUser: builder.query({
-      query: () => '',
+      query: () => "",
     }),
     updateUser: builder.mutation({
       query: ({ id, ...userData }) => ({
         url: `/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: userData,
       }),
     }),
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
     }),
   }),
 });
 
-export const { useGetUserQuery, useGetAllUserQuery, useUpdateUserMutation, useDeleteUserMutation } = userApi;
+export const {
+  useGetUserQuery,
+  useGetAllUserQuery,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} = userApi;

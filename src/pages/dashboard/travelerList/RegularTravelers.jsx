@@ -5,7 +5,7 @@ import { getDaysInMonth } from 'date-fns';
 import { countries } from 'countries-list';
 // import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedTraveler, setTraveler } from '../../../slices/travelerSlice';
+import {  setTraveler } from '../../../slices/travelerSlice';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import LoaderSpiner from '../../../components/Loader/LoaderSpiner';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -43,7 +43,7 @@ const axios = useAxiosSecure()
     images: traveler?.images || [],
   });
 
-  const [successMessage, setSuccessMessage] = useState(null);
+const [successMessage, setSuccessMessage] = useState(null);
 const [errorMessage, setErrorMessage] = useState(null);
 console.log('success', successMessage)
   const [loading, setLoading] = useState(false)
@@ -125,6 +125,9 @@ console.log('success', successMessage)
   };
 
   const handleImageUpload = (files) => {
+    if (files.length === 0) {
+    return;
+  }
     const updatedImages = [...travelerData.images];
     for (let i = 0; i < files.length; i++) {
       updatedImages.push(files[i]);
@@ -160,6 +163,8 @@ console.log('success', successMessage)
   const handleGoBack = () => {
     navigate(-1); 
   };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
@@ -172,11 +177,12 @@ console.log('success', successMessage)
       });
       if (response.status === 201) {
         const newTraveler = response.data;
-        dispatch(setTraveler([...newTraveler]));
-        dispatch(setSelectedTraveler(newTraveler))
+        dispatch(setTraveler(newTraveler));
         console.log(newTraveler);
         setSuccessMessage(response.data.message || 'user created or successfully');
         setErrorMessage(null);
+        navigate(-1)
+       
       }
     } catch (error) {
       // Handle the error

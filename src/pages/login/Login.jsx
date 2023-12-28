@@ -1,132 +1,136 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
-import './Login.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  useLoginMutation,
-} from '../../api/authApi';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../slices/authSlice';
-import InputField from '../../components/inputField/inputField';
-import useForm from '../../hooks/useForm';
-import LoaderSpiner from '../../components/Loader/LoaderSpiner';
+import "./Login.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { faChevronRight, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLoginMutation } from "../../api/authApi";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../slices/authSlice";
+import InputField from "../../components/inputField/inputField";
+import useForm from "../../hooks/useForm";
+import LoaderSpiner from "../../components/Loader/LoaderSpiner";
 
 const Login = () => {
-
   const [loginUser, { isLoading, isError, error }] = useLoginMutation();
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
-
-
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || "/";
 
   const initialState = {
-    identifier: '',
-    password: '',
-  }
-  const validateForm = (values)=>{
-    const errors = {}
-    if(!values.identifier){
-      errors.identifier = 'Username or Email is required'
+    identifier: "",
+    password: "",
+  };
+  const validateForm = (values) => {
+    const errors = {};
+    if (!values.identifier) {
+      errors.identifier = "Username or Email is required";
     }
-  
-    if(!values.password){
-      errors.password = 'Password is required'
+
+    if (!values.password) {
+      errors.password = "Password is required";
     }
-  
+
     return errors;
-  }
-  
-    const {formState, handleBlur, handleChange, handleFocus, handleSubmit, reset} = useForm({
-      init: initialState,
-      validate: validateForm
-    })
-  
- 
+  };
 
+  const {
+    formState,
+    handleBlur,
+    handleChange,
+    handleFocus,
+    handleSubmit,
+    reset,
+  } = useForm({
+    init: initialState,
+    validate: validateForm,
+  });
 
-  const handleLoginSubmit = async ({hasError, errors, values}) => {
+  const handleLoginSubmit = async ({ hasError, errors, values }) => {
     try {
-      if(!hasError){
+      if (!hasError) {
         const { data } = await loginUser({
           identifier: values.identifier,
           password: values.password,
         });
-        localStorage.setItem('access_token', data.access_token);
-        dispatch(setUser({...data.user, access_token: data.access_token}))
-  
-        navigate(from, {replace: true});
-      } 
+        localStorage.setItem("access_token", data.access_token);
+        dispatch(setUser({ ...data.user, access_token: data.access_token }));
+
+        navigate(from, { replace: true });
+      }
     } catch (error) {
       console.log(error);
     }
   };
-  
 
   const handleGoogleLogin = () => {
-    window.open( 'https://triplo-flight.onrender.com/api/auth/google', '_self');
-
+    window.open(
+      "https://tame-leggings-goat.cyclic.app/api/auth/google",
+      "_self"
+    );
   };
-
-
-
 
   const handleFacebookLogin = () => {
-    window.open = 'https://triplo-flight.onrender.com/api/auth/facebook', '_self';
+    (window.open = "https://tame-leggings-goat.cyclic.app/api/auth/facebook"),
+      "_self";
   };
 
-  
   return (
     <div className="login-container">
       <div className="login-content">
         <h2 className="text-xl font-semibold py-5">
           Ready for your next trip?
         </h2>
-        <form className='relative' onSubmit={(e)=> handleSubmit(e, handleLoginSubmit)}>
+        <form
+          className="relative"
+          onSubmit={(e) => handleSubmit(e, handleLoginSubmit)}
+        >
           <div className="custom-login-input-container">
-            
-              <InputField
-            label="Email or Username"
-            type="text"
-            name="identifier"
-            placeholder="Enter Your Email or Username"
-            value={formState.identifier.value}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            error={formState.identifier.error}
-            required
-          />
+            <InputField
+              label="Email or Username"
+              type="text"
+              name="identifier"
+              placeholder="Enter Your Email or Username"
+              value={formState.identifier.value}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              error={formState.identifier.error}
+              required
+            />
           </div>
 
           <div className="custom-login-input-container">
-          <InputField
-            label="Password"
-            type="password"
-            name="password"
-            placeholder="Enter Your Password"
-            value={formState.password.value}
-            onChange={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            error={formState.password.error}
-            required
-          />
+            <InputField
+              label="Password"
+              type="password"
+              name="password"
+              placeholder="Enter Your Password"
+              value={formState.password.value}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              error={formState.password.error}
+              required
+            />
           </div>
 
-          {
-            isLoading ? <LoaderSpiner/> : null
-          }
+          {isLoading ? <LoaderSpiner /> : null}
           {isError && (
             <span className="text-red-600 ">{error.data.message}</span>
           )}
-          <div style={{ display: 'flex', justifyContent: 'flex-end', padding: "5px 0px", color: "blue"}}>
-            <Link to={'/forgot-password'}>Forgot Password</Link>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              padding: "5px 0px",
+              color: "blue",
+            }}
+          >
+            <Link to={"/forgot-password"}>Forgot Password</Link>
           </div>
           <div className="signup-button-container">
             <button className="signup-button" type="submit">

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
-import SessionModal from './SessionModal';
-import CountdownClock from './CountdownTimer';
-import { useSelector } from 'react-redux';
-import ContentWrapper from '../../components/wrapperComponent/ContentWrapper';
-import AccordionFlightBooking from './accordionBookingFlight/AccordionBookingFlight';
-import PaymentOptions from '../../components/payment/Payment';
-import { countries } from 'countries-list';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { getDaysInMonth } from 'date-fns';
-import axios from 'axios';
-import useFlightPrice from '../../hooks/useFlightPrice';
+import SessionModal from "./SessionModal";
+import CountdownClock from "./CountdownTimer";
+import { useSelector } from "react-redux";
+import ContentWrapper from "../../components/wrapperComponent/ContentWrapper";
+import AccordionFlightBooking from "./accordionBookingFlight/AccordionBookingFlight";
+import PaymentOptions from "../../components/payment/Payment";
+import { countries } from "countries-list";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { getDaysInMonth } from "date-fns";
+import axios from "axios";
+import useFlightPrice from "../../hooks/useFlightPrice";
 
 const FlightReview = () => {
   const flight = useSelector((state) => state.airport.selectedFlight);
@@ -25,13 +25,12 @@ const FlightReview = () => {
   const selectDepartureDate = useSelector(
     (state) => state.toFrom.departureDate
   );
-  
 
   const user = useSelector((state) => state.auth.user);
   const userId = user?._id;
   const id = flight?.id;
 
-  console.log('flightData', flight);
+  console.log("flightData", flight);
 
   const {
     initialTotalPrice,
@@ -53,16 +52,16 @@ const FlightReview = () => {
   };
 
   const titleOptions = [
-    { value: 'Mr.', label: 'Mr.' },
-    { value: 'Md.', label: 'Md.' },
-    { value: 'Ms.', label: 'Ms.' },
-    { value: 'Miss.', label: 'Miss.' },
-    { value: 'Mrs.', label: 'Mrs.' },
+    { value: "Mr.", label: "Mr." },
+    { value: "Md.", label: "Md." },
+    { value: "Ms.", label: "Ms." },
+    { value: "Miss.", label: "Miss." },
+    { value: "Mrs.", label: "Mrs." },
   ];
 
   const genderOptions = [
-    { value: 'Male', label: 'Male' },
-    { value: 'Female', label: 'Female' },
+    { value: "Male", label: "Male" },
+    { value: "Female", label: "Female" },
   ];
   const countryOptions = Object.keys(countries).map((code) => ({
     value: code,
@@ -81,18 +80,18 @@ const FlightReview = () => {
 
   const monthOptions = () => {
     const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
     ];
     return months.map((month, index) => (
       <option key={index + 1} value={index + 1}>
@@ -141,25 +140,25 @@ const FlightReview = () => {
       price: totalFare,
       productId: id,
       userId: userId,
-      serviceType: 'flight',
+      serviceType: "flight",
     };
 
     if (!selectedPayment) {
       return;
     }
     try {
-      const apiUrl = `https://triplo-flight.onrender.com/api/payment/payment-process/${selectedPayment}`;
+      const apiUrl = `https://tame-leggings-goat.cyclic.app/api/payment/payment-process/${selectedPayment}`;
       const response = await axios.post(apiUrl, bookingData);
       if (response.status === 200) {
         window.location.replace(response.data.url);
-        console.log(response.data, 'Booking confirmed successfully!');
+        console.log(response.data, "Booking confirmed successfully!");
       }
-      console.log('API Response:', response.data);
+      console.log("API Response:", response.data);
     } catch (error) {
-      console.error('Error confirming booking:', error);
+      console.error("Error confirming booking:", error);
     }
     // console.log('Submitted traveler data:', response);
-    console.log('Submitted traveler data:', bookingData);
+    console.log("Submitted traveler data:", bookingData);
   };
 
   return (
@@ -192,7 +191,7 @@ const FlightReview = () => {
                         <div className="flex gap-3  items-center bookSchedule-traveler-person mb-6">
                           <FontAwesomeIcon
                             icon={faUser}
-                            style={{ color: '#3679ec' }}
+                            style={{ color: "#3679ec" }}
                           />
                           <p>Traveler {index + 1}</p>
                         </div>
@@ -202,11 +201,11 @@ const FlightReview = () => {
                               <select
                                 name="title"
                                 className="custom-select"
-                                value={travelerData[index]?.title || ''}
+                                value={travelerData[index]?.title || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'title',
+                                    "title",
                                     e.target.value
                                   )
                                 }
@@ -232,11 +231,11 @@ const FlightReview = () => {
                               <select
                                 name="gender"
                                 className="custom-select"
-                                value={travelerData[index]?.gender || ''}
+                                value={travelerData[index]?.gender || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'gender',
+                                    "gender",
                                     e.target.value
                                   )
                                 }
@@ -264,11 +263,11 @@ const FlightReview = () => {
                                 name="firstName"
                                 placeholder="Enter Your First Name"
                                 className="visaBookSchedule-input-width"
-                                value={travelerData[index]?.firstName || ''}
+                                value={travelerData[index]?.firstName || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'firstName',
+                                    "firstName",
                                     e.target.value
                                   )
                                 }
@@ -286,11 +285,11 @@ const FlightReview = () => {
                                 name="lastName"
                                 placeholder="Enter Your Last Name"
                                 className="visaBookSchedule-input-width"
-                                value={travelerData[index]?.lastName || ''}
+                                value={travelerData[index]?.lastName || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'lastName',
+                                    "lastName",
                                     e.target.value
                                   )
                                 }
@@ -310,11 +309,11 @@ const FlightReview = () => {
                                 <select
                                   name="birthYear"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthYear || ''}
+                                  value={travelerData[index]?.birthYear || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthYear',
+                                      "birthYear",
                                       e.target.value
                                     )
                                   }
@@ -328,11 +327,11 @@ const FlightReview = () => {
                                 <select
                                   name="birthMonth"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthMonth || ''}
+                                  value={travelerData[index]?.birthMonth || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthMonth',
+                                      "birthMonth",
                                       e.target.value
                                     )
                                   }
@@ -346,11 +345,11 @@ const FlightReview = () => {
                                 <select
                                   name="birthDay"
                                   className="custom-select"
-                                  value={travelerData[index]?.birthDay || ''}
+                                  value={travelerData[index]?.birthDay || ""}
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'birthDay',
+                                      "birthDay",
                                       e.target.value
                                     )
                                   }
@@ -370,12 +369,12 @@ const FlightReview = () => {
                               <div>
                                 <select
                                   name={`nationality-${index}`}
-                                  value={travelerData[index]?.nationality || ''}
+                                  value={travelerData[index]?.nationality || ""}
                                   className="custom-select"
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'nationality',
+                                      "nationality",
                                       e.target.value
                                     )
                                   }
@@ -389,7 +388,7 @@ const FlightReview = () => {
                                       label={code.name}
                                       value={code.name}
                                     >
-                                      {' '}
+                                      {" "}
                                       {code.name}
                                     </option>
                                   ))}
@@ -405,13 +404,13 @@ const FlightReview = () => {
                                 <select
                                   name={`countryCode-${index}`}
                                   value={
-                                    travelerData[index]?.selectedCode || ''
+                                    travelerData[index]?.selectedCode || ""
                                   }
                                   // className="custom-select"
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'selectedCode',
+                                      "selectedCode",
                                       e.target.value
                                     )
                                   }
@@ -423,7 +422,7 @@ const FlightReview = () => {
                                       label={`${code.emoji}  (+${code.phone})`}
                                       value={code.phone}
                                     >
-                                      {' '}
+                                      {" "}
                                       +{code.phone}
                                     </option>
                                   ))}
@@ -434,12 +433,12 @@ const FlightReview = () => {
                                   name={`mobileNumber-${index}`}
                                   className="visaSchedule-number-input"
                                   value={
-                                    travelerData[index]?.mobileNumber || ''
+                                    travelerData[index]?.mobileNumber || ""
                                   }
                                   onChange={(e) =>
                                     handleTravelerChange(
                                       index,
-                                      'mobileNumber',
+                                      "mobileNumber",
                                       e.target.value
                                     )
                                   }
@@ -454,12 +453,12 @@ const FlightReview = () => {
                                 type="email"
                                 name={`email-${index}`}
                                 className="visaBookSchedule-input-width"
-                                style={{ width: '350px' }}
-                                value={travelerData[index]?.email || ''}
+                                style={{ width: "350px" }}
+                                value={travelerData[index]?.email || ""}
                                 onChange={(e) =>
                                   handleTravelerChange(
                                     index,
-                                    'email',
+                                    "email",
                                     e.target.value
                                   )
                                 }

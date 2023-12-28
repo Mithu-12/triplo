@@ -1,18 +1,18 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { setUser, logout } from '../slices/authSlice';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setUser, logout } from "../slices/authSlice";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const baseUrl = 'https://triplo-flight.onrender.com/api/auth';
+const baseUrl = "https://tame-leggings-goat.cyclic.app/api/auth";
 
 // Async thunk for registering a new user
 export const registerUser = createAsyncThunk(
-  'auth/registerUser',
+  "auth/registerUser",
   async (userData, { dispatch }) => {
     try {
       const response = await fetch(`${baseUrl}/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
@@ -28,13 +28,13 @@ export const registerUser = createAsyncThunk(
   }
 );
 export const loginUser = createAsyncThunk(
-  'auth/loginUser',
+  "auth/loginUser",
   async (userData, { dispatch }) => {
     try {
       const response = await fetch(`${baseUrl}/login`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       });
@@ -44,27 +44,27 @@ export const loginUser = createAsyncThunk(
         dispatch(setUser(data.user)); // Update user data in Redux store
       } else {
         // Handle error and redirect as needed
-        console.error('Authentication failed:', data);
+        console.error("Authentication failed:", data);
       }
 
       return data;
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Handle error and redirect as needed
     }
   }
 );
 
 export const loginSuccess = createAsyncThunk(
-  'auth/loginSuccess',
+  "auth/loginSuccess",
   async (_, { dispatch }) => {
     try {
       const response = await fetch(`${baseUrl}/login/success`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        credentials: 'include', // Include cookies in the request
+        credentials: "include", // Include cookies in the request
       });
       const data = await response.json();
 
@@ -72,25 +72,25 @@ export const loginSuccess = createAsyncThunk(
         dispatch(setUser(data.user)); // Update user data in Redux store
       } else {
         // Handle error and redirect as needed
-        console.error('Authentication failed:', data);
+        console.error("Authentication failed:", data);
       }
 
       return data;
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
       // Handle error and redirect as needed
     }
   }
 );
 
 export const authApi = createApi({
-  reducerPath: 'authApi',
+  reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const accessToken = getState().auth.user?.access_token;
       if (accessToken) {
-        headers.set('Authorization', `Bearer ${accessToken}`);
+        headers.set("Authorization", `Bearer ${accessToken}`);
       }
       return headers;
     },
@@ -98,22 +98,22 @@ export const authApi = createApi({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (userData) => ({
-        url: '/register',
-        method: 'POST',
+        url: "/register",
+        method: "POST",
         body: userData,
       }),
     }),
     login: builder.mutation({
       query: (userData) => ({
-        url: '/login',
-        method: 'POST',
+        url: "/login",
+        method: "POST",
         body: userData,
       }),
     }),
     loginSuccess: builder.mutation({
       query: () => ({
-        url: '/login/success',
-        method: 'GET',
+        url: "/login/success",
+        method: "GET",
       }),
     }),
   }),

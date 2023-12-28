@@ -1,23 +1,25 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const visaApi = createApi({
-  reducerPath: 'visaApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://triplo-flight.onrender.com/api/' }),
+  reducerPath: "visaApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://tame-leggings-goat.cyclic.app/api/",
+  }),
   endpoints: (builder) => ({
     getVisa: builder.query({
-      query: () => ({ url: '/visa' }),
+      query: () => ({ url: "/visa" }),
     }),
     createVisa: builder.mutation({
       query: (pkg) => ({
-        url: 'visa',
-        method: 'POST',
+        url: "visa",
+        method: "POST",
         body: pkg,
       }),
     }),
     updateVisa: builder.mutation({
       query: ({ id, ...pkg }) => ({
         url: `visa/${id}`,
-        method: 'PUT',
+        method: "PUT",
         body: pkg,
       }),
     }),
@@ -28,7 +30,7 @@ export const visaApi = createApi({
     deleteVisa: builder.mutation({
       query: (id) => ({
         url: `visa/${id}`,
-        method: 'DELETE',
+        method: "DELETE",
       }),
     }),
   }),
